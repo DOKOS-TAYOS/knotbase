@@ -48,3 +48,11 @@ No complete application runtime is currently asserted. The global `AGENTS.md`, c
 Read the live canonical private repository's `AGENTS.md` directly at the start of the new task and follow its indexed routing before interpreting commands or choosing a procedure. Use this public document only as historical, non-authoritative migration state; refresh all critical GitHub evidence. Work in Spanish with the owner. Continue meaningful, bounded public integrations rather than creating more throwaway generalized instruction sets or waiting for the entire migration. Report exact verified PRs, on-`main` source parity, missing prerequisites and blockers without claiming full functional readiness.
 
 Last verified main immediately before this handoff document: `b3b0b5c1791e7be83023bcde220b169af185e308` (PR #6).
+
+## Code-domain completion checkpoint (2026-10-18)
+
+The original `info_for_ai/code/indice_code.csv` was copied verbatim with Git blob SHA `85d85f9f45d12dfc272594b8b658e770d35b07d7`. The original `info_for_ai/code/01_repository_identity.md` was copied with only three individually documented personal-reference substitutions (canonical blob `0c1231b1b27d47511e041da7e3531ac8070da2d0`; public blob `923c1a9805f592ec39840c3b897d54cd142335ca`). Exact substituted-source comparison established no additional changes.
+
+The code index's 19 file entries all correspond to files present in the publication batch. Its source domain is complete, but the global routing/command system and original personal-data dependencies are not yet installed, so **functional parity is not established**.
+
+The source-parity ledger now has **77 records: 74 verbatim and 3 privacy-adapted**. These counts describe migrated source files, not verified runtime behavior. GitHub core and outstanding domain modules remain priorities.
