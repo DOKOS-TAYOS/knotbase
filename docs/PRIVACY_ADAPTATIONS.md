@@ -65,3 +65,14 @@ Each source file was fetched from current private DIK. Only occurrences of the o
 - Exact change: line 13, replace **one** original owner-name possessive phrase with `the user's`. No other changes.
 
 For all three files, exact source-text substitution and full-text target comparison were performed against the canonical private source and the branch copy, with zero extra differences. The deleted private name is redacted in this public diff ledger to avoid redisclosing a personal identifier; these source/published hashes and line positions are sufficient to reproduce and independently audit the nonredacted diffs with access to DIK. The maintained private repository inventory referenced by the original procedures is not redistributed or replaced with fabricated entries.
+
+## Codex prompting module
+
+- Published path: `info_for_ai/prompting/01_codex_prompt_generation.md`.
+- Canonical source Git blob SHA: `2d7dc003395b8407e571dbb8bcf3af2b3507d558`.
+- Published Git blob SHA: `ef81d9e85b658c3f5a1ee5976cf20502a14fb665`.
+- Manifest status: `privacy-adapted`.
+- Exact privacy substitution: canonical line 38, replace the **single possessive occurrence of the private original owner's first name**, leaving every surrounding character unchanged, with `the user's`. The public ledger redacts the removed private given name; the complete exact textual diff is reproducible using the recorded canonical source hash under authorized DIK access.
+- Verification: applying exactly this one substitution to the source text yields the entire published blob with no additional differences. All original instructions, dependency paths, procedure ordering and conditional behavior remain intact.
+- Rationale: make the hard-coded personal owner reference neutral without redefining the original Codex-prompt workflow.
+- Outstanding portability limitation: references to the original `dokos-instructions-knowledge` checkout and Dokos Knowledge remain literal because changing them could change dependency behavior. Migration of the global Knotbase runtime and any configuration of this dependency require separate review; no runtime portability is claimed.

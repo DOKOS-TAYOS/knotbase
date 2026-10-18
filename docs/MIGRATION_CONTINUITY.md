@@ -70,3 +70,18 @@ The other three newly published sources have only four original-owner possessive
 Following integration, `manifests/source_parity.csv` records **84 source files: 78 verbatim and six privacy-adapted**. The original personal repository inventory has not been published; the source package does **not** provide a functioning, tested global command runtime.
 
 **Known documentation limitation:** a security-control block prevented updating `README.md` in this batch. It still displays the historical 78-file count and describes the GitHub domain as incomplete. The authoritative current migrated-source inventory is the CSV manifest, not that earlier README snapshot. Do not attempt to bypass controls to amend the README. Correct it only when the normal permitted GitHub edit becomes available.
+
+## Prompting-domain source checkpoint (PR #10)
+
+The original `info_for_ai/prompting/` source domain is published as five source files, including the canonical four-row domain index. Four files are copied byte-for-byte and preserve their source Git blob SHAs:
+
+- `00_core.md`: `44a259bc90ac34bc1c75e70f667a9ebdc2ca0de3`
+- `indice_prompting.csv`: `480a791ea43b9bd04e5f7600d421b3581b6d8323`
+- `01_prompt_generation.md`: `f416f334d9cea91794a859663e83d21bfc2114c7`
+- `02_chat_prompt_generation.md`: `258c8a8ab856aecf6fd9323b9155d8bc30ce5301`
+
+`01_codex_prompt_generation.md` (canonical Git blob `2d7dc003395b8407e571dbb8bcf3af2b3507d558`; published `ef81d9e85b658c3f5a1ee5976cf20502a14fb665`) has precisely one owner-name privacy substitution on original line 38; its complete content otherwise matches DIK. See `docs/PRIVACY_ADAPTATIONS.md` for the exact verification rule.
+
+After this source-only integration, `manifests/source_parity.csv` has **89 distinct entries, 82 verbatim and seven privacy-adapted**. The original Codex module's dependency on a local `dokos-instructions-knowledge` checkout was **not** reinterpreted or redesigned for Knotbase. This source is not yet a general-purpose functioning runtime. The global routing and command dispatcher, personal inventory substitution, integration tests, and actual functional proof remain pending.
+
+The README retains the earlier historical count owing to the previously documented blocked GitHub edit. The source ledger and this continuity appendix contain the later verified counts. No alternate path has been used to bypass the security control.

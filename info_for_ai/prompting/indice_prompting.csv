@@ -1,0 +1,5 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Prompt generation core,prompting/00_core.md,Shared context synthesis delivery-shape and execution-package rules for explicit prompt requests and cross-domain prompt handoffs,instruction,active,en
+Prompt target router,prompting/01_prompt_generation.md,Compatibility router that selects exactly one target-specific prompt-generation module after the shared prompting core including the global Codex-prompt output gate,instruction,active,en
+Codex prompt generation,prompting/01_codex_prompt_generation.md,Create the smallest effective Codex execution package for every Codex-targeted prompt or stage regardless of origin after shared prompt context synthesis and packaging decisions,instruction,active,en
+Chat prompt generation,prompting/02_chat_prompt_generation.md,Create a self-contained Chat prompt package after shared prompt context synthesis and packaging decisions,instruction,active,en
