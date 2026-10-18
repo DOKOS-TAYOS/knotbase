@@ -1,0 +1,14 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Shared GitHub rules,github/00_core.md,Remote scope authorization protections tools permissions verification and selective inventory routing,instruction,active,en
+Repository inventory and bulk scope,github/repository_inventory_and_scope.md,Inventory selection archival filtering live repository metadata verification and bounded multi-repository coverage,instruction,active,en
+Integration and publication,github/01_integration_and_publication.md,Push pull request merge squash rebase branch synchronization and verified remote integration,instruction,active,en
+Dependabot review,github/02_dependabot_review.md,Classify adjust verify and safely integrate Dependabot pull requests,instruction,active,en
+Security review,github/03_security_review.md,Dependabot code scanning secret scanning and security-advisory remediation,instruction,active,en
+Branch and worktree cleanup,github/04_branch_and_worktree_cleanup.md,Safe cleanup of integrated local and remote branches and completed worktrees,instruction,active,en
+Failed CI runs review,github/05_failed_ci_runs_review.md,Review failed CI Actions workflows or checks across repositories and apply only small verified repairs before escalating larger decisions,instruction,active,en
+Pull-request review,github/06_pull_request_review.md,Review one pull request correct only small unambiguous issues and integrate only after current-head verification,instruction,active,en
+Release publication,github/07_release_publication.md,Publish a prepared version through integration fresh CI exact tag GitHub Release and final verification,instruction,active,en
+GitHub issue implementation,github/08_issue_implementation.md,Interpret and implement one GitHub issue through bounded code changes pull request CI integration and verified issue closure,instruction,active,en
+Repository work triage,github/09_repository_triage.md,Read-only inventory prioritization deduplication and delegation of actionable GitHub repository work,instruction,active,en
+Research and learning logbook,github/10_research_logbook.md,Scoped dated notes from experiments and learning with read-only reuse for explanations,instruction,active,en
+GitHub repository template,github/plantilla_entrada.md,Template for recording a repository and relevant technical references,template,active,en
