@@ -105,3 +105,13 @@ For every adapted file, applying exactly the specified substitutions to the curr
 The source ledger after publication has **108 unique source entries: 97 verbatim and 11 privacy-adapted**. The domain index's seven file entries resolve to all seven modules in this source batch. The original user-specific article-inventory CSV is **not** redistributed, so the renamed neutral article-inventory path remains an unfulfilled runtime dependency until a separate privacy-safe data layer is configured.
 
 This publication inherits the previously documented README editing limitation; `manifests/source_parity.csv` and this continuity record contain the current source counts. Source fidelity benefits from DIK's prior validation, but has not independently proven the new repository's end-to-end command dispatch, file-path resolution, configuration or export behavior.
+
+## Bilingual interactions source checkpoint (PR #13)
+
+All 16 original `info_for_ai/interactions/` instruction-source files, including the original index and both complete `es/` and `en/` language branches, are included in this batch. Seven files are identical to their current DIK originals by Git blob SHA. Nine files have only **16 precise privacy substitutions** replacing hard-coded original-owner/gender references with neutral current-user wording. No workflow procedure, activation condition, ordering, authorization, or language routing was rewritten. Every adapted file matched its actual original DIK source after only the documented substitutions, with no extra changes. Details and hashes are recorded individually in `docs/PRIVACY_ADAPTATIONS.md`.
+
+All 15 rows in the original interaction-domain index resolve to the published files; 16 files exist including the index. The domain core and language selection contracts remain unchanged.
+
+The source manifest after publication contains **124 unique entries: 104 verbatim and 20 privacy-adapted**. This source batch does not include personal email accounts, credentials, recipient data, signatures or private records. The global Knotbase command runtime and other incomplete dependencies are still absent. An already-validated DIK procedure increases confidence in behavioral fidelity if its exact source is preserved, but this alone does not certify execution inside the new repository.
+
+The README still contains an earlier historical tally due to the previously recorded blocked edit. Use the current ledger and this continuity document for up-to-date counts; do not bypass any security control.
