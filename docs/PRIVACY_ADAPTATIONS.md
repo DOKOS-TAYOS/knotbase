@@ -1,6 +1,6 @@
 # Privacy-only adaptations from canonical DIK
 
-This document records the **only intentional text difference** in the fourth public source batch. Unlisted source files in `manifests/source_parity.csv` are required to preserve their canonical Git blob SHA exactly.
+This document records intentional minimal privacy substitutions in the published source batches. Unlisted source files in `manifests/source_parity.csv` are required to preserve their canonical Git blob SHA exactly.
 
 ## Paper entry template
 
@@ -14,3 +14,13 @@ This document records the **only intentional text difference** in the fourth pub
 - Verification: compare the canonical source with the published file after applying precisely that one heading substitution; their contents must then match exactly.
 
 The remaining 10 files in the `papers` batch were copied verbatim. The overall package remains an incremental source publication, not an operational command runtime.
+
+## Code domain core
+
+- Published path: `info_for_ai/code/00_core.md`
+- Canonical source Git blob SHA: `b38e402d6fd61ad946d46a8ca1dedf2bc54fe781`
+- Published Git blob SHA: `f8ee8906f657852bb5fb747d8c534858512f2ecf`
+- Manifest status: `privacy-adapted`
+- Modification: **exactly two reference replacements**, in the clause that identifies the current GitHub-repository owner and the clause that identifies the subject of personal-fact lookup. Both refer to the current user rather than a hard-coded original owner.
+- Verification: applying only those two replacements to the canonical text reproduces the complete published file exactly.
+- Remaining limitations: the code domain index, repository-identity module and global command dispatcher are not yet published. This is not an operational code-domain installation.
