@@ -1,4 +1,27 @@
-.zip
-.venv
+# Python environments and cache files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Local configuration and secrets
 .env
-pycache
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary and generated files
+*.tmp
+*.temp
+*.log
+*.zip
+.worktrees/
