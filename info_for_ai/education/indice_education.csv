@@ -1,0 +1,28 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Núcleo de educación,education/00_core.md,Abrir siempre para los principios didácticos universales del dominio,instrucción,activo,es
+Explicaciones pedagógicas,education/01_explicaciones.md,Abrir cuando la intención principal sea comprender un tema y seleccionar como máximo un perfil de audiencia sin explorar conocimiento interno por defecto,instrucción,activo,es
+Creación de contenido formativo escrito,education/02_contenido_formativo.md,Abrir para apuntes textos didácticos y handoff educativo hacia un artículo,instrucción,activo,es
+Vídeo educativo para YouTube,education/video_youtube.md,Abrir para crear guiones o paquetes educativos de vídeo con YouTube como destino predeterminado salvo instrucción contraria,instrucción,activo,es
+HTML educativo interactivo,education/html_interactivo.md,Abrir para decidir contenido e interacción didáctica de una experiencia web y añadir htmls solo cuando haga falta implementarla,instrucción,activo,es
+Preparación de clases,education/03_preparacion_clases.md,Abrir para diseñar desarrollar y empaquetar sesiones o formaciones,instrucción,activo,es
+Propuestas TFG y TFM,education/04_propuestas_tfg_tfm.md,Abrir para plantear acotar revisar y convertir una propuesta viable,instrucción,activo,es
+Ficha opcional de explicación,education/plantilla_ficha_explicacion.md,Usar solo en explicaciones complejas con varias fuentes o que deban persistir sin asumir mapa interno ni unidades,plantilla,activo,es
+Perfil OTRI y transferencia,education/perfiles/otri_transferencia.md,Abrir para adaptar educación a transferencia innovación consorcios o convocatorias,perfil,activo,es
+Perfil comercial,education/perfiles/comercial.md,Abrir para adaptar educación a ventas negocio o relación con clientes,perfil,activo,es
+Perfil técnico transversal,education/perfiles/responsables_tecnicos.md,Abrir para especialistas que consultan otra disciplina,perfil,activo,es
+Perfil marketing y comunicación,education/perfiles/marketing_comunicacion.md,Abrir para una audiencia de comunicación con baja exposición técnica,perfil,activo,es
+Perfil universitario técnico no físico,education/perfiles/universitarios_tecnicos_no_fisica.md,Abrir para estudiantes universitarios de carreras técnicas distintas de física,perfil,activo,es
+Perfil universitario de física,education/perfiles/universitarios_fisica.md,Abrir para estudiantes universitarios de física,perfil,activo,es
+Perfil secundaria de ciencias,education/perfiles/secundaria_ciencias.md,Abrir para alumnado de secundaria principalmente de ciencias,perfil,activo,es
+Perfil público general,education/perfiles/publico_general.md,Abrir para público general sin nivel educativo específico asumido,perfil,activo,es
+Perfil directivos de empresa,education/perfiles/directivos_empresas.md,Abrir para directivos que necesitan comprensión orientada a decisiones estratégicas,perfil,activo,es
+Perfil gerentes y mandos intermedios,education/perfiles/gerentes_mandos_intermedios.md,Abrir para gerencia responsables operativos y mandos intermedios,perfil,activo,es
+Perfil audiencia de YouTube,education/perfiles/audiencia_youtube.md,Abrir para divulgación audiovisual dirigida a audiencia generalista de YouTube,perfil,activo,es
+Núcleo de estilo para apuntes,education/estilo_apuntes/00_core.md,Abrir por defecto al redactar apuntes como delta sobre el core educativo y cargar especializaciones solo si hacen falta,instrucción,activo,es
+Arquitectura pedagógica,education/estilo_apuntes/01_arquitectura_pedagogica.md,Especialización opcional para capítulos largos o secuencias conceptuales complejas,instrucción,activo,es
+Explicación matemática,education/estilo_apuntes/02_explicacion_matematica.md,Especialización opcional para formalismo demostraciones y traducción de representaciones,instrucción,activo,es
+Crítica y calibración,education/estilo_apuntes/03_critica_y_calibracion.md,Especialización opcional para límites eficiencia ventajas y estado del arte,instrucción,activo,es
+Ejemplos figuras y tablas,education/estilo_apuntes/04_ejemplos_figuras_tablas.md,Especialización opcional para ejemplos diagramas tablas y microejercicios,instrucción,activo,es
+Investigación y práctica,education/estilo_apuntes/05_investigacion_y_practica.md,Especialización opcional para enlazar con papers software experimentos e implementación,instrucción,activo,es
+Revisión de apuntes,education/estilo_apuntes/06_revision.md,Especialización opcional para revisar el borrador y detectar antipatrones,instrucción,activo,es
+Plantilla general de educación,education/plantilla_entrada.md,Usar solo para registrar de forma persistente un material educativo en el paquete,plantilla,activo,es
