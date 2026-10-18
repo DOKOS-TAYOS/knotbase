@@ -38,3 +38,30 @@ The remaining 10 files in the `papers` batch were copied verbatim. The overall p
 - All other bytes are unchanged. Verification: the original private canonical file with **only** the three exact substitutions applied matches the published file in full, including its final newline.
 - Privacy-preserving diff record: the original name and email values are intentionally redacted in this public ledger, rather than republished as deleted lines. The full exact source-to-target comparison was executed against DIK's private source, with zero additional differences.
 - Rationale: replace owner-specific defaults and a personal attribution reference with user-configurable or neutral wording while preserving the legal/editorial procedure.
+
+## GitHub domain: three ownership references
+
+Each source file was fetched from current private DIK. Only occurrences of the original owner's possessive personal name were replaced by the neutral phrase `the user's`. No algorithm, branch, condition, path, field, example, or surrounding punctuation was changed.
+
+### Shared GitHub core
+
+- Published path: `info_for_ai/github/00_core.md`
+- Canonical source Git blob SHA: `9fccfd155f93e6ba9b4464a414f5eba5248cc1f7`
+- Published Git blob SHA: `c2484e42e7e15e44162c7d19f7b24c8683d6569c`
+- Exact change: line 9, replace **one** original owner-name possessive phrase with `the user's`. No other changes.
+
+### Repository inventory and scope
+
+- Published path: `info_for_ai/github/repository_inventory_and_scope.md`
+- Canonical source Git blob SHA: `7035b0b2fde07c1b41d5d8c4471c41217983fdbd`
+- Published Git blob SHA: `64e93ee6a70b957d585bcca8ffad4ddaa66151b7`
+- Exact changes: lines 5 and 17, replace **one** original owner-name possessive phrase at each location with `the user's`. No other changes.
+
+### GitHub repository entry template
+
+- Published path: `info_for_ai/github/plantilla_entrada.md`
+- Canonical source Git blob SHA: `8ea0f9cede81d3fa6cba718a5a50e5f2fe2aca45`
+- Published Git blob SHA: `9a89b4b4cf7d46aacf76cd2deb77851d8bee8183`
+- Exact change: line 13, replace **one** original owner-name possessive phrase with `the user's`. No other changes.
+
+For all three files, exact source-text substitution and full-text target comparison were performed against the canonical private source and the branch copy, with zero extra differences. The deleted private name is redacted in this public diff ledger to avoid redisclosing a personal identifier; these source/published hashes and line positions are sufficient to reproduce and independently audit the nonredacted diffs with access to DIK. The maintained private repository inventory referenced by the original procedures is not redistributed or replaced with fabricated entries.
