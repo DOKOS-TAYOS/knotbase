@@ -1,0 +1,11 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Peer-review response workflow,papers/01_peer_review_response.md,Open for reviewer comments resubmission planning response letters manuscript diffs and readiness checks,instruction,active,en
+Peer-review comment assessment,papers/peer_review/assessment.md,Assess reviewer or editor comments interpret concerns locate evidence and determine the smallest credible resolution,instruction,active,en
+Peer-review visual manuscript diff,papers/peer_review/visual_diff.md,Prepare a reviewer-ready visual TeX manuscript diff between submitted and current commits,instruction,active,en
+Peer-review response letter,papers/peer_review/response_letter.md,Draft the submission-facing response letter grounded in verified manuscript and experiment evidence,instruction,active,en
+Peer-review resubmission readiness,papers/peer_review/readiness.md,Check revised manuscript consistency newly introduced weaknesses and final resubmission readiness,instruction,active,en
+Journal adaptation workflow,papers/02_journal_adaptation.md,Adapt a TeX manuscript repository to official journal or publisher submission requirements and templates while preserving scientific content,instruction,active,en
+Journal selection workflow,papers/03_journal_selection.md,Rank realistic indexed Q1-Q3 journals for an existing manuscript under scope fit reputation and zero-mandatory-author-fee constraints,instruction,active,en
+Journal-targeted paper review,papers/04_journal_targeted_review.md,Audit a journal-formatted manuscript and build the initial dependency-aware prioritized acceptance-improvement backlog,instruction,active,en
+PAPERFIT iterative execution,papers/paperfit_execution.md,Propose approve execute and verify deferred PAPERFIT revision batches after the initial backlog,instruction,active,en
+Paper entry template,papers/plantilla_entrada.md,Open only to record an identified scientific paper and its reading notes,template,active,en
