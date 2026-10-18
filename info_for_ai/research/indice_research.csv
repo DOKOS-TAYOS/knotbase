@@ -1,0 +1,11 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Shared research rules,research/00_core.md,Evidence primacy traceability version distinction critical reading and DOI or URL verification,instruction,active,en
+Deep research,research/01_deep_research.md,Comprehensive thematic synthesis with coverage limits and optional prioritization or research directions,instruction,active,en
+Paper explanation,research/02_paper_explanation.md,Traceable paper reading notes and study or technical explanation,instruction,active,en
+Argument review,research/03_argument_review.md,Stepwise validation and repair of arguments calculations and proofs,instruction,active,en
+Mathematical proving,research/04_mathematical_proving.md,Rigorous proof construction validation and concise presentation,instruction,active,en
+Source discovery,research/05_source_discovery.md,Scientific literature search with verified bibliography and optional citation export,instruction,active,en
+Opportunity assessment,research/06_opportunity_assessment.md,Prioritization of publishable and industrially relevant research directions,instruction,active,en
+State of the art,research/07_state_of_the_art.md,Comparable frontier methods limitations maturity and improvement opportunities,instruction,active,en
+Interactive paper study HTML,research/08_interactive_paper_study.md,Iterative LaTeX paper study workflow advanced by direct-continuation ok turns and ending in one self-contained annotated HTML artifact,instruction,active,en
+Research entry template,research/plantilla_entrada.md,Template for documenting a research question findings and sources,template,active,en
