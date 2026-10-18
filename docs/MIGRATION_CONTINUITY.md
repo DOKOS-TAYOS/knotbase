@@ -56,3 +56,17 @@ The original `info_for_ai/code/indice_code.csv` was copied verbatim with Git blo
 The missing original `info_for_ai/code/08_integration_preparation.md` was also copied verbatim (Git blob SHA `69a8aa36542c12b1cfc1728398b42e76f94a5ea2`). The code index's 19 file entries all correspond to files present in the publication batch. Its source domain is complete, but the global routing/command system and original personal-data dependencies are not yet installed, so **functional parity is not established**.
 
 The source-parity ledger now has **78 records: 75 verbatim and 3 privacy-adapted**. These counts describe migrated source files, not verified runtime behavior. GitHub core and outstanding domain modules remain priorities.
+
+## GitHub-domain source checkpoint (PR #9)
+
+The complete original `info_for_ai/github/` instruction source set is included in PR #9 as a **source-only** migration: 14 files including the original index. Its index lists 13 files, all present. The three newly published verbatim sources have matching Git blob SHAs to DIK:
+
+- `indice_github.csv`: `97f314bc5509918b31292426cd472396ddea4dbb`.
+- `02_dependabot_review.md`: `8ddb37b6d8aba8c539a7b15f322b7881349a6074`.
+- `09_repository_triage.md`: `071d5e56bf2e1c966ccb9d97976b54e271ce03f5`.
+
+The other three newly published sources have only four original-owner possessive-name substitutions in total: one in `00_core.md`, two in `repository_inventory_and_scope.md`, and one in `plantilla_entrada.md`. Full canonical-to-public substitution comparison found no other differences. Source and published hashes and positions are recorded in `docs/PRIVACY_ADAPTATIONS.md`.
+
+Following integration, `manifests/source_parity.csv` records **84 source files: 78 verbatim and six privacy-adapted**. The original personal repository inventory has not been published; the source package does **not** provide a functioning, tested global command runtime.
+
+**Known documentation limitation:** a security-control block prevented updating `README.md` in this batch. It still displays the historical 78-file count and describes the GitHub domain as incomplete. The authoritative current migrated-source inventory is the CSV manifest, not that earlier README snapshot. Do not attempt to bypass controls to amend the README. Correct it only when the normal permitted GitHub edit becomes available.
