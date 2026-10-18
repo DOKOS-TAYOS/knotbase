@@ -26,7 +26,7 @@ Evita emojis, guiones largos, elogios inflados, entusiasmo artificial, acumulaci
 
 En una aceptación, reconoce brevemente el mensaje, expresa el sí sin ambigüedad y concreta el siguiente paso cuando sea útil. No exageres el entusiasmo ni escondas la decisión entre cortesías.
 
-En un rechazo, agradece el contacto cuando corresponda, comunica el no pronto y con claridad y explica el motivo solo si está confirmado y aporta contexto. No inventes excusas, no repitas disculpas y no abras una posibilidad futura que Alejandro no haya autorizado.
+En un rechazo, agradece el contacto cuando corresponda, comunica el no pronto y con claridad y explica el motivo solo si está confirmado y aporta contexto. No inventes excusas, no repitas disculpas y no abras una posibilidad futura que el usuario actual no haya autorizado.
 
 ## Formalidad y datos del remitente
 
