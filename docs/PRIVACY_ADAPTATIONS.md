@@ -114,8 +114,15 @@ The remaining four files in this domain have byte-identical original and publish
 
 ## Bilingual interactions domain
 
-Nine of the 16 original files contain owner-specific references. Exactly **16 substitutions** were made to neutralize those references, while preserving all shared workflow behavior, activation conditions, language branches, recipient restrictions and substantive procedures. The other seven files were copied byte-for-byte.
+Ten of the 16 original files contain owner-specific references. Exactly **17 substitutions** were made to neutralize those references, while preserving all shared workflow behavior, activation conditions, language branches, recipient restrictions and substantive procedures. The other six files were copied byte-for-byte.
 **Exact diff convention:** source-name spans are not reproduced verbatim in this public adaptation ledger to avoid re-disclosing personal identifiers. Each affected span is identified by its original line number and its exact neutral published replacement. The original deleted span is recoverable from the specified original Git blob under authorized DIK access. Full original-text plus exactly these substitutions matched the entire published file, with no additional differences.
+
+### `info_for_ai/interactions/00_core.md`
+
+- Canonical source Git blob SHA: `e53705f88ab9283c428b00544f6c060cbfaba081`.
+- Published Git blob SHA: `fcfee5b6c7f0f47daba367e3032381c1607810a5`.
+- Exact privacy diff: canonical line 29, the original owner's given name in the rejection authorization clause becomes `el usuario actual`; all surrounding text remains exactly unchanged.
+- Rationale: remove a personal hard-coded authorization subject without altering the prohibition on promising future possibilities without authorization.
 
 ### `info_for_ai/interactions/indice_interactions.csv`
 
@@ -180,4 +187,4 @@ Nine of the 16 original files contain owner-specific references. Exactly **16 su
 - Exact privacy diff: line 5: owner-name possessive becomes `the user's`, and original male-specific `why he recommends` becomes `why they recommend`; line 11: original owner name plus `is` becomes `the user is`.
 - Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
 
-The shared core, Spanish/English optional style notes, LinkedIn replies and project-delivery modules are all literal original copies. No email addresses, signatures, third-party content or private accounts have been published. As in other domains, privacy substitution and source parity do not constitute end-to-end command-runtime verification.
+The Spanish/English optional style notes, LinkedIn replies and project-delivery modules are literal original copies. The shared core requires the single owner-name substitution documented above. No email addresses, signatures, third-party content or private accounts have been published. As in other domains, privacy substitution and source parity do not constitute end-to-end command-runtime verification.
