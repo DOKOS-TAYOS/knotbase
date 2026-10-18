@@ -1,0 +1,20 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Shared code rules,code/00_core.md,Local repository precedence safety typing compatibility verification and selective contract routing,instruction,active,en
+Shared intensive audit depth,code/shared_intensive_audit.md,Coverage saturation and inventory breadth contract loaded by bug dead-code performance and refactoring audits,instruction,active,en
+Shared ChatGPT-first remediation loop,code/shared_codex_remediation_loop.md,Direct post-inventory ChatGPT remediation minimal Codex handoff remote review checkpoint and completion contract for BUG DEAD OPT and REFACT,instruction,active,en
+Scientific experiment code minimalism,code/experimental_scientific_code.md,Minimal implementation structure for scientific experimental code loaded only when such code is generated or modified,instruction,active,en
+Repository identity,code/01_repository_identity.md,Authorship licensing notices citation and package metadata,instruction,active,en
+Preliminary assessment,code/02_preliminary_assessment.md,Existing-solution capability maturity and license assessment,instruction,active,en
+Bug audit,code/03_bug_audit.md,Evidence-led defect inventory with correction requirements consumed by the direct Codex remediation loop or delegated correction workflows,instruction,active,en
+Dead-code audit,code/04_dead_code_audit.md,Safe dead-code inventory and cleanup requirements consumed by the direct Codex remediation loop or delegated correction workflows,instruction,active,en
+Readable refactoring,code/05_readable_refactoring.md,Internal maintainability improvements that preserve external behavior,instruction,active,en
+Cyclic agent workflow,code/06_cyclic_agent_workflow.md,Independent evaluation and bounded correction batches,instruction,active,en
+Documentation update,code/07_documentation_update.md,Repository documentation for use maintenance algorithms and reproducibility,instruction,active,en
+Integration preparation,code/08_integration_preparation.md,Local technical verification before routing remote work to GitHub,instruction,active,en
+Performance audit,code/09_performance_audit.md,Measured performance inventory with optimization and measurement requirements consumed by the direct Codex remediation loop,instruction,active,en
+Apply selected findings,code/10_apply_findings.md,Apply only selected prior findings by delegating bug and dead-code corrections to their existing post-inventory contracts,instruction,active,en
+Release preparation,code/11_release_preparation.md,Resolve one release version synchronize changelog metadata code documentation tests and local release readiness,instruction,active,en
+Refactoring audit,code/12_refactoring_audit.md,Evidence-led maintainability inventory followed by bounded behavior-preserving refactoring batches,instruction,active,en
+Test-suite audit,code/13_test_suite_audit.md,Evidence-led test-quality inventory followed by bounded verified test-improvement batches,instruction,active,en
+Targeted failure reproduction,code/14_failure_reproduction.md,Reproduce minimize and evidence one concrete reported problem without correcting or publishing it,instruction,active,en
+Code knowledge template,code/plantilla_entrada.md,Template for a programming decision or reusable pattern,template,active,en
