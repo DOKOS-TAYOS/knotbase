@@ -12,6 +12,10 @@ Every future instruction, schema, and algorithm must preserve the canonical sour
 
 The personal CV template and Europass are not part of this publication. No user data or review archives are included.
 
+## Migration handoff
+
+For the source-fidelity contract, current verified migration state, remaining blockers and instructions for future work, read [Migration continuity](docs/MIGRATION_CONTINUITY.md).
+
 ## License
 
 Original materials published in this repository are available under the [MIT License](LICENSE). Third-party materials, trademarks and assets are not sublicensed by this license.
