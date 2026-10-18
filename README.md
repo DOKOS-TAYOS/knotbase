@@ -4,7 +4,7 @@ Knotbase is an incremental, public distribution of original, indexed AI instruct
 
 ## Current status
 
-**Source publication in progress — not a functional release.** The first batch consists of 15 author-maintained instruction modules for code work, copied verbatim from the canonical source without simplification or alteration. These selected modules contain no user profile, personal contact information, private paths, or third-party media. Their exact Git blob checksums are recorded in `manifests/source_parity.csv`.
+**Source publication in progress — not a functional release.** The first two batches comprise 23 author-maintained instruction modules for code and GitHub work, copied verbatim from the canonical source without simplification or alteration. These selected modules contain no personal profile or contact details, private filesystem paths, or bundled third-party media. Their exact Git blob checksums are recorded in `manifests/source_parity.csv`.
 
 The domain core, routing registries, command dispatcher and remaining modules are **not yet installed**. Cross-references in the copied sources will become operational only when their respective prerequisites have been migrated, reviewed for privacy, and validated. Do not interpret these files as a working command runtime or claim full parity.
 
