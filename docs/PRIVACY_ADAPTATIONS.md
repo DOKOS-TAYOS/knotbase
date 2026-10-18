@@ -76,3 +76,38 @@ For all three files, exact source-text substitution and full-text target compari
 - Verification: applying exactly this one substitution to the source text yields the entire published blob with no additional differences. All original instructions, dependency paths, procedure ordering and conditional behavior remain intact.
 - Rationale: make the hard-coded personal owner reference neutral without redefining the original Codex-prompt workflow.
 - Outstanding portability limitation: references to the original `dokos-instructions-knowledge` checkout and Dokos Knowledge remain literal because changing them could change dependency behavior. Migration of the global Knotbase runtime and any configuration of this dependency require separate review; no runtime portability is claimed.
+
+## Blog writing domain
+
+Four source files have only owner-identity privacy substitutions. Their complete canonical content, after precisely the listed substitutions, has been compared to the published files with **no other differences**. All substantive instructions and the workflow's original phase ordering are retained. Personal source identifiers are redacted from this public record; exact original spans are reproducible from the recorded source hashes by an authorized reader of DIK.
+
+### Editorial core
+
+- Path: `info_for_ai/blog_writing/00_core.md`
+- Canonical Git blob SHA: `60ffbc848cac318f86ac3fb770f61c915dc4f9ab`
+- Published Git blob SHA: `2c96416110d0b0c196c9b8b0c9f2c607e4e88386`
+- Exactly two replacements: canonical line 1, original owner's full name in the headline becomes `del usuario actual` (the preceding `de` is included in the replaced span); line 20, original owner's given name in the criterion becomes `del usuario actual` (the preceding `de` is included). All other text unchanged.
+
+### Argument architecture
+
+- Path: `info_for_ai/blog_writing/01_arquitectura_del_razonamiento.md`
+- Canonical Git blob SHA: `6da93c3dc5a6f4a021fd1ff4a2c7ae87035965b8`
+- Published Git blob SHA: `0c62994c7e2b951ddd549ec88ef5165df5056678`
+- Exactly one replacement: canonical line 73, the original explicitly owner-named article-inventory path becomes `info_user/articulos_medium_linkedin_usuario.csv`. The rest of the paragraph is unchanged.
+- **Dependency limitation:** the private article inventory is not published; the generic counterpart must be supplied by the eventual runtime/user data layer. This replacement is privacy-driven, not evidence that the generic article inventory currently exists.
+
+### Editorial voice and rhythm
+
+- Path: `info_for_ai/blog_writing/02_voz_pedagogia_y_ritmo.md`
+- Canonical Git blob SHA: `aded78e14de03e43bf9da4ddb83859164ae853d8`
+- Published Git blob SHA: `961f3646be66f488d8e22ffae9c3fbb83bee8845`
+- Exactly one replacement: canonical line 5, `de` plus the original owner's given name becomes `del usuario actual`. Surrounding text unchanged.
+
+### Publication materialization
+
+- Path: `info_for_ai/blog_writing/publication_materialization.md`
+- Canonical Git blob SHA: `984e76accebf4d67df26523dde9871b85d184675`
+- Published Git blob SHA: `9ad2bdb918079936f5387eca93efb19f8e14c33a`
+- Exactly two replacements: canonical lines 3 and 138, each original owner's given name preceded by `de` becomes `del usuario actual`. Other content, including the original required Spanish LinkedIn closing phrase, is unchanged.
+
+The remaining four files in this domain have byte-identical original and published Git blob SHAs. None of these changes establishes functional runtime parity, and no original author-specific data file is transferred.

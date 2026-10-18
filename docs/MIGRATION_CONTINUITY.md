@@ -95,3 +95,13 @@ This integration adds **11 original, byte-for-byte identical HTML-domain source 
 Following this batch, the source ledger has **100 distinct source-file records: 93 verbatim and seven privacy-adapted**. This remains a source-only checkpoint, not an implementation of the separately developed HTML/PDF/DOCX runtime, nor evidence of working editor/export features. The global router, command registry and real behavioral tests remain pending.
 
 The README still contains an earlier historical tally due to the previously documented blocked edit. Counts here and in the source ledger reflect the later published state. No alternative write path was used for that blocked change.
+
+## Blog-writing source checkpoint (PR #12)
+
+The complete original `info_for_ai/blog_writing/` instruction source is included as eight source files, including the canonical original index. Four files were copied byte-for-byte: `indice_blog_writing.csv`, `03_revision.md`, `04_flujo_iterativo_de_generacion.md`, and `plantilla_entrada.md`. Four have only six individually documented original-owner privacy substitutions: two in `00_core.md`, one in `01_arquitectura_del_razonamiento.md`, one in `02_voz_pedagogia_y_ritmo.md`, and two in `publication_materialization.md`.
+
+For every adapted file, applying exactly the specified substitutions to the current original DIK text reproduces the published text in full; no additional rules, phases, examples or procedures were changed. See `docs/PRIVACY_ADAPTATIONS.md` for original/published Git blob SHAs and line positions.
+
+The source ledger after publication has **108 unique source entries: 97 verbatim and 11 privacy-adapted**. The domain index's seven file entries resolve to all seven modules in this source batch. The original user-specific article-inventory CSV is **not** redistributed, so the renamed neutral article-inventory path remains an unfulfilled runtime dependency until a separate privacy-safe data layer is configured.
+
+This publication inherits the previously documented README editing limitation; `manifests/source_parity.csv` and this continuity record contain the current source counts. Source fidelity benefits from DIK's prior validation, but has not independently proven the new repository's end-to-end command dispatch, file-path resolution, configuration or export behavior.

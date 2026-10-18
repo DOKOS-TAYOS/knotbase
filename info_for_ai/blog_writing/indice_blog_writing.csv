@@ -1,0 +1,8 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Núcleo editorial,blog_writing/00_core.md,Abrir siempre para aplicar las restricciones editoriales universales,instrucción,activo,es
+Arquitectura del razonamiento,blog_writing/01_arquitectura_del_razonamiento.md,Abrir antes de diseñar la tesis dependencias progresión crítica y cierre del argumento; no activa por sí sola el flujo de siete fases,instrucción,activo,es
+Voz pedagogía y ritmo,blog_writing/02_voz_pedagogia_y_ritmo.md,Abrir al redactar o editar la prosa de un artículo ya estructurado sin cargar todavía materialización de plataforma,instrucción,activo,es
+Revisión final,blog_writing/03_revision.md,Abrir solo al revisar un borrador completo o preparar la entrega editorial de un artículo,instrucción,activo,es
+Flujo iterativo de generación,blog_writing/04_flujo_iterativo_de_generacion.md,Abrir para #BLOG para una petición explícita del flujo completo o para una petición natural de crear redactar escribir o generar un blog nuevo; Medium es el destino predeterminado salvo instrucción contraria,instrucción,activo,es
+Materialización y postproducción,blog_writing/publication_materialization.md,Abrir solo al preparar la versión lista para publicar o ejecutar postproducción; contiene formato Medium por defecto ecuaciones ilustraciones SEO y copy de distribución,instrucción,activo,es
+Plantilla de escritura de blog,blog_writing/plantilla_entrada.md,Usar solo para registrar una idea o borrador de blog que deba persistir,plantilla,activo,es
