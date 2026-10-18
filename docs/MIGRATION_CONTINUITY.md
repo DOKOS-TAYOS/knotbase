@@ -85,3 +85,13 @@ The original `info_for_ai/prompting/` source domain is published as five source 
 After this source-only integration, `manifests/source_parity.csv` has **89 distinct entries, 82 verbatim and seven privacy-adapted**. The original Codex module's dependency on a local `dokos-instructions-knowledge` checkout was **not** reinterpreted or redesigned for Knotbase. This source is not yet a general-purpose functioning runtime. The global routing and command dispatcher, personal inventory substitution, integration tests, and actual functional proof remain pending.
 
 The README retains the earlier historical count owing to the previously documented blocked GitHub edit. The source ledger and this continuity appendix contain the later verified counts. No alternate path has been used to bypass the security control.
+
+## HTML-domain generic source checkpoint (PR #11)
+
+This integration adds **11 original, byte-for-byte identical HTML-domain source files** under `info_for_ai/htmls/`, including the shared core, generation and interaction, stateful controls, visuals, presentation mode, presentation editing and verification, static PDF export, multi-HTML packages, general verification, and the generic entry template. Every published file's Git blob SHA equals the corresponding live DIK source SHA recorded in `manifests/source_parity.csv`. No privacy transformation is necessary for these 11 files.
+
+**Intentionally not yet included:** the original HTML-domain index and one recipient-specific interactive-letter workflow with personal content and a separate asset dependency. Neither is to be reconstructed or silently replaced with a shortened version. The original full domain index cannot yet be asserted as operational in Knotbase. No personal template assets, media, or private archives have been published.
+
+Following this batch, the source ledger has **100 distinct source-file records: 93 verbatim and seven privacy-adapted**. This remains a source-only checkpoint, not an implementation of the separately developed HTML/PDF/DOCX runtime, nor evidence of working editor/export features. The global router, command registry and real behavioral tests remain pending.
+
+The README still contains an earlier historical tally due to the previously documented blocked edit. Counts here and in the source ledger reflect the later published state. No alternative write path was used for that blocked change.
