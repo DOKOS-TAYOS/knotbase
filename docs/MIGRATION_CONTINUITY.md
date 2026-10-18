@@ -53,6 +53,6 @@ Last verified main immediately before this handoff document: `b3b0b5c1791e7be830
 
 The original `info_for_ai/code/indice_code.csv` was copied verbatim with Git blob SHA `85d85f9f45d12dfc272594b8b658e770d35b07d7`. The original `info_for_ai/code/01_repository_identity.md` was copied with only three individually documented personal-reference substitutions (canonical blob `0c1231b1b27d47511e041da7e3531ac8070da2d0`; public blob `923c1a9805f592ec39840c3b897d54cd142335ca`). Exact substituted-source comparison established no additional changes.
 
-The code index's 19 file entries all correspond to files present in the publication batch. Its source domain is complete, but the global routing/command system and original personal-data dependencies are not yet installed, so **functional parity is not established**.
+The missing original `info_for_ai/code/08_integration_preparation.md` was also copied verbatim (Git blob SHA `69a8aa36542c12b1cfc1728398b42e76f94a5ea2`). The code index's 19 file entries all correspond to files present in the publication batch. Its source domain is complete, but the global routing/command system and original personal-data dependencies are not yet installed, so **functional parity is not established**.
 
-The source-parity ledger now has **77 records: 74 verbatim and 3 privacy-adapted**. These counts describe migrated source files, not verified runtime behavior. GitHub core and outstanding domain modules remain priorities.
+The source-parity ledger now has **78 records: 75 verbatim and 3 privacy-adapted**. These counts describe migrated source files, not verified runtime behavior. GitHub core and outstanding domain modules remain priorities.
