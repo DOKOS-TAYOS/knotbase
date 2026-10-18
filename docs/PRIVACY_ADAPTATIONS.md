@@ -111,3 +111,73 @@ Four source files have only owner-identity privacy substitutions. Their complete
 - Exactly two replacements: canonical lines 3 and 138, each original owner's given name preceded by `de` becomes `del usuario actual`. Other content, including the original required Spanish LinkedIn closing phrase, is unchanged.
 
 The remaining four files in this domain have byte-identical original and published Git blob SHAs. None of these changes establishes functional runtime parity, and no original author-specific data file is transferred.
+
+## Bilingual interactions domain
+
+Nine of the 16 original files contain owner-specific references. Exactly **16 substitutions** were made to neutralize those references, while preserving all shared workflow behavior, activation conditions, language branches, recipient restrictions and substantive procedures. The other seven files were copied byte-for-byte.
+**Exact diff convention:** source-name spans are not reproduced verbatim in this public adaptation ledger to avoid re-disclosing personal identifiers. Each affected span is identified by its original line number and its exact neutral published replacement. The original deleted span is recoverable from the specified original Git blob under authorized DIK access. Full original-text plus exactly these substitutions matched the entire published file, with no additional differences.
+
+### `info_for_ai/interactions/indice_interactions.csv`
+
+- Canonical source Git blob SHA: `6fddf7ac339d3f3b79127fc9b6012d0dbdb93823`.
+- Published Git blob SHA: `cc1954d8c88104d8877217ea5ad0946ee8fa03b9`.
+- Exact privacy diff: line 5: Spanish possessive owner phrase becomes `del usuario actual`; line 12: English owner possessive becomes `the user's`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/es/02_correo_personal.md`
+
+- Canonical source Git blob SHA: `8dab8bc913320a5112f0e0992eb4e16090ecc35b`.
+- Published Git blob SHA: `78d1d4850ec6078b89bb1c37340b1f861bb601ea`.
+- Exact privacy diff: line 5: `de` plus original owner given name becomes `del usuario actual`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/es/03_correo_empresa.md`
+
+- Canonical source Git blob SHA: `54d9c11b629d53d0a7b27dd2b906ca74179cd36f`.
+- Published Git blob SHA: `adbcd9665f890a34a7e3b79598db165c7dea76ad`.
+- Exact privacy diff: lines 5 and 9: at each location, `de` plus original owner given name becomes `del usuario actual`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/es/04_primer_contacto.md`
+
+- Canonical source Git blob SHA: `f2f6a6c90bcda6b2d11a46bdb35545ca2fb2a5e5`.
+- Published Git blob SHA: `1bf3851f581ac456395d716a3e28956f0bc7e3fb`.
+- Exact privacy diff: line 15: `de` plus original owner given name becomes `del usuario actual`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/es/06_carta_recomendacion.md`
+
+- Canonical source Git blob SHA: `70cd7bfb9e20f9baebedbeec72798c42e1940f58`.
+- Published Git blob SHA: `c1ecf15ed901ae9f835ba0c0e14dc8057654f2f4`.
+- Exact privacy diff: line 5: `de` plus original owner given name becomes `del usuario actual`; line 11: original owner given name after `relación` becomes `el usuario actual`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/en/02_personal_email.md`
+
+- Canonical source Git blob SHA: `6284eb7389e8c9397a69ab514f34769ce56419c8`.
+- Published Git blob SHA: `28ffa0849c138a61c320d23cd0c13c229d2708a2`.
+- Exact privacy diff: line 5: owner-name possessive becomes `the user's`; line 13: plain original owner name becomes `the user`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/en/03_company_email.md`
+
+- Canonical source Git blob SHA: `a6ffabcdf1b0d8387a3cf387e95cc0b983de8825`.
+- Published Git blob SHA: `418b50fd008956bbea851bca0b108703a178c4ab`.
+- Exact privacy diff: lines 5 and 9: owner-name possessive becomes `the user's` once in each line.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/en/04_first_contact.md`
+
+- Canonical source Git blob SHA: `2b25dbfe2a18a0c2844d5a0e750c2e9c1e1f23db`.
+- Published Git blob SHA: `6462a618422548a67a7f95a049838ece080ac00f`.
+- Exact privacy diff: line 15: owner-name possessive becomes `the user's`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+### `info_for_ai/interactions/en/06_recommendation_letter.md`
+
+- Canonical source Git blob SHA: `38157fc479c6ada29ad531946f5f7e2472dd1217`.
+- Published Git blob SHA: `b63b6c1d83965be8e92e38a4c404b15f74e7af31`.
+- Exact privacy diff: line 5: owner-name possessive becomes `the user's`, and original male-specific `why he recommends` becomes `why they recommend`; line 11: original owner name plus `is` becomes `the user is`.
+- Rationale: remove the hard-coded original owner or gender reference while maintaining the unchanged workflow contract.
+
+The shared core, Spanish/English optional style notes, LinkedIn replies and project-delivery modules are all literal original copies. No email addresses, signatures, third-party content or private accounts have been published. As in other domains, privacy substitution and source parity do not constitute end-to-end command-runtime verification.
