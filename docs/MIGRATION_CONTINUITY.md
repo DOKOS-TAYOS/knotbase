@@ -30,7 +30,7 @@ The first six pull requests (#1 through #6) were merged on `main`. At this hando
 - `papers`: original index, workflows and template (11 files; one template-heading privacy adaptation).
 - `education`: complete original domain source (28 files), including core, index, workflows, audience profiles and note-writing rules. All 28 published blobs match the manifest.
 
-The two privacy changes and original/published hashes are recorded in [PRIVACY_ADAPTATIONS.md](PRIVACY_ADAPTATIONS.md). The source SHA ledger is [source_parity.csv](../manifests/source_parity.csv). PRs: [#1](../pull/1), [#2](../pull/2), [#3](../pull/3), [#4](../pull/4), [#5](../pull/5), [#6](../pull/6).
+The two privacy changes and original/published hashes are recorded in [PRIVACY_ADAPTATIONS.md](PRIVACY_ADAPTATIONS.md). The source SHA ledger is [source_parity.csv](../manifests/source_parity.csv). Merged PRs: [#1](https://github.com/DOKOS-TAYOS/knotbase/pull/1), [#2](https://github.com/DOKOS-TAYOS/knotbase/pull/2), [#3](https://github.com/DOKOS-TAYOS/knotbase/pull/3), [#4](https://github.com/DOKOS-TAYOS/knotbase/pull/4), [#5](https://github.com/DOKOS-TAYOS/knotbase/pull/5), [#6](https://github.com/DOKOS-TAYOS/knotbase/pull/6).
 
 No complete application runtime is currently asserted. The global `AGENTS.md`, cross-domain index, command registry/lookup, full code/GitHub routing and related prerequisites are **not yet installed**. Do not present copied source modules as registered commands. The last inspected main commit had no reported combined CI status contexts; this is **not evidence of passing CI**.
 
