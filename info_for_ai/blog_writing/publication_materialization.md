@@ -133,9 +133,9 @@ Para Medium por defecto:
 
 1. redacta un resumen orientado a SEO de un máximo de 140 caracteres, centrado en la pregunta, mecanismo o conclusión principal;
 2. redacta un post de LinkedIn listo para compartir el artículo, con contexto suficiente y sin convertirlo en un índice comentado;
-3. mantén tono natural, profesional y directo; evita clickbait, exageraciones, marketing, entusiasmo artificial, emojis y hashtags no solicitados;
+3. ajusta el tono al público, la plataforma y las preferencias editoriales expresas del usuario; evita afirmaciones no verificadas y elementos de distribución no solicitados;
 4. usa una URL solo cuando exista y esté verificada; no inventes marcadores ficticios;
-5. **Invariant:** cuando el post de LinkedIn comparta un artículo del usuario actual en español, termina exactamente con `Espero que os guste`, salvo petición explícita de otro cierre.
+5. **Default:** cuando el post de LinkedIn comparta un artículo, utiliza un cierre coherente con el tono solicitado y la plataforma; no impongas una fórmula de despedida personal del autor original.
 
 Si el usuario ha indicado otra plataforma de publicación, sustituye el resumen específico de Medium por el metadato equivalente que esa plataforma realmente necesite; conserva el texto de LinkedIn salvo que el usuario lo excluya.
 

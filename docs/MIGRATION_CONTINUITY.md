@@ -117,3 +117,13 @@ The source manifest after publication contains **124 unique entries: 103 verbati
 The README still contains an earlier historical tally due to the previously recorded blocked edit. Use the current ledger and this continuity document for up-to-date counts; do not bypass any security control.
 
 **Branch-history privacy correction:** the initial working-branch commit for the shared interactions core contained one original-owner given-name reference. The final PR-diff review detected this; a subsequent commit replaced exactly that reference with neutral current-user wording, and the source parity ledger and adaptation documentation were corrected. The final branch-head file and intended squash-merge snapshot contain no such hard-coded name. The earlier commit was already publicly accessible and may remain retrievable through GitHub history even if it is excluded from `main` by squash merge. This is disclosed rather than represented as erased; no history rewrite or security-control bypass was attempted.
+
+## Owner-authorized blog style exclusion checkpoint (PR #14)
+
+The original owner expressly directed that the public `blog_writing` domain should **not carry over the original owner's editorial voice**. This permits a bounded behavioral difference beyond privacy-only replacements. Ten verified exact-span edits across `00_core.md`, `02_voz_pedagogia_y_ritmo.md`, `03_revision.md`, and `publication_materialization.md` remove voice imitation, personal rhetorical/typographic norms, forced Spain-specific language preferences and the required personal LinkedIn sign-off. Published previous/current Git blob hashes and the changes are documented in `docs/EDITORIAL_EXCLUSIONS.md`. The original DIK files remain unchanged.
+
+The seven-phase blog creation state machine (`04_flujo_iterativo_de_generacion.md`), indexed routing, evidence requirements, argument-design algorithm, phase gates and publishing format protocol have not been rewritten. The original blog domain index still resolves its seven listed modules.
+
+The manifest now records **124 unique sources: 102 verbatim, 18 privacy-only, 3 privacy-and-editorial adapted, and 1 editorial-only adapted**. Source blob SHA fields continue to identify the immutable DIK originals, not public targets. Previously documented privacy-only published hashes for the affected files are superseded by the new published hashes in `docs/EDITORIAL_EXCLUSIONS.md`.
+
+This remains a source-level change, not proof of execution in the future Knotbase command runtime; the earlier README security-control issue and unresolved generic article-inventory dependency remain outstanding.
