@@ -1,21 +1,31 @@
 # Knotbase
 
-Knotbase is an incremental, public distribution of original, indexed AI instruction workflows.
+Knotbase is an incremental, public distribution of indexed AI instruction workflows derived from the privately validated DIK instruction repository.
 
 ## Current status
 
-**Source publication in progress — not a functional release.** The published batches comprise 78 source files across code, GitHub, research, papers and education: 75 copied verbatim and three files with individually documented privacy-only substitutions ([documented here](docs/PRIVACY_ADAPTATIONS.md)). No algorithms or procedural contracts were rewritten. These selected modules contain no personal profile or contact details, private filesystem paths, or bundled third-party media. Canonical Git blob checksums and publication status are recorded in `manifests/source_parity.csv`.
+**Source migration in progress — not a functional release.** The source parity manifest currently records **129 unique source files**:
 
-The education domain contains its original core, index, instructional workflows, audience profiles and note-writing modules. The research domain contains its original core, index, eight workflows and template. The papers domain contains its original index, nine workflows and a privacy-neutralized entry template. The complete original code domain source is now published, with documented minimal privacy substitutions in its core and repository-identity module. The global `AGENTS.md`, cross-domain routing registry, command dispatcher, GitHub core, and remaining GitHub modules are **not yet installed**. Cross-references that require those absent files will become operational only once their prerequisites have been migrated, reviewed for privacy, and validated. Do not interpret these files as a working command runtime or claim full parity.
+- 102 `verbatim` (Git blob identical to the DIK source);
+- 18 `privacy-adapted`;
+- 3 `privacy-and-editorial-adapted`;
+- 1 `authorized-editorial-adapted`;
+- 5 `authorized-workflow-adapted` (the public template-free CV module).
 
-Every future instruction, schema, and algorithm must preserve the canonical source exactly, except for small, documented changes required for privacy. No summaries, rewritten algorithms or approximated contracts are accepted as replacements.
+The published source domains include code, GitHub, research, papers, education, prompting, interactions, blog writing, and the public standard-CV workflow, plus a **partial** HTML domain. Publication status and canonical DIK source blob SHA values are recorded in [the source parity manifest](manifests/source_parity.csv).
 
-The personal CV template and Europass are not part of this publication. No user data or review archives are included.
+Identical DIK source files retain their exact instructions. Deviations are limited to documented privacy adaptations and specific owner-authorized exclusions of the original author's blog-writing style and the fixed personal CV template. See [privacy adaptations](docs/PRIVACY_ADAPTATIONS.md), [editorial exclusions](docs/EDITORIAL_EXCLUSIONS.md), and [authorized CV workflow deviations](docs/AUTHORIZED_CV_DEVIATIONS.md). These changes are explicit exceptions to literal source parity; they are not presented as verbatim copies.
+
+The standard CV workflow uses an evidence-led **two-phase strategy with explicit approval** before drafting a new CV and can render its own HTML, PDF, and optionally DOCX **without an existing template or required private assets**. The personal source/profile layer and the Europass template and rendering workflow are not published. The CV module has not yet been integrated into a working global command runtime.
+
+**Important runtime limitation:** the global `AGENTS.md` router, command registry/lookup, personal-profile-independent evidence routing and some dependencies are not yet published and validated in Knotbase. The `htmls` domain is partial, and the blog article-inventory dependency is not supplied. These source files do **not** yet establish a fully functional portable `#BLOG`, `#CV` or general command dispatcher. Prior DIK validation supports confidence in the unmodified sources, but it does not replace end-to-end validation of this public repository.
+
+Source publications must preserve original DIK behavior and algorithms except for documented privacy and owner-authorized deviations. Do not add private or restricted data, personal contact details, proprietary templates, or unlicensed third-party media.
 
 ## Migration handoff
 
-For the source-fidelity contract, current verified migration state, remaining blockers and instructions for future work, read [Migration continuity](docs/MIGRATION_CONTINUITY.md).
+For verified migration checkpoints, limitations, and remaining steps, read [migration continuity](docs/MIGRATION_CONTINUITY.md).
 
 ## License
 
-Original materials published in this repository are available under the [MIT License](LICENSE). Third-party materials, trademarks and assets are not sublicensed by this license.
+Original materials published in this repository are available under the [MIT License](LICENSE). Third-party materials, trademarks, and assets are not sublicensed by this license.

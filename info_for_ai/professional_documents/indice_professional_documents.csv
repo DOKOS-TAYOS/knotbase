@@ -1,0 +1,5 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Núcleo de CV,professional_documents/00_core.md,Reglas compartidas de estrategia en dos fases selección de evidencia privacidad publicaciones priorización y voz; no carga rendering ni assets durante la fase 1,instruction,active,es
+Crear CV adaptado,professional_documents/01_crear_cv.md,Crear un CV nuevo ejecutando primero estrategia y aprobación y cargando materialización solo tras el OK,instruction,active,es
+Reajustar CV,professional_documents/02_reajustar_cv.md,Reajustar un CV distinguiendo cambios locales de retargeting estratégico y difiriendo materialización hasta que sea aplicable,instruction,active,es
+Renderizado de CV estándar,professional_documents/standard_cv_rendering.md,Materializar y verificar HTML PDF o DOCX estándar sin plantilla fija ni assets obligatorios; cargar solo en fase 2 o ajuste local aplicable,instruction,active,es
