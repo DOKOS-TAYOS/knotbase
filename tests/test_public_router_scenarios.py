@@ -144,6 +144,25 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 self.assertEqual(decision.module, module)
                 self.assertTrue((AI / module).is_file())
 
+    def test_interaction_commands_use_existing_bilingual_public_modules(self) -> None:
+        workflows = {
+            "#MAIL": ("02_correo_personal.md", "02_personal_email.md", "03_correo_empresa.md", "03_company_email.md"),
+            "#LINKEDIN": ("01_linkedin.md", "01_linkedin.md"),
+            "#CONTACT": ("04_primer_contacto.md", "04_first_contact.md"),
+            "#DELIVER": ("05_envio_compromiso.md", "05_project_delivery.md"),
+            "#REC": ("06_carta_recomendacion.md", "06_recommendation_letter.md"),
+        }
+        for command, filenames in workflows.items():
+            with self.subTest(command=command):
+                resolution = resolve_command(command + " Synthetic drafting context")
+                self.assertEqual(resolution.domain, "interactions")
+                self.assertEqual(resolution.module, "")  # chosen by the index and recipient language
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+                for filename in filenames:
+                    language = "es" if filename.endswith(("correo_personal.md", "correo_empresa.md", "primer_contacto.md", "envio_compromiso.md", "carta_recomendacion.md")) else "en"
+                    self.assertTrue((AI / "interactions" / language / filename).is_file())
+
     def test_education_command_modules(self) -> None:
         cases = {
             "#EXPL": "education/01_explicaciones.md",
