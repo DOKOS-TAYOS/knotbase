@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
@@ -61,16 +61,19 @@ class PublicRouterTests(unittest.TestCase):
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
         mapping = {row[0]: row for row in domains[1:]}
-        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions"})
+        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers"})
         for domain, row in mapping.items():
             self.assertEqual(len(row), 8)
             core = AI / row[3]
             index = AI / row[4]
-            self.assertTrue(core.is_file(), str(core))
+            if row[3]:
+                self.assertTrue(core.is_file(), str(core))
             self.assertTrue(index.is_file(), str(index))
         for row in csv_rows(AI / "comandos.csv")[2:]:
-            domain = row[7]
-            self.assertIn(domain, mapping)
+            declared_domains = [item.strip() for item in row[7].split(";") if item.strip()]
+            self.assertTrue(declared_domains)
+            for domain in declared_domains:
+                self.assertIn(domain, mapping)
             modules = [module.strip() for module in row[8].split(";") if module.strip()]
             if row[0] == "#PROMPT":
                 self.assertFalse(modules)
@@ -78,7 +81,7 @@ class PublicRouterTests(unittest.TestCase):
             for module in modules:
                 route = AI / module
                 self.assertTrue(route.is_file(), str(route))
-        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions"):
+        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
             for row in index[1:]:
                 self.assertTrue((AI / row[1]).is_file(), row[1])
