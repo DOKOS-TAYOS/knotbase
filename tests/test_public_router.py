@@ -181,5 +181,48 @@ class PublicRouterTests(unittest.TestCase):
                 self.assertNotIn(token, text, f"{relative}: {token}")
 
 
+    def test_portable_bootstrap_is_fail_closed_until_dependencies_exist(self) -> None:
+        bootstrap = (ROOT / "BOOTSTRAP.md").read_text(encoding="utf-8")
+        for required in (
+            "config/instance.csv",
+            "instance_repository",
+            "github_owner",
+            "knowledge_repository",
+            "maintenance_for_ai/indice_mantenimiento.csv",
+            "## Acceptance conditions for a user instance",
+        ):
+            self.assertIn(required, bootstrap)
+        registered = {row[0] for row in csv_rows(AI / "comandos.csv")[1:]}
+        self.assertNotIn("#NOAH", registered)
+
+        user_commands = {"#ME", "#BIO"}
+        maintenance_commands = {"#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK"}
+        bulk_commands = {"#DEP", "#SEC", "#CLEAN", "#RUNS", "#TRIAGE"}
+        if registered & (user_commands | maintenance_commands | bulk_commands):
+            self.assertTrue((ROOT / "config/instance.csv").is_file(),
+                            "Do not activate owner workflows before instance configuration exists")
+            self.assertTrue((AI / "info_user/00_core.md").is_file())
+            self.assertTrue((AI / "info_user/indice_info_user.csv").is_file())
+            self.assertTrue((AI / "info_user/repositorios_github.csv").is_file())
+            self.assertTrue((AI / "info_user/repositorios_github_lookup.csv").is_file())
+        if registered & maintenance_commands:
+            self.assertTrue((ROOT / "maintenance_for_ai/00_core.md").is_file())
+            self.assertTrue((ROOT / "maintenance_for_ai/indice_mantenimiento.csv").is_file())
+            self.assertTrue((ROOT / "maintenance_for_ai/validation/validate.py").is_file(),
+                            "KBCHK and maintenance commands require the portable validator")
+
+        for relative in (
+            "info_for_ai/info_user/_data/fuentes.csv",
+            "info_for_ai/info_user/_data/hechos.csv",
+            "info_for_ai/info_user/_data/capacidades.csv",
+            "info_for_ai/info_user/_data/relaciones.csv",
+            "info_for_ai/info_user/repositorios_github.csv",
+        ):
+            path = ROOT / relative
+            if path.exists():
+                self.assertEqual(len(csv_rows(path)), 1,
+                                 "The public upstream must ship empty personal-data tables: " + relative)
+
+
 if __name__ == "__main__":
     unittest.main()
