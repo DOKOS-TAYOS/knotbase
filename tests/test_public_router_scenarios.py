@@ -139,9 +139,8 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 self.assertTrue((AI / module).is_file())
 
     def test_modifiers_and_multiline_argument_survive(self) -> None:
-        original = "#LONG #BLOG Un tema de prueba; nivel introductorio\nSin imágenes"
         with self.assertRaises(RoutingError):
-            resolve_command(original)  # modifier must be the *first* token
+            resolve_command("#LONG #SHORT #BLOG Un tema de prueba")
         result = resolve_command("#LONG #BLOG Un tema de prueba; nivel introductorio\nSin imágenes")
         self.assertEqual(result.modifier, "#LONG")
         self.assertIn("; nivel introductorio\nSin imágenes", result.argument)
@@ -212,7 +211,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
         continuation = (AI / "iterative_continuation.md").read_text(encoding="utf-8")
         for expected in ("../iterative_continuation.md", "6A. Planificación visual", "6B. Generación visual", "Fase 7. Distribución"):
             self.assertIn(expected, module)
-        self.assertIn("exactamente la siguiente unidad pendiente", continuation) if "exactamente la siguiente unidad pendiente" in continuation else self.assertIn("siguiente unidad pendiente", continuation)
+        self.assertIn("siguiente unidad pendiente", continuation)
 
 
 if __name__ == "__main__":
