@@ -139,3 +139,13 @@ The source manifest now has **129 unique canonical-source records: 102 verbatim,
 A template-free CV feasibility test using fictional applicant information generated HTML, PDF and DOCX and checked native PDF text extraction and rendered output. This does not validate the complete two-phase workflow within Knotbase. The source package still lacks its global runtime, command registry/lookup, portable evidence-source configuration and functional end-to-end integration tests. Earlier sections document historical checkpoints and their counts; the 129-row ledger is authoritative for the current batch.
 
 The README has been refreshed to correct obsolete source totals and GitHub-domain claims, while distinguishing public source publication from a functional release.
+
+## Public scoped router checkpoint (proposed PR #16)
+
+A public, restricted root `AGENTS.md` and command-dispatch files have been prepared on a separate working branch for `#HELP`, `#BLOG`, `#CV` and `#CVEDIT`. The registry reproduces those **four exact DIK command rows**, but the public registry is intentionally a subset, and its lookup uses new public line numbers. The scope and exact source/target blob hashes are recorded in `docs/PUBLIC_ROUTER_SCOPE.md`.
+
+The domain index exposes the template-free `professional_documents` package, the author-neutral `blog_writing` package and already-published `research` support. No original personal-profile domain, maintenance commands or unpublished workflows are enabled. The cross-domain iterative-continuation contract is **verbatim** from DIK and retains its canonical blob hash.
+
+The manifest now contains **134 unique source records**: 103 verbatim, 18 privacy-adapted, 3 privacy-and-editorial-adapted, 1 editorial-adapted, 5 workflow-adapted, 3 public-routing-adapted and 1 public-subset-adapted. The private DIK remains unchanged. The README reflects the restricted pilot and these current counts; earlier historical counts elsewhere in this continuity document refer to older migration checkpoints.
+
+Structural verification of paths, SHA parity, registry lookup, authorization gates and privacy is required before integration. A merge would publish the routing **instructions**, but it would not demonstrate that a ChatGPT consumer activates them automatically or that an entire seven-phase blog workflow or CV generation completes end-to-end. The private blog article inventory and any user-provided evidence remain separate runtime concerns.
