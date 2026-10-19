@@ -157,3 +157,11 @@ The public `htmls` domain now has its own resolvable `indice_htmls.csv`, adapted
 Source trace: canonical DIK index Git blob `05189871f4a37f1d8c7d8079996e7ddeec44eea4`; adapted public index Git blob `abdb61041c9d57b843f676ae2485b60c8387c3b0`. The `privacy-adapted` difference and omission are explained in `docs/HTML_PUBLIC_SCOPE.md`. The manifest now has **135 unique source records**, of which **103 are verbatim and 19 privacy-adapted**. The original DIK repository is unchanged.
 
 This checkpoint completes the general HTML **source index**, not top-level activation of `#HTML`, any excluded personal workflow, or all original DIK commands. The limited root router and four-command registry remain unchanged. Structural GitHub Actions checks apply to the packaged source index; independent end-to-end consumer tests are deferred until after the remaining public routing work.
+
+## Public research, HTML and prompting command extension (PR #19)
+
+The public command registry was extended from four to **fourteen** commands. Exact canonical DIK rows were selected for eight research workflows (`#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`), general-purpose `#HTML`, and `#PROMPT`, alongside the original four commands. The lookup was updated to exact public line numbers 2–15.
+
+The public index now includes `htmls` and `prompting` in addition to `professional_documents`, `blog_writing`, and `research`. All source modules were already published. The public root router is adapted for multi-module research commands, explicit Codex-vs-Chat prompt selection, and the existing authorization and output gates; no personal-profile or private letter workflow is reintroduced.
+
+There are still **135 provenance records**. This phase updates four previously adapted routing files, tests and documentation but adds no new source-file entry. Its current source and public blob hashes are documented in `docs/PUBLIC_ROUTER_SCOPE.md`. DIK remains unmodified. The PR's source/structural CI and subsequent independent ChatGPT functional routing verification are distinct; the latter remains deferred until the full public command migration is finished.
