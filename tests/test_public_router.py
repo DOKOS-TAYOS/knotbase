@@ -247,18 +247,29 @@ class PublicRouterTests(unittest.TestCase):
             "info_for_ai/info_user/repositorios_github.csv": "nombre,url,descripcion_resumen,tipo,visibilidad,estado_desarrollo,archivado,es_fork,dependabot_dias_versiones,ultima_verificacion,notas",
             "info_for_ai/info_user/repositorios_github_lookup.csv": "nombre,line",
         }
-        # Installed private forks may legitimately contain user records. Only the
-        # public upstream may enforce header-only user data at CI runtime.
+        # An installed private fork may hold authorized user records. Upstream
+        # PR validation must reject published personal rows, including CSVs
+        # added after this fixed list of canonical schemas.
         is_public_upstream = os.environ.get("GITHUB_REPOSITORY", "").lower() == "dokos-tayos/knotbase"
+        profile_root = AI / "info_user"
+        if (profile_root / "00_core.md").is_file():
+            self.assertTrue((profile_root / "indice_info_user.csv").is_file())
+            for required in schemas:
+                self.assertTrue((ROOT / required).is_file(),
+                                "Published info_user is missing required schema: " + required)
         for relative, header in schemas.items():
             path = ROOT / relative
             if not path.exists():
                 continue
             rows = csv_rows(path)
             self.assertEqual(rows[0], header.split(","), relative)
-            if is_public_upstream:
+        if is_public_upstream and profile_root.exists():
+            for path in profile_root.rglob("*.csv"):
+                rows = csv_rows(path)
                 self.assertEqual(len(rows), 1,
-                                 "Public upstream must ship no personal records: " + relative)
+                                 "Public upstream must ship header-only profile CSVs: " + str(path))
+                self.assertTrue(rows[0] and any(field.strip() for field in rows[0]),
+                                "Public CSV must have a nonempty header: " + str(path))
 
         config_path = ROOT / "config/instance.csv"
         if config_path.exists():
