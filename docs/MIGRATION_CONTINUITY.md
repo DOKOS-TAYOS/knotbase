@@ -199,3 +199,13 @@ All seven original read-only or artifact-write effects, argument order, authoriz
 Five source-identical DIK commands `#INIT`, `#REPRO`, `#REFAC`, `#DOC`, and `#READY` are added to the public registry as lookup lines 34–38, raising the scoped catalog from 32 to **37** commands. The original `local-write` effect, argument syntax, module mapping and original authorization fields are unchanged. Existing public `code` source modules are reused without any new publication, so the provenance ledger stays at **139** source entries.
 
 Remote publication remains outside the scope of all five original commands. No user-specific identity information, private repository inventory, or private DIK edits are included. This checkpoint requires structural validation and passing final-HEAD GitHub CI before integration; independent functional consumer routing tests remain deliberately postponed until the migration has finished.
+
+## Integrated command batches #24 and #25
+
+PR #24 added nine exact DIK audit/journal rows, taking the public subset to 46 commands. Squash commit `905cebd7695885abcc106ef843d7189e43ad08a8`; post-merge GitHub Actions success confirmed. PR #25 added five exact repository-scoped GitHub rows (`#PR`, `#ISSUE`, `#SYNC`, `#RELEASE`, `#BITACORA`), raising the count to 51. It was squash-merged manually after verified head CI, producing `a2166be668e2eec3005bc87e1924285aa6fbd884`; post-merge GitHub Actions run `39313473940` completed successfully. The source manifest remains at 139 entries throughout. No DIK private source files were modified.
+
+## Scoped SHIP and public portability exclusions (PR #26)
+
+The next command-only batch adds `#SHIP` as the exact DIK row at lookup line 53. This raises the scoped public total to 52 of the original 65 and preserves code-first technical-readiness and GitHub publication gates. The 13 remaining original commands depend on original-owner private profile/maintenance records, a repository inventory unavailable publicly for broad operational workflows, or recipient-specific private media. These are not activated or silently reimplemented with weaker semantics. No additional source record is published and the manifest stays at 139.
+
+Final validation still requires independent end-to-end consumer tests after the public subset is complete. Passing structural tests and GitHub CI verify indexed packaging but not actual ChatGPT runtime activation or authorization behavior.

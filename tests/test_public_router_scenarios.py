@@ -251,6 +251,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
             "#SYNC": ("github", "github/01_integration_and_publication.md"),
             "#RELEASE": ("code; github", "code/11_release_preparation.md; code/08_integration_preparation.md; github/01_integration_and_publication.md; github/05_failed_ci_runs_review.md; github/07_release_publication.md"),
             "#BITACORA": ("github", "github/10_research_logbook.md"),
+            "#SHIP": ("code; github", "code/08_integration_preparation.md; github/01_integration_and_publication.md"),
         }
         for command, (domains, modules) in cases.items():
             with self.subTest(command=command):
@@ -265,7 +266,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
                         resolve_command(command + " example/repository")
                 with self.assertRaises(RoutingError):
                     resolve_command(command)
-        for command in ("#SYNC", "#RELEASE"):
+        for command in ("#SYNC", "#RELEASE", "#SHIP"):
             self.assertEqual(resolve_command(command + " example/repository").command, command)
         issue = (AI / "github/08_issue_implementation.md").read_text(encoding="utf-8")
         release = (AI / "code/11_release_preparation.md").read_text(encoding="utf-8")
