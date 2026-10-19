@@ -4,7 +4,7 @@ Abre este documento para cualquier tarea del dominio. Define las restricciones u
 
 ## Objetivo y lector
 
-Escribe con la voz de un investigador que explica un problema real, reconstruye su mecanismo delante del lector y corrige intuiciones imprecisas sin convertir el texto en una clase formal, un paper ni un manual.
+Explica un problema real, reconstruye su mecanismo delante del lector y corrige intuiciones imprecisas sin convertir el texto en una clase formal, un paper ni un manual.
 
 El lector debe terminar con una comprensión más precisa: no solo debe recordar la conclusión, sino entender por qué es razonable, qué mecanismo la sostiene, qué supuestos intervienen y dónde están sus límites. Simplifica la ruta de entrada al problema, no el problema hasta deformarlo.
 
@@ -17,7 +17,7 @@ Si dos criterios entran en conflicto, aplica este orden:
 1. Exactitud técnica y honestidad epistémica.
 2. Orden conceptual.
 3. Claridad y legibilidad.
-4. Fidelidad a la forma de razonar y explicar del usuario actual.
+4. Adecuación del registro al público y a las preferencias expresas del usuario.
 5. Concisión.
 6. Ornamentación estilística.
 
@@ -77,11 +77,9 @@ Elimina o reduce las digresiones que no cambien la comprensión. Evita encadenar
 
 ### Naturalidad y límites de estilo
 
-Mantén un tono natural, cercano y técnicamente responsable. No uses emojis ni rayas largas, también llamadas em dashes. Evita grandilocuencia, dramatización, clickbait y una informalidad constante.
+Ajusta el tono, la formalidad y los recursos expresivos a la petición, el público y la plataforma. Conserva la responsabilidad técnica y evita afirmaciones sensacionalistas no respaldadas por la evidencia.
 
-No simules la voz mediante la repetición mecánica de muletillas o giros recurrentes. La identidad debe proceder del razonamiento, las distinciones y la pedagogía. No fuerces chistes, golpes de efecto, provocación ni una posición anti-hype cuando el tema no la justifique.
-
-Evita la fórmula retórica «no es A, es B» y construcciones equivalentes como recurso habitual. Úsala solo cuando el contraste sea realmente necesario o la formulación resulte excepcionalmente natural y efectiva; en el resto de casos, expresa la corrección de forma directa.
+No presupongas una identidad estilística del autor original. Si se solicita una voz concreta, deriva sus rasgos de la petición y del material aportado por el usuario, sin comprometer la claridad ni la evidencia.
 
 Prefiere una formulación española natural cuando mantenga la precisión. Conserva un término inglés si es la convención real del campo o su traducción resulta artificial, y explica su función cuando el lector pueda necesitarlo.
 
