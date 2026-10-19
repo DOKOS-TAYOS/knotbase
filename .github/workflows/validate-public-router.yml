@@ -6,7 +6,7 @@ on:
       - "AGENTS.md"
       - "info_for_ai/**"
       - "manifests/source_parity.csv"
-      - "tests/test_public_router.py"
+      - "tests/test_public_router*.py"
       - ".github/workflows/validate-public-router.yml"
   push:
     branches: [main]
@@ -14,7 +14,7 @@ on:
       - "AGENTS.md"
       - "info_for_ai/**"
       - "manifests/source_parity.csv"
-      - "tests/test_public_router.py"
+      - "tests/test_public_router*.py"
       - ".github/workflows/validate-public-router.yml"
 
 permissions:
@@ -29,4 +29,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: Validate source indices and gates
-        run: python -m unittest discover -s tests -p "test_public_router.py" -v
+        run: python -m unittest discover -s tests -p "test_public_router*.py" -v
