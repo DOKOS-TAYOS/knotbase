@@ -4,11 +4,11 @@ Abre este módulo al redactar o editar la prosa de un artículo cuya arquitectur
 
 **Default:** el destino final de los artículos del usuario actual es Medium salvo que el usuario indique otra plataforma, pero las reglas mecánicas de materialización no pertenecen a este módulo. Carga `publication_materialization.md` solo cuando haya que producir o revisar la versión lista para publicar.
 
-## Voz
+## Voz configurable
 
-Escribe como alguien que conoce el campo desde dentro y muestra cómo razona sobre él. Suena seguro cuando el mecanismo está establecido y prudente cuando existe incertidumbre; la autoridad no necesita solemnidad.
+Ajusta el registro, el grado de formalidad, la cercanía y la voz narrativa al público, al objetivo editorial y a las preferencias expresas del usuario. No reproduzcas por defecto la voz del autor original.
 
-Evita la voz de manual académico, la voz corporativa y la de un creador de contenido que busca una frase impactante cada pocos párrafos. El texto puede ser conversacional, pero no una charla informal. Usa cercanía para reducir fricción, no para sustituir precisión.
+Mantén la distinción entre afirmaciones establecidas e incertidumbre. Las elecciones de voz no deben sustituir la precisión conceptual, la evidencia ni las explicaciones de los mecanismos.
 
 ## Relación con el lector
 
@@ -61,8 +61,6 @@ Durante borrador y pulido usa una notación clara y no ambigua sin gastar trabaj
 **Invariant: integración narrativa.** El hipervínculo debe formar parte de una oración que ya cumpla una función narrativa o argumentativa en el párrafo. No coloques como línea o párrafo independiente un título, nombre de paper, autor, vídeo, artículo propio o texto de enlace únicamente para adjuntar su URL. Tampoco añadas después de una afirmación una segunda línea que repita el nombre de la fuente enlazada. Si merece nombrarse el trabajo, intégralo gramaticalmente en la frase que explica qué aporta, demuestra, amplía o documenta. Si solo hace falta respaldar una afirmación, enlaza directamente la formulación natural de esa afirmación o el nombre del autor dentro de la prosa. El artículo no debe adquirir apariencia de bibliografía incrustada por la colocación de sus enlaces.
 
 Prioriza papers originales, documentación oficial y otras fuentes primarias cuando estén disponibles. No enlances afirmaciones triviales ni satures el artículo de referencias. La materialización final para Medium debe aplicar además la auditoría de cobertura e integración narrativa de hipervínculos definida en `publication_materialization.md`.
-
-Cuando cites o reproduzcas palabras entre comillas, utiliza comillas dobles rectas `" "` como estilo por defecto.
 
 ## Encabezados, listas y títulos
 
