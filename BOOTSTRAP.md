@@ -2,6 +2,8 @@
 
 This file describes the **consumer's own installation**. The upstream public Knotbase repository is a template, never a destination for a user's personal records or routine maintenance changes.
 
+**Implementation status:** This document is currently a proposed onboarding contract on a work branch. The referenced `config/instance.csv`, blank `info_user` templates, portable `maintenance_for_ai` procedures, and public router integration are not yet installed. Do not interpret this document's presence as successful bootstrap or as authorization to activate omitted commands.
+
 ## Bootstrap trigger
 
 At the start of a newly adopted Knotbase instance, inspect `config/instance.csv`. If `instance_repository` or `github_owner` is empty, perform this bootstrap before selecting owner-specific GitHub commands, reading user facts as verified, or making repository mutations. Ask for the missing values conversationally, one decision at a time; do not guess from the original author's repository or from the currently connected GitHub account.
