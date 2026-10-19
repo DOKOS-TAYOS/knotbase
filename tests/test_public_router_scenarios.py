@@ -159,8 +159,8 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 self.assertEqual(resolution.module, "")  # chosen by the index and recipient language
                 with self.assertRaises(RoutingError):
                     resolve_command(command)
-                for filename in filenames:
-                    language = "es" if filename.endswith(("correo_personal.md", "correo_empresa.md", "primer_contacto.md", "envio_compromiso.md", "carta_recomendacion.md")) else "en"
+                for index, filename in enumerate(filenames):
+                    language = "es" if index % 2 == 0 else "en"
                     self.assertTrue((AI / "interactions" / language / filename).is_file())
 
     def test_education_command_modules(self) -> None:
