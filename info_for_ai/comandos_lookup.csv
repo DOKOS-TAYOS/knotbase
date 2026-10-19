@@ -31,3 +31,8 @@ command,line
 #DIFF,31
 #RESP,32
 #RESUB,33
+#INIT,34
+#REPRO,35
+#REFAC,36
+#DOC,37
+#READY,38
