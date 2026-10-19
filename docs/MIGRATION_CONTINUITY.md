@@ -157,3 +157,19 @@ The public `htmls` domain now has its own resolvable `indice_htmls.csv`, adapted
 Source trace: canonical DIK index Git blob `05189871f4a37f1d8c7d8079996e7ddeec44eea4`; adapted public index Git blob `abdb61041c9d57b843f676ae2485b60c8387c3b0`. The `privacy-adapted` difference and omission are explained in `docs/HTML_PUBLIC_SCOPE.md`. The manifest now has **135 unique source records**, of which **103 are verbatim and 19 privacy-adapted**. The original DIK repository is unchanged.
 
 This checkpoint completes the general HTML **source index**, not top-level activation of `#HTML`, any excluded personal workflow, or all original DIK commands. The limited root router and four-command registry remain unchanged. Structural GitHub Actions checks apply to the packaged source index; independent end-to-end consumer tests are deferred until after the remaining public routing work.
+
+## Public research, HTML and prompting command extension (PR #19)
+
+The public command registry was extended from four to **fourteen** commands. Exact canonical DIK rows were selected for eight research workflows (`#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`), general-purpose `#HTML`, and `#PROMPT`, alongside the original four commands. The lookup was updated to exact public line numbers 2–15.
+
+The public index now includes `htmls` and `prompting` in addition to `professional_documents`, `blog_writing`, and `research`. All source modules were already published. The public root router is adapted for multi-module research commands, explicit Codex-vs-Chat prompt selection, and the existing authorization and output gates; no personal-profile or private letter workflow is reintroduced.
+
+There are still **135 provenance records**. This phase updates four previously adapted routing files, tests and documentation but adds no new source-file entry. Its current source and public blob hashes are documented in `docs/PUBLIC_ROUTER_SCOPE.md`. DIK remains unmodified. The PR's source/structural CI and subsequent independent ChatGPT functional routing verification are distinct; the latter remains deferred until the full public command migration is finished.
+
+## Runtime assets for PAPER and HTML editor (PR #19 review correction)
+
+The pre-integration review found a missing mandatory `#PAPER` HTML study template and an unavailable presentation-editor resource referenced by the published generic `#HTML` modules. These were missing *packaging dependencies*, not structural-test failures. Both original, generic, self-contained DIK HTML assets have now been copied **verbatim** to `assets_for_ai/paper_study/paper_study_template.html` and `assets_for_ai/htmls/presentation_editor_base.html`. Their minimal source-derived asset index and lookup expose precisely those two public IDs, without private portraits, unrelated media or personal templates.
+
+Source parity now records **139 source entries**: 105 verbatim, 21 privacy-adapted, 3 privacy-and-editorial, 1 authorized-editorial, 5 authorized-workflow, 3 public-routing and 1 public-subset. Four records were added beyond the prior 135: the two verbatim HTML assets and two privacy-scoped indices. The older 135 entry count above is a historical state of this PR before its dependency correction, not the final state. See `docs/PUBLIC_ASSETS_SCOPE.md` for original and public Git blob hashes, intended use and limitations.
+
+The structural unittest now normalizes Windows CRLF checkout text to canonical LF for Git blob verification, without modifying the original `info_for_ai/iterative_continuation.md` file or its expected SHA. No independent consumer routing, paper HTML assembly or presentation-editor interaction has been claimed; the owner requested those manual integration checks only after the public migration is complete.

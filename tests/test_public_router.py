@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#BLOG", "#CV", "#CVEDIT")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#BLOG", "#HTML", "#CV", "#CVEDIT")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
@@ -35,7 +35,7 @@ def csv_rows(path: Path) -> list[list[str]]:
 
 
 def git_blob_sha(path: Path) -> str:
-    data = path.read_bytes()
+    data = path.read_bytes().replace(b"\r\n", b"\n")  # normalize Windows text checkout to source LF
     envelope = b"blob " + str(len(data)).encode("ascii") + b"\x00" + data
     return hashlib.sha1(envelope).hexdigest()
 
@@ -44,7 +44,7 @@ class PublicRouterTests(unittest.TestCase):
     def test_four_exact_commands_and_lookup_lines(self) -> None:
         registry = csv_rows(AI / "comandos.csv")
         lookup = csv_rows(AI / "comandos_lookup.csv")
-        self.assertEqual(len(registry), 5)
+        self.assertEqual(len(registry), len(EXPECTED_COMMANDS) + 1)
         self.assertEqual(len(registry[0]), 11)
         self.assertEqual(tuple(row[0] for row in registry[1:]), EXPECTED_COMMANDS)
         self.assertEqual(lookup[0], ["command", "line"])
@@ -53,7 +53,7 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(len(row), 11)
             self.assertIn(row[2], ("help", "route"))
             if row[2] == "route":
-                self.assertTrue(row[7] and row[8])
+                self.assertTrue(row[7])
             else:
                 self.assertEqual(row[0], "#HELP")
 
@@ -61,7 +61,7 @@ class PublicRouterTests(unittest.TestCase):
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
         mapping = {row[0]: row for row in domains[1:]}
-        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research"})
+        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting"})
         for domain, row in mapping.items():
             self.assertEqual(len(row), 8)
             core = AI / row[3]
@@ -71,9 +71,14 @@ class PublicRouterTests(unittest.TestCase):
         for row in csv_rows(AI / "comandos.csv")[2:]:
             domain = row[7]
             self.assertIn(domain, mapping)
-            route = AI / row[8]
-            self.assertTrue(route.is_file(), str(route))
-        for domain in ("professional_documents", "blog_writing", "research"):
+            modules = [module.strip() for module in row[8].split(";") if module.strip()]
+            if row[0] == "#PROMPT":
+                self.assertFalse(modules)
+                modules = ["prompting/01_codex_prompt_generation.md", "prompting/02_chat_prompt_generation.md"]
+            for module in modules:
+                route = AI / module
+                self.assertTrue(route.is_file(), str(route))
+        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
             for row in index[1:]:
                 self.assertTrue((AI / row[1]).is_file(), row[1])
@@ -91,7 +96,7 @@ class PublicRouterTests(unittest.TestCase):
     def test_source_ledger(self) -> None:
         rows = csv_rows(ROOT / "manifests/source_parity.csv")
         self.assertEqual(rows[0], ["path", "source_git_blob_sha", "status"])
-        self.assertEqual(len(rows), 136)  # header + 135 sources
+        self.assertEqual(len(rows), 140)  # header + 139 sources
         paths = [row[0] for row in rows[1:]]
         self.assertEqual(len(paths), len(set(paths)))
         lookup = {row[0]: row[1:] for row in rows[1:]}
@@ -103,9 +108,9 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(len(row), 3)
             self.assertEqual(len(row[1]), 40)
         self.assertEqual(
-            sum(row[2] == "verbatim" for row in rows[1:]), 103
+            sum(row[2] == "verbatim" for row in rows[1:]), 105
         )
-        self.assertEqual(sum(row[2] == "privacy-adapted" for row in rows[1:]), 19)
+        self.assertEqual(sum(row[2] == "privacy-adapted" for row in rows[1:]), 21)
 
     def test_html_index_is_complete_without_personal_letter_flow(self) -> None:
         rows = csv_rows(AI / "htmls/indice_htmls.csv")
@@ -126,6 +131,36 @@ class PublicRouterTests(unittest.TestCase):
             manifest["info_for_ai/htmls/indice_htmls.csv"][1:],
             ["05189871f4a37f1d8c7d8079996e7ddeec44eea4", "privacy-adapted"],
         )
+
+    def test_two_public_runtime_assets(self) -> None:
+        lookup = csv_rows(ROOT / "assets_for_ai/indice_assets_lookup.csv")
+        index = csv_rows(ROOT / "assets_for_ai/indice_assets.csv")
+        self.assertEqual(lookup[0], ["id", "line"])
+        self.assertEqual(len(index), 3)
+        self.assertEqual(
+            lookup[1:],
+            [["paper-study-html-template", "2"], ["presentation-editor-html-base", "3"]],
+        )
+        sha_expected = {
+            "paper-study-html-template": "0aa057406d3965f6d2566825afb86b739fc62aa3",
+            "presentation-editor-html-base": "349765691f9e11cddf8b37e4bb652fa089747968",
+        }
+        for label, line in lookup[1:]:
+            entry = index[int(line) - 1]
+            self.assertEqual(entry[0], label)
+            path = ROOT / "assets_for_ai" / entry[1]
+            self.assertTrue(path.is_file(), str(path))
+            self.assertEqual(git_blob_sha(path), sha_expected[label])
+            markup = path.read_text(encoding="utf-8")
+            self.assertIn("</html>", markup.lower())
+            self.assertNotIn("info_user/", markup)
+            self.assertNotIn("photos_/", markup)
+        source_records = {row[0]: row for row in csv_rows(ROOT / "manifests/source_parity.csv")[1:]}
+        for suffix in (
+            "assets_for_ai/indice_assets.csv",
+            "assets_for_ai/indice_assets_lookup.csv",
+        ):
+            self.assertEqual(source_records[suffix][2], "privacy-adapted")
 
     def test_no_private_identity_in_router_files(self) -> None:
         for relative in EXPECTED_SOURCE:

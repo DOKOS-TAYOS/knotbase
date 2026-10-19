@@ -77,10 +77,16 @@ def resolve_command(message: str) -> Decision:
     if domain not in domains:
         raise RoutingError("Domain unavailable in public index")
     entry = domains[domain]
-    for relative in (entry["core"], entry["indice"], row["modules"]):
+    modules = [module.strip() for module in row["modules"].split(";") if module.strip()]
+    if name == "#PROMPT":
+        args = argument.split(";", 1)
+        if len(args) != 2 or args[0].strip().lower() not in ("codex", "chat") or not args[1].strip():
+            raise RoutingError("Invalid prompt target or empty request: " + row["usage"])
+        modules = ["prompting/01_codex_prompt_generation.md" if args[0].strip().lower() == "codex" else "prompting/02_chat_prompt_generation.md"]
+    for relative in (entry["core"], entry["indice"], *modules):
         if not (AI / relative).is_file():
             raise RoutingError("Missing route target: " + relative)
-    return Decision(name, modifier, argument, domain, row["modules"], "route")
+    return Decision(name, modifier, argument, domain, "; ".join(modules), "route")
 
 
 def next_cv_phase(phase: str, message: str, *, same_application: bool) -> str:
@@ -153,9 +159,22 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 resolve_command(message)
 
     def test_unknown_commands_are_not_guessed(self) -> None:
-        for message in ("#DEP", "#UNREGISTERED Do something", "#PROMPT Whatever"):
+        for message in ("#DEP", "#UNREGISTERED Do something", "#SEC Whatever"):
             with self.subTest(message=message), self.assertRaisesRegex(RoutingError, "Unregistered"):
                 resolve_command(message)
+
+    def test_prompt_target_and_required_separator(self) -> None:
+        self.assertEqual(resolve_command("#PROMPT Chat; Explain an array").module, "prompting/02_chat_prompt_generation.md")
+        self.assertEqual(resolve_command("#PROMPT Codex; Add a small unittest").module, "prompting/01_codex_prompt_generation.md")
+        for invalid in ("#PROMPT Chat", "#PROMPT Unknown; do this", "#PROMPT Codex;   "):
+            with self.subTest(invalid=invalid), self.assertRaises(RoutingError):
+                resolve_command(invalid)
+
+    def test_sota_uses_both_indexed_modules(self) -> None:
+        paths = resolve_command("#SOTA Data compression algorithms").module.split("; ")
+        self.assertEqual(paths, ["research/01_deep_research.md", "research/07_state_of_the_art.md"])
+        for path in paths:
+            self.assertTrue((AI / path).is_file())
 
     def test_help_is_read_only_without_domain_load(self) -> None:
         for message in ("#HELP", "#HELP CAREER"):
