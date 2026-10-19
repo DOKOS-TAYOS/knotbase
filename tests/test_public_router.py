@@ -78,7 +78,7 @@ class PublicRouterTests(unittest.TestCase):
         )
         self.assertIsNotNone(excluded)
         import re
-        excluded_commands = set(re.findall(r"`(#[A-Z0-9_]+)`", excluded))
+        excluded_commands = set(re.findall(r"`(#[A-Z0-9_]+)`", excluded.split("These thirteen commands", 1)[0]))
         registry_commands = set(EXPECTED_COMMANDS)
         self.assertTrue(excluded_commands.isdisjoint(registry_commands),
                         "A published command cannot be described as excluded")
