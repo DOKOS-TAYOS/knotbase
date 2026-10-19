@@ -57,6 +57,15 @@ class PublicRouterTests(unittest.TestCase):
             else:
                 self.assertEqual(row[0], "#HELP")
 
+    def test_router_command_summary_matches_registry(self) -> None:
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        prefix = "The registry currently supports "
+        summary = next((line for line in router.splitlines() if line.startswith(prefix)), None)
+        self.assertIsNotNone(summary)
+        self.assertIn(": ", summary)
+        named = tuple(piece.strip("`") for piece in summary.split(": ", 1)[1].split(". Its exact rows", 1)[0].replace(" and ", ", ").split(", "))
+        self.assertEqual(named, EXPECTED_COMMANDS)
+
     def test_published_domain_routes(self) -> None:
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
