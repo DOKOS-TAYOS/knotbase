@@ -29,7 +29,7 @@ The public domain index contains `professional_documents`, `blog_writing`, `rese
 
 ## Structural verification and runtime acceptance
 
-Before merging, verify that the fourteen command rows are exact original DIK registry rows, public lookup line numbers match, every routed core/index/module path exists in the target repository, `iterative_continuation.md` has the immutable DIK blob SHA, the manifest retains 135 unique source records and this command expansion adds no new source-file record, and the public router files do not contain private user-specific facts.
+Before merging, verify that the fourteen command rows are exact original DIK registry rows, public lookup line numbers match, every routed core/index/module path exists in the target repository, `iterative_continuation.md` has the immutable DIK blob SHA, the manifest records 139 unique source records, including four new records for two generic HTML runtime assets and their privacy-scoped lookup indices, and the public router files do not contain private user-specific facts.
 
 **Structural validity is not the same as runtime validation.** The executable consumer must load the root `AGENTS.md`, honor the lookup/registry and phase gates, obtain real supporting evidence without private DIK access, and create/inspect genuine artifacts before a functional `#CV` or `#BLOG` claim can be made. A text-only fake run, the DIK source's prior validation or a synthetic CV-conversion smoke test is insufficient evidence of end-to-end routing behavior.
 
@@ -38,3 +38,7 @@ The source manifest is an inventory of **published source records**, not an inve
 ## Research, HTML and prompt expansion
 
 The extension adds the eight canonical DIK research commands `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, and `#OPP`; the general-purpose `#HTML`; and `#PROMPT` with explicit `Codex; request` or `Chat; request` target parsing. The original DIK commands' side-effect and authorization fields were not expanded. Prompt routing selects exactly one target-specific module. The public index exposes already published generic HTML and prompting cores/indices. Recipient-specific private HTML workflows remain excluded. Static routing CI is not independent ChatGPT runtime acceptance.
+
+## Public runtime asset dependency closure
+
+The mandatory paper-study HTML runtime asset and optional presentation editor runtime are now published as identical DIK blobs with a privacy-scoped two-row asset registry. Their source and public hashes, IDs, selected-use constraints and runtime-verification limits are described in [`PUBLIC_ASSETS_SCOPE.md`](PUBLIC_ASSETS_SCOPE.md). The general `#HTML` creation route can produce ordinary HTML without a presentation editor; presentation-oriented authoring must use the registered editor runtime when its indexed module activates, unless the user explicitly opts out under that module's conditions. `#PAPER` must have the runtime available for its final assembly phase. The module contracts and phase gates remain unchanged.
