@@ -58,6 +58,6 @@ Default to Spanish for user-facing responses unless the audience, task or user r
 
 ## Scope boundary
 
-This pilot intentionally **does not register** `#DEP`, `#SEC`, `#SHIP`, personal-data synchronization, maintenance commands, excluded private-recipient workflows or other unlisted DIK commands. Their original contracts, scopes and permissions must not be inferred from their names. Unregistered commands remain unavailable even where their source modules or supporting domains are present.
+This pilot intentionally **does not register** `#PAPSYNC`, `#CVSYNC`, `#REPOSYNC`, `#KBCHK`, `#DEP`, `#SEC`, `#CLEAN`, `#RUNS`, `#CI`, `#TRIAGE`, `#BIO`, `#ME` or the private-recipient-specific `#NOAH`. These thirteen commands remain unavailable until their prerequisites and public routing contracts are individually published; no semantics, authorization or repository scope may be inferred from their names. `#SHIP` **is registered** and remains subject to its canonical code-readiness and GitHub publication gates.
 
 The public source files are instructions for a capable ChatGPT client; Knotbase is **not** a standalone executable or independently validated full DIK runtime. Activation depends on loading this repository's `AGENTS.md` in the actual consumer environment. Test command parsing, index resolution, phase gates, privacy and artifact generation in that environment before claiming functional parity.
