@@ -181,3 +181,9 @@ After verifying integration of PR #19 in `main` at `85f6132da6d5058078e1b6983177
 The education workflows require a topic and accept context only as declared by their original argument grammar; content or format generation is bounded by the selected module and no external publication is authorized. Learner prerequisites are determined from supplied context, not from any private original-owner profile. Readiness checks include registry/lookup integrity and the already-published education domain's module references.
 
 No new source files are included in this command-expansion batch, so the manifest continues to record **139 unique source entries**. The branch updates only scoped public routing, static tests, README and documentation. No edits to canonical DIK or private assets are made. These checks do not replace independent ChatGPT consumer acceptance tests, which remain deferred to the final migration phase.
+
+## Professional-interaction commands (PR #21)
+
+A bounded command-only batch extends the scoped public registry from twenty to **twenty-five** commands with five exact canonical DIK rows: `#MAIL`, `#LINKEDIN`, `#CONTACT`, `#DELIVER`, and `#REC`. Their read-only, draft-only authorization is preserved. The canonical `interactions` domain-index row is exposed through the public router, backed by all previously published bilingual interaction source modules. The lookup assigns lines 22–26; no private user profile, contact data or recipient-specific personal template is added.
+
+Structural checks cover canonical row identity, lookup correspondence, published route dependencies, both language branches and the unchanged provenance inventory. `manifests/source_parity.csv` remains at **139 records**, because no source is newly published. No email, message or letter is actually sent or signed. Independent functional routing acceptance is still deliberately postponed until migration completion. DIK remains untouched.

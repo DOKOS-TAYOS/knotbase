@@ -16,7 +16,7 @@ This is a **public, scoped adaptation** of the DIK global routing contract. It i
 
 ## Enabled pilot commands and behavior
 
-The registry currently supports twenty public commands: `#HELP`, `#PROMPT`, `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`, `#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`, `#BLOG`, `#HTML`, `#CV` and `#CVEDIT`. Its exact rows are authoritative, not this summary.
+The registry currently supports twenty-five public commands: `#HELP`, `#PROMPT`, `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`, `#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`, `#BLOG`, `#HTML`, `#CV`, `#CVEDIT`, `#MAIL`, `#LINKEDIN`, `#CONTACT`, `#DELIVER` and `#REC`. Its exact rows are authoritative, not this summary.
 
 - **`#CV`**: route to `professional_documents/01_crear_cv.md` after its core and index. The first turn executes *strategy only* and asks for explicit approval. Only after an unambiguous `OK` on that same candidature may generation proceed under `standard_cv_rendering.md`. Only user-provided/authorized evidence is available; no personal profile, fixed template, phone, nationality, company email or Europass is bundled.
 - **`#CVEDIT`**: route to `professional_documents/02_reajustar_cv.md` after its core and index. Local changes may run directly; a material new target requires the phase-1 approval gate. Never invent a prior CV when none was supplied or established in the current conversation.
@@ -25,6 +25,7 @@ The registry currently supports twenty public commands: `#HELP`, `#PROMPT`, `#DE
 - **Research commands** (`#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`): load the research core and index, then the declared module(s). `#SOTA` requires both modules; `#PAPER` preserves the original staged `OK` approvals. Do not mutate permanent knowledge unless separately authorized.
 - **`#HTML`**: load the general HTML core and index, the generation module and mandatory verification module, plus only other modules required by the requested artifact. Do not enable excluded personal workflows or external publication.
 - **Education commands** (`#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`): load the education core and index, then the exact published module selected by the registry. Apply the audience's actual prior-knowledge constraints and format contract. No user-specific teaching profile or likeness is inferred; `#VIDEO` does not publish externally or generate the user's likeness without authorized resources. Educational HTML may require the separately indexed HTML domain at its proper materialization phase.
+- **Professional interactions** (`#MAIL`, `#LINKEDIN`, `#CONTACT`, `#DELIVER`, `#REC`): load the interactions core and index, then exactly one recipient-language branch (`es/` or `en/`) and the task-appropriate indexed workflow. `#MAIL` selects personal or corporate email according to supplied context. Draft text only; never send, sign, fabricate personal or third-party facts, or assert delivery of unavailable material. Optional style references are loaded only when the public core requires them.
 - **`#HELP`**: show only commands registered in the public lookup, with no claims about omitted DIK commands.
 
 ## Evidence, artifacts and privacy
