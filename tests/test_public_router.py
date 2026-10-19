@@ -195,6 +195,11 @@ class PublicRouterTests(unittest.TestCase):
             "## Acceptance conditions for a user instance",
         ):
             self.assertIn(required, bootstrap)
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("## Portable-instance onboarding (draft entrypoint)", router)
+        self.assertIn("BOOTSTRAP.md", router)
+        self.assertIn("read-only setup guide", router)
+        self.assertIn("not installed yet", router)
         registered = {row[0] for row in csv_rows(AI / "comandos.csv")[1:]}
         self.assertNotIn("#NOAH", registered)
 
