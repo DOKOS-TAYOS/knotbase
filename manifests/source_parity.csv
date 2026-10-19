@@ -133,3 +133,4 @@ info_for_ai/indice_dominios.csv,c5a3b7cb29e83719dd8303e1f4f93dde04e7692f,public-
 info_for_ai/comandos.csv,8c57e847df45dd80d92a74bbc0efd6129d4e32e0,public-subset-adapted
 info_for_ai/comandos_lookup.csv,890701beb36f8a4ed80437341f16a080f1cd26aa,public-routing-adapted
 info_for_ai/iterative_continuation.md,89f7ff26efd2ad8db17b64e1a12c43e3274e819b,verbatim
+info_for_ai/htmls/indice_htmls.csv,05189871f4a37f1d8c7d8079996e7ddeec44eea4,privacy-adapted
