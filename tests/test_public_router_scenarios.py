@@ -66,7 +66,8 @@ def resolve_command(message: str) -> Decision:
     if row["command"].upper() != name:
         raise RoutingError("Registry and lookup inconsistent")
     argument = parts[1].strip() if len(parts) == 2 else ""
-    if row["mode"] == "route" and not argument:
+    required_args = [item.strip() for item in row["arguments"].split(";") if item.strip() and not item.strip().endswith("?")]
+    if row["mode"] == "route" and not argument and required_args:
         raise RoutingError("Missing required arguments: " + row["usage"])
     if row["mode"] == "help":
         return Decision(name, modifier, argument, None, None, "help")
@@ -208,6 +209,38 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 self.assertTrue((AI / module).is_file())
                 with self.assertRaises(RoutingError):
                     resolve_command(command)
+
+    def test_code_audit_and_journal_routes(self) -> None:
+        expected = {
+            "#BUG": ("code; github", "code/03_bug_audit.md"),
+            "#OPT": ("code; github", "code/09_performance_audit.md"),
+            "#DEAD": ("code; github", "code/04_dead_code_audit.md"),
+            "#TEST": ("code; github", "code/13_test_suite_audit.md"),
+            "#FIX": ("code; github", "code/10_apply_findings.md"),
+            "#CYCLE": ("code", "code/06_cyclic_agent_workflow.md"),
+            "#REFACT": ("code; github", "code/12_refactoring_audit.md"),
+            "#JOURNAL": ("papers", "papers/03_journal_selection.md"),
+            "#PAPERFIT": ("papers", "papers/04_journal_targeted_review.md"),
+        }
+        rows = {row["command"]: row for row in read_csv(AI / "comandos.csv")}
+        for name, (domains, module) in expected.items():
+            with self.subTest(command=name):
+                choice = resolve_command(name + " sample repository; sample context")
+                self.assertEqual(choice.command, name)
+                self.assertEqual(choice.domain, domains)
+                self.assertEqual(choice.module, module)
+                self.assertTrue((AI / module).is_file())
+                if name != "#JOURNAL":
+                    with self.assertRaises(RoutingError):
+                        resolve_command(name)
+        self.assertEqual(rows["#CYCLE"]["effect"], "local-write")
+        self.assertEqual(rows["#PAPERFIT"]["arguments"], "repo; journal")
+        self.assertEqual(rows["#JOURNAL"]["arguments"], "input...?")
+        self.assertEqual(resolve_command("#JOURNAL").module, "papers/03_journal_selection.md")
+        for support in ("code/shared_intensive_audit.md",
+                        "code/shared_codex_remediation_loop.md",
+                        "papers/paperfit_execution.md"):
+            self.assertTrue((AI / support).is_file())
 
     def test_education_command_modules(self) -> None:
         cases = {
