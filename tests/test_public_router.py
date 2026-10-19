@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB", "#INIT", "#REPRO", "#REFAC", "#DOC", "#READY", "#BUG", "#OPT", "#DEAD", "#TEST", "#FIX", "#CYCLE", "#REFACT", "#JOURNAL", "#PAPERFIT")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB", "#INIT", "#REPRO", "#REFAC", "#DOC", "#READY", "#BUG", "#OPT", "#DEAD", "#TEST", "#FIX", "#CYCLE", "#REFACT", "#JOURNAL", "#PAPERFIT", "#PR", "#ISSUE", "#SYNC", "#RELEASE", "#BITACORA")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
@@ -56,6 +56,15 @@ class PublicRouterTests(unittest.TestCase):
                 self.assertTrue(row[7])
             else:
                 self.assertEqual(row[0], "#HELP")
+
+    def test_router_command_summary_matches_registry(self) -> None:
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        prefix = "The registry currently supports "
+        summary = next((line for line in router.splitlines() if line.startswith(prefix)), None)
+        self.assertIsNotNone(summary)
+        self.assertIn(": ", summary)
+        named = tuple(piece.strip("`") for piece in summary.split(": ", 1)[1].split(". Its exact rows", 1)[0].replace(" and ", ", ").split(", "))
+        self.assertEqual(named, EXPECTED_COMMANDS)
 
     def test_published_domain_routes(self) -> None:
         domains = csv_rows(AI / "indice_dominios.csv")

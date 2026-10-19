@@ -67,8 +67,10 @@ def resolve_command(message: str) -> Decision:
         raise RoutingError("Registry and lookup inconsistent")
     argument = parts[1].strip() if len(parts) == 2 else ""
     required_args = [item.strip() for item in row["arguments"].split(";") if item.strip() and not item.strip().endswith("?")]
-    if row["mode"] == "route" and not argument and required_args:
-        raise RoutingError("Missing required arguments: " + row["usage"])
+    if row["mode"] == "route" and required_args:
+        supplied = argument.split(";", len(required_args) - 1)
+        if len(supplied) < len(required_args) or any(not part.strip() for part in supplied):
+            raise RoutingError("Missing required arguments: " + row["usage"])
     if row["mode"] == "help":
         return Decision(name, modifier, argument, None, None, "help")
     if row["mode"] != "route":
@@ -181,7 +183,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
         }
         for command, (expected_domain, module) in command_domains.items():
             with self.subTest(command=command):
-                result = resolve_command(command + " synthetic repository; synthetic evidence; synthetic review comments")
+                result = resolve_command(command + " synthetic repository; synthetic code repository; synthetic submitted commit; synthetic review comments")
                 self.assertEqual(result.domain, expected_domain)
                 self.assertEqual(result.module, module)
                 self.assertTrue((AI / module).is_file())
@@ -241,6 +243,34 @@ class PublicRouterScenarioTests(unittest.TestCase):
                         "code/shared_codex_remediation_loop.md",
                         "papers/paperfit_execution.md"):
             self.assertTrue((AI / support).is_file())
+
+    def test_scoped_github_command_destinations(self) -> None:
+        cases = {
+            "#PR": ("github", "github/06_pull_request_review.md"),
+            "#ISSUE": ("code; github", "github/08_issue_implementation.md; code/08_integration_preparation.md; github/01_integration_and_publication.md; github/05_failed_ci_runs_review.md"),
+            "#SYNC": ("github", "github/01_integration_and_publication.md"),
+            "#RELEASE": ("code; github", "code/11_release_preparation.md; code/08_integration_preparation.md; github/01_integration_and_publication.md; github/05_failed_ci_runs_review.md; github/07_release_publication.md"),
+            "#BITACORA": ("github", "github/10_research_logbook.md"),
+        }
+        for command, (domains, modules) in cases.items():
+            with self.subTest(command=command):
+                decision = resolve_command(command + " example/repository; sample context")
+                self.assertEqual(decision.command, command)
+                self.assertEqual(decision.domain, domains)
+                self.assertEqual(decision.module, modules)
+                for module in modules.split("; "):
+                    self.assertTrue((AI / module).is_file())
+                if command in ("#PR", "#ISSUE", "#BITACORA"):
+                    with self.assertRaises(RoutingError):
+                        resolve_command(command + " example/repository")
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+        for command in ("#SYNC", "#RELEASE"):
+            self.assertEqual(resolve_command(command + " example/repository").command, command)
+        issue = (AI / "github/08_issue_implementation.md").read_text(encoding="utf-8")
+        release = (AI / "code/11_release_preparation.md").read_text(encoding="utf-8")
+        self.assertIn("Do not load", issue)
+        self.assertIn("Do not load", release)
 
     def test_education_command_modules(self) -> None:
         cases = {
