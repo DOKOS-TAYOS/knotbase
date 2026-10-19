@@ -1,0 +1,12 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+HTML domain core,htmls/00_core.md,Open for every HTML-domain task to apply universal delivery rules and selective module routing,instruction,active,en
+HTML generation and interaction,htmls/01_generation_and_interaction.md,Open when creating or revising HTML for implementation responsive layout prose ordinary visual design and the general interaction shell,instruction,active,en
+Stateful HTML controls,htmls/interactive_controls.md,Open only for audience-facing filters selectors tabs toggles progressive disclosure modals or comparable stateful content interaction not already owned by another specialized module,instruction,active,en
+HTML visuals and diagrams,htmls/02_visuals_and_diagrams.md,Open when HTML contains diagrams charts plots matrices coordinate maps structured tables or comparable visual geometry,instruction,active,en
+HTML presentation mode,htmls/03_presentation_mode.md,Open for talks classes workshops live presentation artifacts or explicitly requested presentation mode,instruction,active,en
+Presentation editing layer,htmls/presentation_editor.md,Open with presentation mode or explicit editable presentation requests to add bounded last-mile text style position palette image editing and clean final HTML export,instruction,active,en
+Presentation editor verification,htmls/presentation_editor_verification.md,Open only at the delivery gate for editor-enabled HTML to exercise the rendered editor and clean-export verification matrix,instruction,active,en
+Static PDF export,htmls/static_pdf_export.md,Open only when PDF or another static derivative is requested from HTML and verify the produced derivative,instruction,active,en
+Multi-HTML package workflow,htmls/04_multi_html_packages.md,Open when creating or revising an ordered package or coordinated set of multiple HTML files,instruction,active,en
+HTML verification,htmls/05_verification.md,Open before delivering any created or revised HTML to perform rendered functional responsive and applicable specialized checks,instruction,active,en
+HTML page entry template,htmls/plantilla_entrada.md,Open only to record an identified HTML page or web reference,template,active,en
