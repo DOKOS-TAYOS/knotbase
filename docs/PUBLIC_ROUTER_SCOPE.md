@@ -6,7 +6,7 @@ This note records the **scoped public routing adaptation** enabled by the Knotba
 
 | Public path | Canonical DIK Git blob SHA | Public Git blob SHA | Manifest status |
 |---|---|---|---|
-| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `68ec3749dd15df446f4ace1c0a3fae6b151c9f85` | `public-routing-adapted` |
+| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `12f0c26d47b4a186b58fad139d2513db925773fb` | `public-routing-adapted` |
 | `info_for_ai/indice_dominios.csv` | `c5a3b7cb29e83719dd8303e1f4f93dde04e7692f` | `d27fd759b4085fba5ab0cc5975a88dbc5f8b3090` | `public-routing-adapted` |
 | `info_for_ai/comandos.csv` | `8c57e847df45dd80d92a74bbc0efd6129d4e32e0` | `bad3f620dfe2c9cf9d3749954768bc5f5ea1e839` | `public-subset-adapted` |
 | `info_for_ai/comandos_lookup.csv` | `890701beb36f8a4ed80437341f16a080f1cd26aa` | `38e3d0bc890a7baa2cd4505f87abb76f4d714620` | `public-routing-adapted` |
