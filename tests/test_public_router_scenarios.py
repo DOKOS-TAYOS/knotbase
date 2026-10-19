@@ -183,7 +183,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
         }
         for command, (expected_domain, module) in command_domains.items():
             with self.subTest(command=command):
-                result = resolve_command(command + " synthetic repository; synthetic evidence; synthetic review comments")
+                result = resolve_command(command + " synthetic repository; synthetic code repository; synthetic submitted commit; synthetic review comments")
                 self.assertEqual(result.domain, expected_domain)
                 self.assertEqual(result.module, module)
                 self.assertTrue((AI / module).is_file())
