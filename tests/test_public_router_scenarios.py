@@ -84,8 +84,8 @@ def resolve_command(message: str) -> Decision:
         if len(args) != 2 or args[0].strip().lower() not in ("codex", "chat") or not args[1].strip():
             raise RoutingError("Invalid prompt target or empty request: " + row["usage"])
         modules = ["prompting/01_codex_prompt_generation.md" if args[0].strip().lower() == "codex" else "prompting/02_chat_prompt_generation.md"]
-    for name in requested_domains:
-        for relative in (domains[name]["core"], domains[name]["indice"]):
+    for declared_domain in requested_domains:
+        for relative in (domains[declared_domain]["core"], domains[declared_domain]["indice"]):
             if relative and not (AI / relative).is_file():
                 raise RoutingError("Missing route target: " + relative)
     for relative in modules:
