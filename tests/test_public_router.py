@@ -69,6 +69,26 @@ class PublicRouterTests(unittest.TestCase):
         named = tuple(piece.strip("`") for piece in summary.split(": ", 1)[1].split(". Its exact rows", 1)[0].replace(" and ", ", ").split(", "))
         self.assertEqual(named, EXPECTED_COMMANDS)
 
+    def test_unregistered_command_summary_matches_registry(self) -> None:
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        excluded = next(
+            (line for line in router.splitlines()
+             if line.startswith("This pilot intentionally **does not register**")),
+            None,
+        )
+        self.assertIsNotNone(excluded)
+        import re
+        excluded_commands = set(re.findall(r"`(#[A-Z0-9_]+)`", excluded))
+        registry_commands = set(EXPECTED_COMMANDS)
+        self.assertTrue(excluded_commands.isdisjoint(registry_commands),
+                        "A published command cannot be described as excluded")
+        self.assertEqual(excluded_commands, {
+            "#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK",
+            "#DEP", "#SEC", "#CLEAN", "#RUNS", "#CI", "#TRIAGE",
+            "#BIO", "#ME", "#NOAH",
+        })
+        self.assertIn("`#SHIP` **is registered**", excluded)
+
     def test_published_domain_routes(self) -> None:
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
