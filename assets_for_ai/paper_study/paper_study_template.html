@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="paper-study-viewer" content="embedded-page-images-v3">
+  <title>{{PAPER_TITLE}}</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f4f1;
+      --panel: #ffffff;
+      --text: #181816;
+      --muted: #66665f;
+      --line: #d9d9d2;
+      --accent: #2b5c8a;
+      --accent-soft: #e8f0f7;
+      --paper-bg: #5b5b5b;
+      --marker-bg: rgba(232,240,247,.78);
+      --marker-text: #173b59;
+      --marker-active: rgba(43,92,138,.94);
+      --shadow: 0 8px 28px rgba(0,0,0,.10);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171716;
+        --panel: #222220;
+        --text: #f1f1ed;
+        --muted: #b3b3aa;
+        --line: #3a3a36;
+        --accent: #8bb7e0;
+        --accent-soft: #26384a;
+        --paper-bg: #4f4f4f;
+        --marker-bg: rgba(38,56,74,.84);
+        --marker-text: #e7f2fc;
+        --marker-active: rgba(139,183,224,.94);
+        --shadow: 0 8px 28px rgba(0,0,0,.35);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { background: var(--bg); color: var(--text); overflow: hidden; }
+    button, input, select { font: inherit; }
+    button, input, select { min-height: 42px; }
+    .app { height: 100%; display: grid; grid-template-rows: auto 1fr; padding-top: env(safe-area-inset-top); }
+    .topbar { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 10px max(14px, env(safe-area-inset-right)) 10px max(14px, env(safe-area-inset-left)); border-bottom: 1px solid var(--line); background: var(--panel); z-index: 5; }
+    .paper-title { min-width: 0; }
+    .paper-title h1 { margin: 0; font-size: 15px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .paper-title .meta { color: var(--muted); font-size: 12px; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    .btn { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 9px; padding: 8px 11px; cursor: pointer; touch-action: manipulation; }
+    .btn:hover, .btn:focus-visible { border-color: var(--accent); outline: none; }
+    .mobile-switch { display: none; }
+    .layout { min-height: 0; display: grid; grid-template-columns: minmax(420px,1fr) minmax(350px,470px); }
+    .paper-pane { min-width: 0; min-height: 0; position: relative; background: var(--paper-bg); }
+    .paper-scroll { height: 100%; overflow: auto; overscroll-behavior: contain; background: var(--paper-bg); padding: 18px 14px 28px; scroll-behavior: smooth; scrollbar-gutter: stable; }
+    .paper-page { position: relative; width: min(100%,900px); margin: 0 auto 18px; background: #fff; box-shadow: 0 4px 18px rgba(0,0,0,.28); }
+    .paper-page img { display: block; width: 100%; height: auto; background: #fff; }
+    .paper-page-label { position: absolute; top: 8px; right: 8px; z-index: 4; background: rgba(20,20,20,.72); color: #fff; border-radius: 6px; padding: 4px 7px; font: 11px/1.2 Inter,ui-sans-serif,sans-serif; pointer-events: none; opacity: .78; }
+    .page-marker-rail { position: absolute; top: 34px; right: 8px; z-index: 5; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; max-width: min(44%,280px); }
+    .page-marker { display: flex; align-items: center; gap: 7px; max-width: 100%; border: 1px solid rgba(43,92,138,.36); background: var(--marker-bg); backdrop-filter: blur(2px); color: var(--marker-text); border-radius: 999px; padding: 5px 8px; cursor: pointer; box-shadow: 0 2px 9px rgba(0,0,0,.12); font: 12px/1.15 Inter,ui-sans-serif,sans-serif; text-align: left; touch-action: manipulation; }
+    .page-marker:hover, .page-marker:focus-visible { border-color: var(--accent); outline: none; transform: translateX(-1px); }
+    .page-marker.is-selected { background: var(--marker-active); color: #fff; border-color: var(--accent); }
+    .page-marker-number { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; border-radius: 999px; background: rgba(255,255,255,.92); color: #173b59; font-weight: 700; font-size: 11px; flex: 0 0 auto; }
+    .page-marker-text { display: block; max-width: 185px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .annotation-hotspot { position: absolute; z-index: 3; border: 2px solid rgba(43,92,138,.72); background: rgba(43,92,138,.16); border-radius: 6px; cursor: pointer; padding: 0; min-height: 0; touch-action: manipulation; }
+    .annotation-hotspot:hover, .annotation-hotspot:focus-visible, .annotation-hotspot.is-selected { background: rgba(43,92,138,.28); border-color: var(--accent); outline: none; }
+    .study-pane { min-width: 0; min-height: 0; background: var(--panel); border-left: 1px solid var(--line); display: grid; grid-template-rows: auto auto 1fr; }
+    .study-head { padding: 14px; border-bottom: 1px solid var(--line); }
+    .study-head h2 { margin: 0 0 8px; font-size: 16px; }
+    .search-row { display: grid; grid-template-columns: 1fr 125px; gap: 8px; }
+    .search-row input, .search-row select { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text); padding: 8px 9px; }
+    .annotation-list { max-height: 34vh; overflow: auto; overscroll-behavior: contain; border-bottom: 1px solid var(--line); }
+    .annotation-row { display: grid; grid-template-columns: 46px 1fr; gap: 10px; padding: 11px 12px; border-bottom: 1px solid var(--line); cursor: pointer; touch-action: manipulation; }
+    .annotation-row:hover, .annotation-row[aria-selected="true"] { background: var(--accent-soft); }
+    .page-pill { align-self: start; text-align: center; padding: 5px; border-radius: 7px; background: var(--bg); color: var(--muted); font-size: 11px; border: 1px solid var(--line); }
+    .annotation-row h3 { margin: 0; font-size: 13px; line-height: 1.25; }
+    .annotation-row p { margin: 4px 0 0; color: var(--muted); font-size: 11.5px; line-height: 1.35; }
+    .type-tag { display: inline-block; margin-top: 5px; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }
+    .note { overflow: auto; overscroll-behavior: contain; padding: 18px 20px max(28px, env(safe-area-inset-bottom)); }
+    .note-empty { color: var(--muted); line-height: 1.5; }
+    .note-header { margin-bottom: 16px; }
+    .note-header h2 { margin: 0 0 7px; font-size: 20px; line-height: 1.25; }
+    .note-location { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    .jump-btn { border: 0; background: var(--accent); color: #fff; border-radius: 9px; padding: 8px 11px; cursor: pointer; touch-action: manipulation; }
+    .note-body { font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif; font-size: 16px; line-height: 1.62; overflow-wrap: anywhere; }
+    .note-body h3, .note-body h4 { font-family: Inter, ui-sans-serif, sans-serif; line-height: 1.3; }
+    .note-body code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+    .note-body pre { max-width: 100%; overflow: auto; padding: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
+    .note-body blockquote { margin: 1em 0; padding-left: 14px; border-left: 3px solid var(--line); color: var(--muted); }
+    .note-body math[display="block"] { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.1em 0; }
+    .source-kind { margin-top: 18px; color: var(--muted); font-size: 11px; border-top: 1px solid var(--line); padding-top: 10px; }
+    .status { position: absolute; left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); max-width: min(70%,520px); padding: 8px 10px; border-radius: 8px; background: rgba(20,20,20,.82); color: #fff; font-size: 12px; box-shadow: var(--shadow); display: none; z-index: 20; }
+    body.panel-hidden .layout { grid-template-columns: 1fr; }
+    body.panel-hidden .study-pane { display: none; }
+    @media (max-width: 1100px) and (min-width: 721px) {
+      .layout { grid-template-columns: minmax(0,1fr) minmax(330px,42vw); }
+      .topbar { gap: 8px; }
+      .top-actions { gap: 6px; }
+      .btn { padding-inline: 9px; }
+      .annotation-list { max-height: 38vh; }
+    }
+    @media (max-width: 720px) {
+      body { overflow: hidden; }
+      .app { height: 100dvh; min-height: 100%; grid-template-rows: auto auto 1fr; padding-bottom: env(safe-area-inset-bottom); }
+      .topbar { grid-template-columns: minmax(0,1fr) auto; gap: 8px; padding-top: 8px; padding-bottom: 8px; }
+      .paper-title h1 { font-size: 14px; }
+      .paper-title .meta { font-size: 11px; }
+      .top-actions .btn:not(#prev-note):not(#next-note) { display: none; }
+      .top-actions .btn { min-width: 44px; padding-inline: 8px; }
+      #prev-note, #next-note { font-size: 0; }
+      #prev-note::after { content: "‹"; font-size: 24px; line-height: 1; }
+      #next-note::after { content: "›"; font-size: 24px; line-height: 1; }
+      .mobile-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 7px max(10px,env(safe-area-inset-right)) 7px max(10px,env(safe-area-inset-left)); border-bottom: 1px solid var(--line); background: var(--panel); }
+      .mobile-switch .btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+      .layout { display: block; min-height: 0; height: 100%; }
+      .paper-pane, .study-pane { height: 100%; min-height: 0; }
+      .paper-scroll { padding: 8px 4px 20px; }
+      .paper-page { margin-bottom: 10px; box-shadow: none; }
+      .paper-page-label { top: 5px; right: 5px; }
+      .page-marker-rail { top: 30px; right: 5px; gap: 5px; max-width: none; }
+      .page-marker { width: 30px; height: 30px; padding: 0; border-radius: 999px; justify-content: center; }
+      .page-marker-text { display: none; }
+      .page-marker-number { min-width: 18px; height: 18px; font-size: 10px; background: transparent; color: inherit; }
+      .study-pane { border: 0; grid-template-rows: auto minmax(130px,31vh) 1fr; }
+      body.mobile-view-paper .study-pane { display: none; }
+      body.mobile-view-notes .paper-pane { display: none; }
+      body.mobile-view-paper .paper-pane, body.mobile-view-notes .study-pane { display: grid; }
+      body.mobile-view-paper .paper-pane { display: block; }
+      .study-head { padding: 10px max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left)); }
+      .study-head h2 { display: none; }
+      .search-row { grid-template-columns: 1fr 108px; gap: 7px; }
+      .annotation-list { max-height: none; min-height: 0; }
+      .annotation-row { padding: 10px max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left)); }
+      .note { min-height: 0; padding: 15px max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)); }
+      .note-header h2 { font-size: 19px; }
+      .note-body { font-size: 17px; line-height: 1.68; }
+      .jump-btn { width: 100%; }
+      .status { max-width: calc(100% - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)); }
+    }
+    @media (max-width: 420px) {
+      .search-row { grid-template-columns: 1fr; }
+      .study-pane { grid-template-rows: auto minmax(145px,36vh) 1fr; }
+      .annotation-row { grid-template-columns: 40px 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body class="mobile-view-paper">
+  <div class="app">
+    <header class="topbar">
+      <div class="paper-title">
+        <h1 id="title">{{PAPER_TITLE}}</h1>
+        <div class="meta" id="paper-meta"></div>
+      </div>
+      <div class="top-actions">
+        <button class="btn" id="prev-note" type="button" title="Previous annotation" aria-label="Previous annotation">Previous</button>
+        <button class="btn" id="next-note" type="button" title="Next annotation" aria-label="Next annotation">Next</button>
+        <button class="btn" id="toggle-panel" type="button">Hide notes</button>
+      </div>
+    </header>
+
+    <nav class="mobile-switch" aria-label="Mobile reading view">
+      <button class="btn" id="show-paper" type="button" aria-pressed="true">Paper</button>
+      <button class="btn" id="show-notes" type="button" aria-pressed="false">Notes</button>
+    </nav>
+
+    <main class="layout">
+      <section class="paper-pane" aria-label="Original paper">
+        <div id="paper-scroll" class="paper-scroll" tabindex="0" aria-label="Original paper pages"></div>
+        <div class="status" id="status"></div>
+      </section>
+
+      <aside class="study-pane" aria-label="Study annotations">
+        <div class="study-head">
+          <h2>Study layer</h2>
+          <div class="search-row">
+            <input id="search" type="search" placeholder="Search explanations" autocomplete="off">
+            <select id="type-filter" aria-label="Filter annotation type">
+              <option value="">All types</option>
+            </select>
+          </div>
+        </div>
+        <div class="annotation-list" id="annotation-list" role="listbox" aria-label="Annotations"></div>
+        <article class="note" id="note">
+          <p class="note-empty">Select an annotation to open its explanation.</p>
+        </article>
+      </aside>
+    </main>
+  </div>
+
+  <script type="application/json" id="paper-metadata">{{PAPER_META_JSON}}</script>
+  <script type="application/json" id="study-data">{{STUDY_DATA_JSON}}</script>
+  <script type="application/json" id="paper-page-images">{{PAPER_PAGE_IMAGES_JSON}}</script>
+  <script type="text/plain" id="paper-pdf-base64">{{PAPER_PDF_BASE64}}</script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const meta = JSON.parse(document.getElementById("paper-metadata").textContent || "{}");
+      const annotations = JSON.parse(document.getElementById("study-data").textContent || "[]");
+      const pageImages = JSON.parse(document.getElementById("paper-page-images").textContent || "[]");
+      const paperScroll = document.getElementById("paper-scroll");
+      const list = document.getElementById("annotation-list");
+      const note = document.getElementById("note");
+      const search = document.getElementById("search");
+      const typeFilter = document.getElementById("type-filter");
+      const status = document.getElementById("status");
+      const panelToggle = document.getElementById("toggle-panel");
+      const prev = document.getElementById("prev-note");
+      const next = document.getElementById("next-note");
+      const metaLine = document.getElementById("paper-meta");
+      const showPaper = document.getElementById("show-paper");
+      const showNotes = document.getElementById("show-notes");
+      const narrowViewport = window.matchMedia("(max-width: 720px)");
+
+      let visible = annotations.slice();
+      let selectedId = null;
+
+      function showStatus(message) {
+        status.textContent = message;
+        status.style.display = "block";
+        window.clearTimeout(showStatus.timer);
+        showStatus.timer = window.setTimeout(() => status.style.display = "none", 2400);
+      }
+
+      function esc(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function setMobileView(view) {
+        if (!narrowViewport.matches) return;
+        const paperActive = view === "paper";
+        document.body.classList.toggle("mobile-view-paper", paperActive);
+        document.body.classList.toggle("mobile-view-notes", !paperActive);
+        showPaper.setAttribute("aria-pressed", paperActive ? "true" : "false");
+        showNotes.setAttribute("aria-pressed", paperActive ? "false" : "true");
+      }
+
+      function validAnchor(anchor) {
+        if (!anchor || typeof anchor !== "object") return false;
+        const values = [anchor.x, anchor.y, anchor.w, anchor.h].map(Number);
+        if (!values.every(Number.isFinite)) return false;
+        const [x,y,w,h] = values;
+        return x >= 0 && y >= 0 && w > 0 && h > 0 && x + w <= 1.000001 && y + h <= 1.000001;
+      }
+
+      function dataUrlForPage(item) {
+        if (item.dataUrl) return item.dataUrl;
+        const mime = item.mime || "image/jpeg";
+        return `data:${mime};base64,${String(item.base64 || "").replace(/\s+/g, "")}`;
+      }
+
+      function updatePaperSelection() {
+        document.querySelectorAll(".page-marker,.annotation-hotspot").forEach(node => {
+          node.classList.toggle("is-selected", node.dataset.id === selectedId);
+        });
+      }
+
+      function selectFromPaper(id) {
+        select(id, false);
+        if (narrowViewport.matches) setMobileView("notes");
+      }
+
+      function renderPaper() {
+        paperScroll.innerHTML = "";
+        const ordered = pageImages.slice().sort((a,b) => Number(a.page) - Number(b.page));
+        if (!ordered.length) {
+          paperScroll.innerHTML = '<div style="color:#fff;padding:24px">Embedded paper page images are missing.</div>';
+          return;
+        }
+        const byPage = new Map();
+        for (const item of annotations) {
+          const page = Number(item.page) || 1;
+          if (!byPage.has(page)) byPage.set(page, []);
+          byPage.get(page).push(item);
+        }
+        for (const imageData of ordered) {
+          const page = Number(imageData.page) || 1;
+          const pageEl = document.createElement("section");
+          pageEl.className = "paper-page";
+          pageEl.id = `paper-page-${page}`;
+          pageEl.dataset.page = String(page);
+          pageEl.setAttribute("aria-label", `Page ${page}`);
+
+          const label = document.createElement("div");
+          label.className = "paper-page-label";
+          label.textContent = `Page ${page}`;
+
+          const img = document.createElement("img");
+          img.src = dataUrlForPage(imageData);
+          img.alt = `Page ${page} of the original paper`;
+          img.decoding = "async";
+          img.loading = page <= 2 ? "eager" : "lazy";
+          if (Number(imageData.width) > 0) img.width = Number(imageData.width);
+          if (Number(imageData.height) > 0) img.height = Number(imageData.height);
+
+          pageEl.append(label, img);
+
+          const items = byPage.get(page) || [];
+          if (items.length) {
+            const rail = document.createElement("div");
+            rail.className = "page-marker-rail";
+            items.forEach((item,index) => {
+              const marker = document.createElement("button");
+              marker.type = "button";
+              marker.className = "page-marker";
+              marker.dataset.id = item.id;
+              marker.title = `${item.title} · ${item.target || `Page ${page}`}`;
+              marker.setAttribute("aria-label", `Open annotation ${index + 1} on page ${page}: ${item.title}`);
+              marker.innerHTML = `<span class="page-marker-number">${index + 1}</span><span class="page-marker-text">${esc(item.title)}</span>`;
+              marker.addEventListener("click", event => { event.preventDefault(); selectFromPaper(item.id); });
+              rail.appendChild(marker);
+
+              if (validAnchor(item.anchor)) {
+                const hotspot = document.createElement("button");
+                hotspot.type = "button";
+                hotspot.className = "annotation-hotspot";
+                hotspot.dataset.id = item.id;
+                hotspot.title = item.title;
+                hotspot.setAttribute("aria-label", `Open annotation: ${item.title}`);
+                hotspot.style.left = `${Number(item.anchor.x) * 100}%`;
+                hotspot.style.top = `${Number(item.anchor.y) * 100}%`;
+                hotspot.style.width = `${Number(item.anchor.w) * 100}%`;
+                hotspot.style.height = `${Number(item.anchor.h) * 100}%`;
+                hotspot.addEventListener("click", event => { event.preventDefault(); selectFromPaper(item.id); });
+                pageEl.appendChild(hotspot);
+              }
+            });
+            pageEl.appendChild(rail);
+          }
+          paperScroll.appendChild(pageEl);
+        }
+        updatePaperSelection();
+      }
+
+      function goToPage(page, id) {
+        const n = Math.max(1, Number(page) || 1);
+        const target = document.getElementById(`paper-page-${n}`);
+        if (!target) return;
+        if (narrowViewport.matches) setMobileView("paper");
+        requestAnimationFrame(() => {
+          const hotspot = id ? target.querySelector(`.annotation-hotspot[data-id="${CSS.escape(id)}"]`) : null;
+          (hotspot || target).scrollIntoView({ block: hotspot ? "center" : "start", behavior: "smooth" });
+        });
+      }
+
+      function renderList() {
+        list.innerHTML = "";
+        if (!visible.length) {
+          list.innerHTML = '<div class="annotation-row"><div></div><div><p>No annotations match this filter.</p></div></div>';
+          return;
+        }
+        for (const item of visible) {
+          const row = document.createElement("div");
+          row.className = "annotation-row";
+          row.dataset.id = item.id;
+          row.setAttribute("role", "option");
+          row.setAttribute("tabindex", "0");
+          row.setAttribute("aria-selected", item.id === selectedId ? "true" : "false");
+          row.innerHTML = `<div class="page-pill">p. ${esc(item.page)}</div><div><h3>${esc(item.title)}</h3><p>${esc(item.summary || item.target || "")}</p><span class="type-tag">${esc(item.type || "note")}</span></div>`;
+          row.addEventListener("click", () => select(item.id, false));
+          row.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              select(item.id, false);
+            }
+          });
+          list.appendChild(row);
+        }
+      }
+
+      function renderNote(item) {
+        if (!item) {
+          note.innerHTML = '<p class="note-empty">Select an annotation to open its explanation.</p>';
+          return;
+        }
+        note.innerHTML = `<header class="note-header"><h2>${esc(item.title)}</h2><div class="note-location">Page ${esc(item.page)} · ${esc(item.target || "Paper location")}</div><button type="button" class="jump-btn" id="jump-current">Go to paper location</button></header><div class="note-body">${item.bodyHtml || `<p>${esc(item.summary || "")}</p>`}</div><div class="source-kind">Explanation kind: ${esc(item.sourceKind || "paper")}</div>`;
+        document.getElementById("jump-current").addEventListener("click", () => goToPage(item.page, item.id));
+      }
+
+      function select(id, jump) {
+        const item = annotations.find(entry => entry.id === id);
+        if (!item) return;
+        selectedId = id;
+        renderList();
+        renderNote(item);
+        updatePaperSelection();
+        note.scrollTop = 0;
+        if (jump) goToPage(item.page, item.id);
+        const row = list.querySelector(`[data-id="${CSS.escape(id)}"]`);
+        if (row) row.scrollIntoView({ block: "nearest" });
+      }
+
+      function applyFilters() {
+        const q = search.value.trim().toLowerCase();
+        const type = typeFilter.value;
+        visible = annotations.filter(item => {
+          const haystack = [item.title, item.summary, item.target, item.type].filter(Boolean).join(" ").toLowerCase();
+          return (!q || haystack.includes(q)) && (!type || item.type === type);
+        });
+        renderList();
+      }
+
+      function move(delta) {
+        if (!annotations.length) return;
+        const current = Math.max(0, annotations.findIndex(entry => entry.id === selectedId));
+        const index = (current + delta + annotations.length) % annotations.length;
+        select(annotations[index].id, false);
+        if (narrowViewport.matches) setMobileView("notes");
+      }
+
+      const types = [...new Set(annotations.map(item => item.type).filter(Boolean))].sort();
+      for (const type of types) {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        typeFilter.appendChild(option);
+      }
+
+      const metaParts = [meta.authors, meta.venue, meta.year, pageImages.length ? `${pageImages.length} pages` : null].filter(Boolean);
+      metaLine.textContent = metaParts.join(" · ");
+      search.addEventListener("input", applyFilters);
+      typeFilter.addEventListener("change", applyFilters);
+      prev.addEventListener("click", () => move(-1));
+      next.addEventListener("click", () => move(1));
+      showPaper.addEventListener("click", () => setMobileView("paper"));
+      showNotes.addEventListener("click", () => setMobileView("notes"));
+      panelToggle.addEventListener("click", () => {
+        if (narrowViewport.matches) {
+          setMobileView(document.body.classList.contains("mobile-view-paper") ? "notes" : "paper");
+          return;
+        }
+        document.body.classList.toggle("panel-hidden");
+        panelToggle.textContent = document.body.classList.contains("panel-hidden") ? "Show notes" : "Hide notes";
+      });
+      narrowViewport.addEventListener("change", event => {
+        document.body.classList.remove("panel-hidden");
+        panelToggle.textContent = "Hide notes";
+        if (event.matches) setMobileView("paper");
+      });
+
+      renderPaper();
+      renderList();
+      if (annotations.length) select(annotations[0].id, false);
+      if (narrowViewport.matches) setMobileView("paper");
+      if (!pageImages.length) showStatus("Embedded page images are missing.");
+    })();
+  </script>
+</body>
+</html>
