@@ -91,7 +91,7 @@ class PublicRouterTests(unittest.TestCase):
     def test_source_ledger(self) -> None:
         rows = csv_rows(ROOT / "manifests/source_parity.csv")
         self.assertEqual(rows[0], ["path", "source_git_blob_sha", "status"])
-        self.assertEqual(len(rows), 135)  # header + 134 sources
+        self.assertEqual(len(rows), 136)  # header + 135 sources
         paths = [row[0] for row in rows[1:]]
         self.assertEqual(len(paths), len(set(paths)))
         lookup = {row[0]: row[1:] for row in rows[1:]}
@@ -104,6 +104,27 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(len(row[1]), 40)
         self.assertEqual(
             sum(row[2] == "verbatim" for row in rows[1:]), 103
+        )
+        self.assertEqual(sum(row[2] == "privacy-adapted" for row in rows[1:]), 19)
+
+    def test_html_index_is_complete_without_personal_letter_flow(self) -> None:
+        rows = csv_rows(AI / "htmls/indice_htmls.csv")
+        self.assertEqual(len(rows), 12)  # header + 11 general public modules
+        self.assertEqual(len(rows[0]), 6)
+        routes = []
+        for row in rows[1:]:
+            self.assertEqual(len(row), 6)
+            self.assertNotIn("letter", " ".join(row).lower())
+            path = AI / row[1]
+            self.assertTrue(path.is_file(), str(path))
+            routes.append(row[1])
+        self.assertEqual(len(set(routes)), 11)
+        self.assertIn("htmls/00_core.md", routes)
+        self.assertIn("htmls/05_verification.md", routes)
+        manifest = {row[0]: row for row in csv_rows(ROOT / "manifests/source_parity.csv")[1:]}
+        self.assertEqual(
+            manifest["info_for_ai/htmls/indice_htmls.csv"][1:],
+            ["05189871f4a37f1d8c7d8079996e7ddeec44eea4", "privacy-adapted"],
         )
 
     def test_no_private_identity_in_router_files(self) -> None:
