@@ -211,7 +211,7 @@ class PublicRouterScenarioTests(unittest.TestCase):
         continuation = (AI / "iterative_continuation.md").read_text(encoding="utf-8")
         for expected in ("../iterative_continuation.md", "6A. Planificación visual", "6B. Generación visual", "Fase 7. Distribución"):
             self.assertIn(expected, module)
-        self.assertIn("siguiente unidad pendiente", continuation)
+        self.assertIn("next pending unit", continuation)
 
 
 if __name__ == "__main__":
