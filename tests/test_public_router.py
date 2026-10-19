@@ -1,0 +1,117 @@
+"""Offline structural checks for Knotbase's scoped public router.
+
+These tests do not claim that a ChatGPT consumer activates AGENTS.md or
+that CV/blog artifacts execute end to end.
+"""
+from __future__ import annotations
+
+import csv
+import hashlib
+import io
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+AI = ROOT / "info_for_ai"
+EXPECTED_COMMANDS = ("#HELP", "#BLOG", "#CV", "#CVEDIT")
+EXPECTED_SOURCE = {
+    "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
+    "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
+    "info_for_ai/comandos.csv": ("8c57e847df45dd80d92a74bbc0efd6129d4e32e0", "public-subset-adapted"),
+    "info_for_ai/comandos_lookup.csv": ("890701beb36f8a4ed80437341f16a080f1cd26aa", "public-routing-adapted"),
+    "info_for_ai/iterative_continuation.md": ("89f7ff26efd2ad8db17b64e1a12c43e3274e819b", "verbatim"),
+}
+PRIVATE_TOKENS = (
+    "info_user/",
+    "assets_for_ai/",
+    "standard-cv-html-template",
+    "03_formato_europass.md",
+)
+
+
+def csv_rows(path: Path) -> list[list[str]]:
+    with path.open("r", encoding="utf-8", newline="") as stream:
+        return list(csv.reader(stream))
+
+
+def git_blob_sha(path: Path) -> str:
+    data = path.read_bytes()
+    envelope = b"blob " + str(len(data)).encode("ascii") + b"\x00" + data
+    return hashlib.sha1(envelope).hexdigest()
+
+
+class PublicRouterTests(unittest.TestCase):
+    def test_four_exact_commands_and_lookup_lines(self) -> None:
+        registry = csv_rows(AI / "comandos.csv")
+        lookup = csv_rows(AI / "comandos_lookup.csv")
+        self.assertEqual(len(registry), 5)
+        self.assertEqual(len(registry[0]), 11)
+        self.assertEqual(tuple(row[0] for row in registry[1:]), EXPECTED_COMMANDS)
+        self.assertEqual(lookup[0], ["command", "line"])
+        self.assertEqual(lookup[1:], [[command, str(i + 2)] for i, command in enumerate(EXPECTED_COMMANDS)])
+        for row in registry[1:]:
+            self.assertEqual(len(row), 11)
+            self.assertIn(row[2], ("help", "route"))
+            if row[2] == "route":
+                self.assertTrue(row[7] and row[8])
+            else:
+                self.assertEqual(row[0], "#HELP")
+
+    def test_published_domain_routes(self) -> None:
+        domains = csv_rows(AI / "indice_dominios.csv")
+        self.assertEqual(len(domains[0]), 8)
+        mapping = {row[0]: row for row in domains[1:]}
+        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research"})
+        for domain, row in mapping.items():
+            self.assertEqual(len(row), 8)
+            core = AI / row[3]
+            index = AI / row[4]
+            self.assertTrue(core.is_file(), str(core))
+            self.assertTrue(index.is_file(), str(index))
+        for row in csv_rows(AI / "comandos.csv")[2:]:
+            domain = row[7]
+            self.assertIn(domain, mapping)
+            route = AI / row[8]
+            self.assertTrue(route.is_file(), str(route))
+        for domain in ("professional_documents", "blog_writing", "research"):
+            index = csv_rows(AI / domain / f"indice_{domain}.csv")
+            for row in index[1:]:
+                self.assertTrue((AI / row[1]).is_file(), row[1])
+
+    def test_continuation_and_approval_gates(self) -> None:
+        iterative = AI / "iterative_continuation.md"
+        self.assertEqual(git_blob_sha(iterative), EXPECTED_SOURCE["info_for_ai/iterative_continuation.md"][0])
+        blog = (AI / "blog_writing/04_flujo_iterativo_de_generacion.md").read_text(encoding="utf-8")
+        cv = (AI / "professional_documents/00_core.md").read_text(encoding="utf-8")
+        self.assertIn("../iterative_continuation.md", blog)
+        self.assertIn("OK", blog)
+        self.assertIn("OK explícito", cv)
+        self.assertIn("standard_cv_rendering.md", cv)
+
+    def test_source_ledger(self) -> None:
+        rows = csv_rows(ROOT / "manifests/source_parity.csv")
+        self.assertEqual(rows[0], ["path", "source_git_blob_sha", "status"])
+        self.assertEqual(len(rows), 135)  # header + 134 sources
+        paths = [row[0] for row in rows[1:]]
+        self.assertEqual(len(paths), len(set(paths)))
+        lookup = {row[0]: row[1:] for row in rows[1:]}
+        for path, source in EXPECTED_SOURCE.items():
+            self.assertIn(path, lookup)
+            self.assertEqual(tuple(lookup[path]), source)
+            self.assertTrue((ROOT / path).is_file(), path)
+        for row in rows[1:]:
+            self.assertEqual(len(row), 3)
+            self.assertEqual(len(row[1]), 40)
+        self.assertEqual(
+            sum(row[2] == "verbatim" for row in rows[1:]), 103
+        )
+
+    def test_no_private_identity_in_router_files(self) -> None:
+        for relative in EXPECTED_SOURCE:
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            for token in PRIVATE_TOKENS:
+                self.assertNotIn(token, text, f"{relative}: {token}")
+
+
+if __name__ == "__main__":
+    unittest.main()

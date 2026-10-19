@@ -1,0 +1,4 @@
+dominio,ruta,descripcion,core,indice,idioma_instrucciones,idioma_salida_defecto,responsabilidades
+professional_documents,professional_documents/,"CV creation and retargeting using only evidence supplied or authorized by the current user, without fixed personal templates",professional_documents/00_core.md,professional_documents/indice_professional_documents.csv,es,es,"cv_creation; cv_adjustment; application_document_strategy"
+blog_writing,blog_writing/,"Blog ideas and evidence-led articles with author voice configured from user preferences",blog_writing/00_core.md,blog_writing/indice_blog_writing.csv,es,es,"blog_ideation; blog_article; editorial_style"
+research,research/,"Evidence-led research: source discovery, paper analysis, arguments, proofs, opportunities, and state-of-the-art work",research/00_core.md,research/indice_research.csv,en,es,"evidence_research; scientific_argument; mathematical_proof; state_of_art"
