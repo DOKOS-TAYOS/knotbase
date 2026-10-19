@@ -6,22 +6,22 @@ This note records the **scoped public routing adaptation** enabled by the Knotba
 
 | Public path | Canonical DIK Git blob SHA | Public Git blob SHA | Manifest status |
 |---|---|---|---|
-| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `d8d5e715255c1bc9ebe7a080ddd222ac2b71c418` | `public-routing-adapted` |
-| `info_for_ai/indice_dominios.csv` | `c5a3b7cb29e83719dd8303e1f4f93dde04e7692f` | `77b28a94b0fe5f2a56681e35642531ff816207a2` | `public-routing-adapted` |
-| `info_for_ai/comandos.csv` | `8c57e847df45dd80d92a74bbc0efd6129d4e32e0` | `c3d43dbc6b9bb03b7879698142efcd89b102c03e` | `public-subset-adapted` |
-| `info_for_ai/comandos_lookup.csv` | `890701beb36f8a4ed80437341f16a080f1cd26aa` | `12ba5ab46ce5fff60c4fb7b80e2ae96dd3825378` | `public-routing-adapted` |
+| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `5b45e6e6c81e1190675920038cbd341194eb8682` | `public-routing-adapted` |
+| `info_for_ai/indice_dominios.csv` | `c5a3b7cb29e83719dd8303e1f4f93dde04e7692f` | `1a88bf6658c4feb0262aa2d6153f6cba764f3378` | `public-routing-adapted` |
+| `info_for_ai/comandos.csv` | `8c57e847df45dd80d92a74bbc0efd6129d4e32e0` | `9478b86a9b79244a7b51fa83815f7cbf2cfd0bcf` | `public-subset-adapted` |
+| `info_for_ai/comandos_lookup.csv` | `890701beb36f8a4ed80437341f16a080f1cd26aa` | `bda295e601fefdcb4e43fb895b51a8c62414faac` | `public-routing-adapted` |
 | `info_for_ai/iterative_continuation.md` | `89f7ff26efd2ad8db17b64e1a12c43e3274e819b` | `89f7ff26efd2ad8db17b64e1a12c43e3274e819b` | `verbatim` |
 
-The public registry contains twenty-five exact DIK semantic command rows, and `comandos_lookup.csv` maps them to lines 2 through 26. The DIK source blob remains recorded in the manifest. Unregistered commands are unavailable and cannot be inferred or activated.
+The public registry contains thirty-two exact DIK semantic command rows, and `comandos_lookup.csv` maps them to lines 2 through 33. The DIK source blob remains recorded in the manifest. Unregistered commands are unavailable and cannot be inferred or activated.
 
-The public domain index contains `professional_documents`, `blog_writing`, `research`, `htmls`, `prompting`, `education`, and `interactions`. The first two descriptions are neutralized for public use; the research domain row is copied from the source index and maps to its already published unchanged research core and modules. Index paths are relative to `info_for_ai/` exactly once.
+The public domain index contains `professional_documents`, `blog_writing`, `research`, `htmls`, `prompting`, `education`, `interactions`, `code`, and `papers`. The first two descriptions are neutralized for public use; the research domain row is copied from the source index and maps to its already published unchanged research core and modules. Index paths are relative to `info_for_ai/` exactly once.
 
 ## Behavioral boundaries
 
 - `#CV` invokes an evidence-led first phase and requires explicit approval before composing the final CV. The standard public CV generates HTML, PDF and optional editable DOCX without private personal templates.
 - `#CVEDIT` distinguishes local adjustments from changes requiring a new target strategy and explicit approval.
 - `#BLOG` uses the original seven-phase editorial workflow and the **verbatim** shared iterative continuation rules for an isolated `OK`. The public edition does not enforce the original author's personal voice.
-- `#HELP` exposes only the twenty-five installed commands. Eight research commands, general `#HTML` and `#PROMPT` now have indexed public routes and retain their canonical argument and authorization contracts.
+- `#HELP` exposes only the thirty-two installed commands. Eight research commands, general `#HTML` and `#PROMPT` now have indexed public routes and retain their canonical argument and authorization contracts.
 - Research modules support evidence gathering and technical verification under eight explicitly registered research commands. `#SOTA` loads both listed modules; `#PAPER` retains its staged approval contract.
 - Do not load unpublished personal records, fixed CV layouts, private article inventories or unlicensed assets. Missing evidence or a missing publication dependency must be reported, never invented.
 - User-facing changes to professional facts, publication and remote actions require the same authorization gates as the source modules.
@@ -29,7 +29,7 @@ The public domain index contains `professional_documents`, `blog_writing`, `rese
 
 ## Structural verification and runtime acceptance
 
-Before merging, verify that the twenty-five command rows are exact original DIK registry rows, public lookup line numbers match, every routed core/index/module path exists in the target repository, `iterative_continuation.md` has the immutable DIK blob SHA, the manifest records 139 unique source records, including four new records for two generic HTML runtime assets and their privacy-scoped lookup indices, and the public router files do not contain private user-specific facts.
+Before merging, verify that the thirty-two command rows are exact original DIK registry rows, public lookup line numbers match, every routed core/index/module path exists in the target repository, `iterative_continuation.md` has the immutable DIK blob SHA, the manifest records 139 unique source records, including four new records for two generic HTML runtime assets and their privacy-scoped lookup indices, and the public router files do not contain private user-specific facts.
 
 **Structural validity is not the same as runtime validation.** The executable consumer must load the root `AGENTS.md`, honor the lookup/registry and phase gates, obtain real supporting evidence without private DIK access, and create/inspect genuine artifacts before a functional `#CV` or `#BLOG` claim can be made. A text-only fake run, the DIK source's prior validation or a synthetic CV-conversion smoke test is insufficient evidence of end-to-end routing behavior.
 
@@ -54,3 +54,11 @@ This adds **zero source-file records** to the manifest, which remains at 139. Th
 Five original DIK semantic rows are registered without modification: `#MAIL`, `#LINKEDIN`, `#CONTACT`, `#DELIVER`, and `#REC`. Their lookup lines are 22–26, and the `interactions` domain row matches the canonical DIK index. The previously migrated shared interaction core, bilingual index and both language branches already contain every required personal/corporate email, LinkedIn, first-contact, project-delivery and recommendation-letter module. `modules` remains empty in these five original records because the active workflow is selected by recipient language and purpose through the published domain index.
 
 All five commands have original `read-only` effect and **draft-only authorization**. They cannot send emails or direct messages, sign recommendations, claim nonexistent delivery, invent third-party evidence, or load private sender/recipient profiles. The appropriate single language branch is loaded by the existing public interaction core; optional style references remain conditional. This integration changes routing, structural tests and documentation only; the source-parity ledger remains **139 records**, and independent consumer-runtime acceptance remains deferred.
+
+## Code assessment and manuscript peer review (PR #22)
+
+Seven canonical DIK semantic rows are newly enabled **verbatim**, with public lookup lines 27–33: `#IDENT`, `#ASSESS`, `#REV`, `#COM`, `#DIFF`, `#RESP`, and `#RESUB`. Original `effect`, ordered arguments, module paths, authorization and phase boundaries are unchanged. The full canonical `code` and `papers` domain rows have been copied without modification, including the intentionally **empty** `papers.core` value. A blank core means no core is declared; the papers index and the parent peer-review workflow must be loaded in their original order. `#REV` and `#RESUB` retain the canonical `papers; code` domain set, with the second domain loaded only as appropriate to the selected workflow.
+
+The already published code assessment sources and papers peer-review parent/stage modules are reused as-is. The publication provides no personal professional profile, original-owner repo inventory, private manuscripts or code. `#IDENT` and `#ASSESS` remain read-only; the paper commands retain read-only or artifact-only effects exactly as recorded. Private-profile-dependent optional facts are unavailable unless the current user provides or authorizes them. No remote manuscript/code changes, journal submission or signing are activated.
+
+No new migrated sources were copied. The manifest remains **139** records, including the same four adapted public router files. This is structural routing activation, not an independently validated consumer-runtime implementation. Manual functional tests remain postponed until after migration completion.
