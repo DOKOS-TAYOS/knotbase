@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB", "#INIT", "#REPRO", "#REFAC", "#DOC", "#READY")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),

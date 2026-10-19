@@ -191,6 +191,24 @@ class PublicRouterScenarioTests(unittest.TestCase):
         for module in ("assessment.md", "visual_diff.md", "response_letter.md", "readiness.md"):
             self.assertTrue((AI / "papers" / "peer_review" / module).is_file())
 
+    def test_local_code_workflows_remain_scoped_to_published_modules(self) -> None:
+        cases = {
+            "#INIT": "code/01_repository_identity.md",
+            "#REPRO": "code/14_failure_reproduction.md",
+            "#REFAC": "code/05_readable_refactoring.md",
+            "#DOC": "code/07_documentation_update.md",
+            "#READY": "code/08_integration_preparation.md",
+        }
+        for command, module in cases.items():
+            with self.subTest(command=command):
+                result = resolve_command(command + " synthetic repository; bounded objective")
+                self.assertEqual(result.command, command)
+                self.assertEqual(result.domain, "code")
+                self.assertEqual(result.module, module)
+                self.assertTrue((AI / module).is_file())
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+
     def test_education_command_modules(self) -> None:
         cases = {
             "#EXPL": "education/01_explicaciones.md",
