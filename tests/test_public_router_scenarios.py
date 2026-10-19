@@ -244,6 +244,34 @@ class PublicRouterScenarioTests(unittest.TestCase):
                         "papers/paperfit_execution.md"):
             self.assertTrue((AI / support).is_file())
 
+    def test_scoped_github_command_destinations(self) -> None:
+        cases = {
+            "#PR": ("github", "github/06_pull_request_review.md"),
+            "#ISSUE": ("code; github", "github/08_issue_implementation.md; code/08_integration_preparation.md; github/01_integration_and_publication.md; github/05_failed_ci_runs_review.md"),
+            "#SYNC": ("github", "github/01_integration_and_publication.md"),
+            "#RELEASE": ("code; github", "code/11_release_preparation.md; code/08_integration_preparation.md; github/01_integration_and_publication.md; github/05_failed_ci_runs_review.md; github/07_release_publication.md"),
+            "#BITACORA": ("github", "github/10_research_logbook.md"),
+        }
+        for command, (domains, modules) in cases.items():
+            with self.subTest(command=command):
+                decision = resolve_command(command + " example/repository; sample context")
+                self.assertEqual(decision.command, command)
+                self.assertEqual(decision.domain, domains)
+                self.assertEqual(decision.module, modules)
+                for module in modules.split("; "):
+                    self.assertTrue((AI / module).is_file())
+                if command in ("#PR", "#ISSUE", "#BITACORA"):
+                    with self.assertRaises(RoutingError):
+                        resolve_command(command + " example/repository")
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+        for command in ("#SYNC", "#RELEASE"):
+            self.assertEqual(resolve_command(command + " example/repository").command, command)
+        issue = (AI / "github/08_issue_implementation.md").read_text(encoding="utf-8")
+        release = (AI / "code/11_release_preparation.md").read_text(encoding="utf-8")
+        self.assertIn("Do not load", issue)
+        self.assertIn("Do not load", release)
+
     def test_education_command_modules(self) -> None:
         cases = {
             "#EXPL": "education/01_explicaciones.md",
