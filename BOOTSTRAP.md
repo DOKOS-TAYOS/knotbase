@@ -27,3 +27,32 @@ At the start of a newly adopted Knotbase instance, inspect `config/instance.csv`
 ## Minimal completion criteria
 
 `instance_repository` and `github_owner` have verified, nonempty values in the user's own instance; private knowledge storage has been chosen or explicitly deferred; no user secrets have been stored. Additional features require their own indexed dependencies and acceptance tests.
+
+## Migration dependency contract
+
+**Storage ownership.** A public Knotbase checkout contains routing instructions and empty templates only. Bootstrap must resolve the user's instance and private knowledge repository and verify read/write permissions *before* any command is permitted to persist personal facts, source records, repository inventory, or maintenance logs. A read-only answer may still be given from permitted public material when setup is incomplete.
+
+**Path resolution.** Distinguish three namespaces: (a) upstream public instruction files, (b) the user-controlled instance and its maintenance procedures, and (c) the user-controlled knowledge files. Relative `info_for_ai/` and `maintenance_for_ai/` paths resolve against the configured instance or knowledge repository according to their indexed responsibility. Never infer a destination from the canonical DIK owner's literal paths or names. Cross-repository reads and writes require their own access and authorization checks.
+
+**Required schema-preserving substitutions before activation:**
+
+- Replace the original owner's publication catalog path with an explicitly indexed user catalog, preserving its CSV columns and publication-update semantics. Until that mapping is installed, `#PAPSYNC` must not run.
+- Keep the original user-knowledge canonical layers and their source IDs, statuses, dates and visibility fields; publish only empty headers and blank derived views. Until their index and owner-specific storage are installed, `#ME`, `#BIO`, `#CVSYNC` and profile-maintenance commands must fail closed instead of fabricating records.
+- Keep `repositorios_github.csv` and its line-number lookup together. Bootstrap must verify allowed owners, repository identity, archived/frozen status and inventory completeness before `#DEP`, `#SEC`, `#CLEAN`, `#RUNS`, `#TRIAGE` or a bulk synchronization. Even when a repository is explicitly supplied, retain the original workflow's eligibility and protection checks.
+- Translate maintenance's hard-coded repository name into the configured *user instance* only after a verified selection. A copied procedure referring to original-owner publication files, a fixed GitHub owner, or a project instruction mirror must not be considered portable until those references have been reviewed and adapted individually.
+- Port the canonical maintenance validator, dependency index and logbook procedures with equivalent checks against the configured instance. `#KBCHK` cannot claim full validity from Knotbase's existing subset-only structural suite; it requires validation of the exact installed target tree.
+- Preserve the original distinction between user assertions and independently verified claims. Public templates contain no user facts, and private records should not be committed to upstream or placed in examples.
+
+**Activation order:** publish and test configuration plus blank schemas; then index and test the user-knowledge domain; then adapt and validate maintenance procedures; then add the remaining 12 original commands, preserving their source-specific scopes and approval gates. `#NOAH` stays excluded. A public command is not operational merely because its row appears in a lookup.
+
+## Acceptance conditions for a user instance
+
+1. Unconfigured bootstrap: no write, no automatic cross-repository discovery and no fallback to the upstream author's repositories.
+2. Verified private instance: records are written only to the selected authorized destination, never the public upstream.
+3. Empty personal profile: `#ME` and `#BIO` report missing evidence rather than invented biography.
+4. Repository inventory absent, incomplete, frozen or archived: the affected bulk command stops or excludes the target exactly as its original module requires.
+5. Owner-scoped maintenance: a supplied CV, publication or repository update changes only its canonical record and genuinely affected derived views, retaining traceability and review status.
+6. Validation and logging: maintenance operations run the portable canonical validator against the exact target tree and create only the required logbook records; missing validator or permission is a blocker, not success.
+7. Remote mutation: checks, reviews, protection, current-head verification and authorization remain mandatory; a configured account alone grants no consent to publish or merge.
+8. Source parity and regression: all retained original constraints are tested; any privacy or ownership adaptation is documented and must not weaken protections.
+9. Functional acceptance: independent consumer runs must demonstrate actual routing, evidence selection, continuation gates and resulting artifacts. Structural CI alone is insufficient.
