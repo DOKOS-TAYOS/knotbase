@@ -16,7 +16,7 @@ This is a **public, scoped adaptation** of the DIK global routing contract. It i
 
 ## Enabled pilot commands and behavior
 
-The registry currently supports fourteen public commands: `#HELP`, `#PROMPT`, `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`, `#BLOG`, `#HTML`, `#CV` and `#CVEDIT`. Its exact rows are authoritative, not this summary.
+The registry currently supports twenty public commands: `#HELP`, `#PROMPT`, `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`, `#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`, `#BLOG`, `#HTML`, `#CV` and `#CVEDIT`. Its exact rows are authoritative, not this summary.
 
 - **`#CV`**: route to `professional_documents/01_crear_cv.md` after its core and index. The first turn executes *strategy only* and asks for explicit approval. Only after an unambiguous `OK` on that same candidature may generation proceed under `standard_cv_rendering.md`. Only user-provided/authorized evidence is available; no personal profile, fixed template, phone, nationality, company email or Europass is bundled.
 - **`#CVEDIT`**: route to `professional_documents/02_reajustar_cv.md` after its core and index. Local changes may run directly; a material new target requires the phase-1 approval gate. Never invent a prior CV when none was supplied or established in the current conversation.
@@ -24,6 +24,7 @@ The registry currently supports fourteen public commands: `#HELP`, `#PROMPT`, `#
 - **`#PROMPT`**: load the prompting core and index, then exactly one target-specific module according to `Codex; request` or `Chat; request`. Codex-targeted prompts, including cross-domain handoffs, must apply the indexed Codex contract, including single-agent operation; this command never authorizes external mutation.
 - **Research commands** (`#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`): load the research core and index, then the declared module(s). `#SOTA` requires both modules; `#PAPER` preserves the original staged `OK` approvals. Do not mutate permanent knowledge unless separately authorized.
 - **`#HTML`**: load the general HTML core and index, the generation module and mandatory verification module, plus only other modules required by the requested artifact. Do not enable excluded personal workflows or external publication.
+- **Education commands** (`#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`): load the education core and index, then the exact published module selected by the registry. Apply the audience's actual prior-knowledge constraints and format contract. No user-specific teaching profile or likeness is inferred; `#VIDEO` does not publish externally or generate the user's likeness without authorized resources. Educational HTML may require the separately indexed HTML domain at its proper materialization phase.
 - **`#HELP`**: show only commands registered in the public lookup, with no claims about omitted DIK commands.
 
 ## Evidence, artifacts and privacy

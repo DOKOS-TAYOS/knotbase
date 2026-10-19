@@ -144,6 +144,24 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 self.assertEqual(decision.module, module)
                 self.assertTrue((AI / module).is_file())
 
+    def test_education_command_modules(self) -> None:
+        cases = {
+            "#EXPL": "education/01_explicaciones.md",
+            "#NOTES": "education/02_contenido_formativo.md",
+            "#VIDEO": "education/video_youtube.md",
+            "#CLASS": "education/03_preparacion_clases.md",
+            "#TFG": "education/04_propuestas_tfg_tfm.md",
+            "#TFM": "education/04_propuestas_tfg_tfm.md",
+        }
+        for command, expected in cases.items():
+            with self.subTest(command=command):
+                result = resolve_command(command + " Synthetic mathematical topic")
+                self.assertEqual(result.domain, "education")
+                self.assertEqual(result.module, expected)
+                self.assertTrue((AI / expected).is_file())
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+
     def test_modifiers_and_multiline_argument_survive(self) -> None:
         with self.assertRaises(RoutingError):
             resolve_command("#LONG #SHORT #BLOG Un tema de prueba")
