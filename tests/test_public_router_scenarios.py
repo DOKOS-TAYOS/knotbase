@@ -74,16 +74,21 @@ def resolve_command(message: str) -> Decision:
         raise RoutingError("Unsupported mode")
     domains = {entry["dominio"]: entry for entry in read_csv(AI / "indice_dominios.csv")}
     domain = row["domains"]
-    if domain not in domains:
+    requested_domains = [item.strip() for item in domain.split(";") if item.strip()]
+    if not requested_domains or any(item not in domains for item in requested_domains):
         raise RoutingError("Domain unavailable in public index")
-    entry = domains[domain]
+    entry = domains[requested_domains[0]]
     modules = [module.strip() for module in row["modules"].split(";") if module.strip()]
     if name == "#PROMPT":
         args = argument.split(";", 1)
         if len(args) != 2 or args[0].strip().lower() not in ("codex", "chat") or not args[1].strip():
             raise RoutingError("Invalid prompt target or empty request: " + row["usage"])
         modules = ["prompting/01_codex_prompt_generation.md" if args[0].strip().lower() == "codex" else "prompting/02_chat_prompt_generation.md"]
-    for relative in (entry["core"], entry["indice"], *modules):
+    for name in requested_domains:
+        for relative in (domains[name]["core"], domains[name]["indice"]):
+            if relative and not (AI / relative).is_file():
+                raise RoutingError("Missing route target: " + relative)
+    for relative in modules:
         if not (AI / relative).is_file():
             raise RoutingError("Missing route target: " + relative)
     return Decision(name, modifier, argument, domain, "; ".join(modules), "route")
@@ -162,6 +167,29 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 for index, filename in enumerate(filenames):
                     language = "es" if index % 2 == 0 else "en"
                     self.assertTrue((AI / "interactions" / language / filename).is_file())
+
+    def test_code_and_paper_review_commands_use_published_source(self) -> None:
+        command_domains = {
+            "#IDENT": ("code", "code/01_repository_identity.md"),
+            "#ASSESS": ("code", "code/02_preliminary_assessment.md"),
+            "#REV": ("papers; code", "papers/01_peer_review_response.md"),
+            "#COM": ("papers", "papers/01_peer_review_response.md"),
+            "#DIFF": ("papers", "papers/01_peer_review_response.md"),
+            "#RESP": ("papers", "papers/01_peer_review_response.md"),
+            "#RESUB": ("papers; code", "papers/01_peer_review_response.md"),
+        }
+        for command, (expected_domain, module) in command_domains.items():
+            with self.subTest(command=command):
+                result = resolve_command(command + " synthetic repository; synthetic evidence; synthetic review comments")
+                self.assertEqual(result.domain, expected_domain)
+                self.assertEqual(result.module, module)
+                self.assertTrue((AI / module).is_file())
+                with self.assertRaises(RoutingError):
+                    resolve_command(command)
+        papers = {entry["dominio"]: entry for entry in read_csv(AI / "indice_dominios.csv")}["papers"]
+        self.assertEqual(papers["core"], "")
+        for module in ("assessment.md", "visual_diff.md", "response_letter.md", "readiness.md"):
+            self.assertTrue((AI / "papers" / "peer_review" / module).is_file())
 
     def test_education_command_modules(self) -> None:
         cases = {
