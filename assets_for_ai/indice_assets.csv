@@ -1,0 +1,3 @@
+id,ruta,descripcion_breve,tipo,estado,condiciones_de_uso
+paper-study-html-template,paper_study/paper_study_template.html,Plantilla HTML autocontenida para estudiar un paper original con panel lateral de explicaciones navegación por páginas búsqueda y matemáticas visibles,plantilla_html,confirmado,Usar únicamente con el flujo interactivo de estudio de papers y embeber todos los datos en el HTML final
+presentation-editor-html-base,htmls/presentation_editor_base.html,Base HTML autocontenida y reutilizable para presentaciones con edición acotada de texto tipografía alineación posición tamaño paleta e imágenes y exportación limpia,plantilla_html,confirmado,Usar como recurso técnico para HTML de presentación editables; el editor debe eliminarse de la exportación final
