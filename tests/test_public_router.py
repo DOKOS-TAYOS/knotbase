@@ -22,9 +22,8 @@ EXPECTED_SOURCE = {
     "info_for_ai/iterative_continuation.md": ("89f7ff26efd2ad8db17b64e1a12c43e3274e819b", "verbatim"),
 }
 PRIVATE_TOKENS = (
-    "Alejandro Mata",
-    "QuantumQuipu",
-    "When Physics",
+    "info_user/",
+    "assets_for_ai/",
     "standard-cv-html-template",
     "03_formato_europass.md",
 )
