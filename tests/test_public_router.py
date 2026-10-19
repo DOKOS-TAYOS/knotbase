@@ -153,8 +153,8 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(git_blob_sha(path), sha_expected[label])
             markup = path.read_text(encoding="utf-8")
             self.assertIn("</html>", markup.lower())
-            self.assertNotIn("Alejandro", markup)
-            self.assertNotIn("QuantumQuipu", markup)
+            self.assertNotIn("info_user/", markup)
+            self.assertNotIn("photos_/", markup)
         source_records = {row[0]: row for row in csv_rows(ROOT / "manifests/source_parity.csv")[1:]}
         for suffix in (
             "assets_for_ai/indice_assets.csv",
