@@ -173,3 +173,11 @@ The pre-integration review found a missing mandatory `#PAPER` HTML study templat
 Source parity now records **139 source entries**: 105 verbatim, 21 privacy-adapted, 3 privacy-and-editorial, 1 authorized-editorial, 5 authorized-workflow, 3 public-routing and 1 public-subset. Four records were added beyond the prior 135: the two verbatim HTML assets and two privacy-scoped indices. The older 135 entry count above is a historical state of this PR before its dependency correction, not the final state. See `docs/PUBLIC_ASSETS_SCOPE.md` for original and public Git blob hashes, intended use and limitations.
 
 The structural unittest now normalizes Windows CRLF checkout text to canonical LF for Git blob verification, without modifying the original `info_for_ai/iterative_continuation.md` file or its expected SHA. No independent consumer routing, paper HTML assembly or presentation-editor interaction has been claimed; the owner requested those manual integration checks only after the public migration is complete.
+
+## Education command subset (PR #20)
+
+After verifying integration of PR #19 in `main` at `85f6132da6d5058078e1b69831777570e305da7a`, the public command subset was extended from fourteen to **twenty** with six exact DIK education records: `#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, and `#TFM`. The public `education` domain row, its canonical core and index, and all six command destinations resolve to previously published source-identical education modules.
+
+The education workflows require a topic and accept context only as declared by their original argument grammar; content or format generation is bounded by the selected module and no external publication is authorized. Learner prerequisites are determined from supplied context, not from any private original-owner profile. Readiness checks include registry/lookup integrity and the already-published education domain's module references.
+
+No new source files are included in this command-expansion batch, so the manifest continues to record **139 unique source entries**. The branch updates only scoped public routing, static tests, README and documentation. No edits to canonical DIK or private assets are made. These checks do not replace independent ChatGPT consumer acceptance tests, which remain deferred to the final migration phase.
