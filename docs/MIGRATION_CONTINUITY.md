@@ -149,3 +149,11 @@ The domain index exposes the template-free `professional_documents` package, the
 The manifest now contains **134 unique source records**: 103 verbatim, 18 privacy-adapted, 3 privacy-and-editorial-adapted, 1 editorial-adapted, 5 workflow-adapted, 3 public-routing-adapted and 1 public-subset-adapted. The private DIK remains unchanged. The README reflects the restricted pilot and these current counts; earlier historical counts elsewhere in this continuity document refer to older migration checkpoints.
 
 Structural verification of paths, SHA parity, registry lookup, authorization gates and privacy is required before integration. A merge would publish the routing **instructions**, but it would not demonstrate that a ChatGPT consumer activates them automatically or that an entire seven-phase blog workflow or CV generation completes end-to-end. The private blog article inventory and any user-provided evidence remain separate runtime concerns.
+
+## Public HTML domain index checkpoint (proposed PR #18)
+
+The public `htmls` domain now has its own resolvable `indice_htmls.csv`, adapted from the original DIK index without changing the eleven published general HTML modules. The original private, recipient-specific interactive-letter workflow was intentionally excluded: its unpublished personal template and media are neither copied nor replaced with invented public equivalents.
+
+Source trace: canonical DIK index Git blob `05189871f4a37f1d8c7d8079996e7ddeec44eea4`; adapted public index Git blob `abdb61041c9d57b843f676ae2485b60c8387c3b0`. The `privacy-adapted` difference and omission are explained in `docs/HTML_PUBLIC_SCOPE.md`. The manifest now has **135 unique source records**, of which **103 are verbatim and 19 privacy-adapted**. The original DIK repository is unchanged.
+
+This checkpoint completes the general HTML **source index**, not top-level activation of `#HTML`, `#NOAH` or all original DIK commands. The limited root router and four-command registry remain unchanged. Structural GitHub Actions checks apply to the packaged source index; independent end-to-end consumer tests are deferred until after the remaining public routing work.
