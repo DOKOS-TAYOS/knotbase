@@ -66,7 +66,8 @@ def resolve_command(message: str) -> Decision:
     if row["command"].upper() != name:
         raise RoutingError("Registry and lookup inconsistent")
     argument = parts[1].strip() if len(parts) == 2 else ""
-    if row["mode"] == "route" and not argument:
+    required_args = [item.strip() for item in row["arguments"].split(";") if item.strip() and not item.strip().endswith("?")]
+    if row["mode"] == "route" and not argument and required_args:
         raise RoutingError("Missing required arguments: " + row["usage"])
     if row["mode"] == "help":
         return Decision(name, modifier, argument, None, None, "help")
