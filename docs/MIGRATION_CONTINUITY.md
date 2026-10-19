@@ -127,3 +127,15 @@ The seven-phase blog creation state machine (`04_flujo_iterativo_de_generacion.m
 The manifest now records **124 unique sources: 102 verbatim, 18 privacy-only, 3 privacy-and-editorial adapted, and 1 editorial-only adapted**. Source blob SHA fields continue to identify the immutable DIK originals, not public targets. Previously documented privacy-only published hashes for the affected files are superseded by the new published hashes in `docs/EDITORIAL_EXCLUSIONS.md`.
 
 This remains a source-level change, not proof of execution in the future Knotbase command runtime; the earlier README security-control issue and unresolved generic article-inventory dependency remain outstanding.
+
+## Template-free professional documents checkpoint (CV source batch)
+
+The five public `info_for_ai/professional_documents/` sources were selected from the currently verified DIK source hashes and adapted with the user's explicit authorization to **create standard CVs without the mandatory personal HTML template**. Their changes and both source/target Git blob hashes are documented in `docs/AUTHORIZED_CV_DEVIATIONS.md`; the private DIK source repository remains unchanged.
+
+The public package preserves two-stage strategy and explicit OK approval, evidence and relevance prioritization, strategic-versus-local CV adjustments, factual/publication verification, default PDF output, optional editable DOCX, final visual inspection and native-text ATS ordering checks. It removes the owner's private profile references and specific contact defaults, mandatory brand/icon/layout assets, and the Europass branch. The public domain index resolves to four published files (core, creation, adjustment and rendering); no private profile data, Europass assets or fixed CV template were included.
+
+The source manifest now has **129 unique canonical-source records: 102 verbatim, 18 privacy-only, 3 privacy-and-editorial, 1 editorial-only and 5 workflow-adapted**. All five new rows have `authorized-workflow-adapted` status; their SHA fields are the original DIK blob SHAs.
+
+A template-free CV feasibility test using fictional applicant information generated HTML, PDF and DOCX and checked native PDF text extraction and rendered output. This does not validate the complete two-phase workflow within Knotbase. The source package still lacks its global runtime, command registry/lookup, portable evidence-source configuration and functional end-to-end integration tests. Earlier sections document historical checkpoints and their counts; the 129-row ledger is authoritative for the current batch.
+
+The README has been refreshed to correct obsolete source totals and GitHub-domain claims, while distinguishing public source publication from a functional release.
