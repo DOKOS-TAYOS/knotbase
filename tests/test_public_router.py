@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#BLOG", "#HTML", "#CV", "#CVEDIT")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
@@ -41,7 +41,7 @@ def git_blob_sha(path: Path) -> str:
 
 
 class PublicRouterTests(unittest.TestCase):
-    def test_four_exact_commands_and_lookup_lines(self) -> None:
+    def test_public_commands_and_lookup_lines(self) -> None:
         registry = csv_rows(AI / "comandos.csv")
         lookup = csv_rows(AI / "comandos_lookup.csv")
         self.assertEqual(len(registry), len(EXPECTED_COMMANDS) + 1)
@@ -61,7 +61,7 @@ class PublicRouterTests(unittest.TestCase):
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
         mapping = {row[0]: row for row in domains[1:]}
-        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting"})
+        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting", "education"})
         for domain, row in mapping.items():
             self.assertEqual(len(row), 8)
             core = AI / row[3]
@@ -78,7 +78,7 @@ class PublicRouterTests(unittest.TestCase):
             for module in modules:
                 route = AI / module
                 self.assertTrue(route.is_file(), str(route))
-        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting"):
+        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
             for row in index[1:]:
                 self.assertTrue((AI / row[1]).is_file(), row[1])
