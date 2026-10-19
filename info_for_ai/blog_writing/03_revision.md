@@ -20,7 +20,7 @@ Realiza tres pasadas sobre el artículo completo antes de entregarlo:
 - **Evidencia:** toda afirmación material debe conservar el alcance y grado de certeza que permiten sus fuentes. Verifica datos concretos y enlaces usados; no conviertas una estimación o modelo en hecho.
 - **Matemáticas:** cada fórmula debe corresponder exactamente a la afirmación, conservar miembros y magnitudes, definir símbolos necesarios e integrarse gramaticalmente en la oración según `02_voz_pedagogia_y_ritmo.md`. No hagas aquí una segunda conversión al formato de plataforma.
 - **Publicación:** cuando la salida deba quedar lista para publicar, delega en `publication_materialization.md` la notación copiable, los marcadores `>>>>>>>>>> LATEX`, hipervínculos, URLs, separadores y comprobaciones específicas del destino. No dupliques esas reglas en esta checklist.
-- **Naturalidad:** revisa de forma ligera calcos del inglés y morfología técnica poco natural en español de España sin castellanizar términos cuya forma inglesa sea la convención real del campo.
+- **Naturalidad:** revisa de forma ligera calcos y morfología técnica poco natural en el idioma y la variedad solicitados, respetando los términos técnicos establecidos en el campo.
 - **Ritmo y topología de párrafos:** no aceptes secuencias de dos o más párrafos de una sola frase en prosa ordinaria salvo que cada bloque tenga una función estructural distinta y justificable. Fusiona frases aisladas con el párrafo que desarrolla su misma idea y comprueba también los dos últimos párrafos de cada sección, donde es más frecuente que aparezca fragmentación residual.
 
 ## Diagnóstico
