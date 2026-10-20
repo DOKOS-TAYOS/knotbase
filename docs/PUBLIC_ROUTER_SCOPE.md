@@ -95,7 +95,7 @@ The canonical DIK registry contains 65 commands. The public subset now contains 
 
 The manifest remains **139 source records**. No personal inventory, restricted evidence or proprietary media has been newly published. Structural CI verifies command and routing integrity, but independent end-to-end ChatGPT consumer tests for real routing, approval gates, asset assembly, and remote publication remain separate acceptance requirements.
 
-## Draft onboarding entrypoint (PR #27)
+## Read-only onboarding entrypoint (not an installed instance)
 
 The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The entrypoint is read-only and fail-closed while `config/instance.csv`, generic `info_user` templates and portable maintenance contracts remain unpublished. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
 
