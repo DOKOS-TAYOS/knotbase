@@ -6,7 +6,7 @@ This note records the **scoped public routing adaptation** enabled by the Knotba
 
 | Public path | Canonical DIK Git blob SHA | Public Git blob SHA | Manifest status |
 |---|---|---|---|
-| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `d06aa6c9598d1f28d129f44284c0282c1db0bd85` | `public-routing-adapted` |
+| `AGENTS.md` | `611a06672cf2fb99889268741c3f3eecb4e53696` | `ad0952f40fd9d0a79e9e9810f7978caa3f9f2403` | `public-routing-adapted` |
 | `info_for_ai/indice_dominios.csv` | `c5a3b7cb29e83719dd8303e1f4f93dde04e7692f` | `d27fd759b4085fba5ab0cc5975a88dbc5f8b3090` | `public-routing-adapted` |
 | `info_for_ai/comandos.csv` | `8c57e847df45dd80d92a74bbc0efd6129d4e32e0` | `c230a2cdb6da6638fa9b68b473130f2ce8f7e261` | `public-subset-adapted` |
 | `info_for_ai/comandos_lookup.csv` | `890701beb36f8a4ed80437341f16a080f1cd26aa` | `85d61ef2646dc0491062ba4083ec14294d668b94` | `public-routing-adapted` |
@@ -94,3 +94,9 @@ The canonical `#SHIP` row is published unchanged at lookup line 53. The supplied
 The canonical DIK registry contains 65 commands. The public subset now contains **52**, leaving **13 unregistered**. The remaining original workflows rely on unpublished personal records or maintenance infrastructure, private repository-inventory and archived/frozen status checks for broad operational work, or a private recipient-specific letter template. Do not activate them by inventing missing inventory or weakening the canonical contract. This is a portability exclusion, not a claim that the full DIK command set is public.
 
 The manifest remains **139 source records**. No personal inventory, restricted evidence or proprietary media has been newly published. Structural CI verifies command and routing integrity, but independent end-to-end ChatGPT consumer tests for real routing, approval gates, asset assembly, and remote publication remain separate acceptance requirements.
+
+## Read-only onboarding entrypoint (not an installed instance)
+
+The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The entrypoint is read-only and fail-closed while `config/instance.csv`, generic `info_user` templates and portable maintenance contracts remain unpublished. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
+
+A public upstream checkout and a private installed fork have different privacy obligations: the public upstream must not ship personal-data rows or instance assignments, but a configured private fork must be allowed to store validated user evidence. Structural checks protect schema parity and public blank-data packaging without requiring the private fork's evidence tables to remain empty. No consumer-runtime acceptance is inferred.

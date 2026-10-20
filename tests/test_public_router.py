@@ -8,6 +8,8 @@ from __future__ import annotations
 import csv
 import hashlib
 import io
+import os
+import re
 import unittest
 from pathlib import Path
 
@@ -22,8 +24,9 @@ EXPECTED_SOURCE = {
     "info_for_ai/iterative_continuation.md": ("89f7ff26efd2ad8db17b64e1a12c43e3274e819b", "verbatim"),
 }
 PRIVATE_TOKENS = (
-    "info_user/",
-    "assets_for_ai/",
+    "Alejandro Mata Ali",
+    "papers_alejandro_mata_ali.csv",
+    "DOKOS-TAYOS/dokos-instructions-knowledge",
     "standard-cv-html-template",
     "03_formato_europass.md",
 )
@@ -65,6 +68,26 @@ class PublicRouterTests(unittest.TestCase):
         self.assertIn(": ", summary)
         named = tuple(piece.strip("`") for piece in summary.split(": ", 1)[1].split(". Its exact rows", 1)[0].replace(" and ", ", ").split(", "))
         self.assertEqual(named, EXPECTED_COMMANDS)
+
+    def test_unregistered_command_summary_matches_registry(self) -> None:
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        excluded = next(
+            (line for line in router.splitlines()
+             if line.startswith("This pilot intentionally **does not register**")),
+            None,
+        )
+        self.assertIsNotNone(excluded)
+        import re
+        excluded_commands = set(re.findall(r"`(#[A-Z0-9_]+)`", excluded.split("These thirteen commands", 1)[0]))
+        registry_commands = set(EXPECTED_COMMANDS)
+        self.assertTrue(excluded_commands.isdisjoint(registry_commands),
+                        "A published command cannot be described as excluded")
+        self.assertEqual(excluded_commands, {
+            "#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK",
+            "#DEP", "#SEC", "#CLEAN", "#RUNS", "#CI", "#TRIAGE",
+            "#BIO", "#ME", "#NOAH",
+        })
+        self.assertIn("`#SHIP` **is registered**", excluded)
 
     def test_published_domain_routes(self) -> None:
         domains = csv_rows(AI / "indice_dominios.csv")
@@ -179,6 +202,100 @@ class PublicRouterTests(unittest.TestCase):
             text = (ROOT / relative).read_text(encoding="utf-8")
             for token in PRIVATE_TOKENS:
                 self.assertNotIn(token, text, f"{relative}: {token}")
+
+
+    def test_portable_bootstrap_is_fail_closed_until_dependencies_exist(self) -> None:
+        bootstrap = (ROOT / "BOOTSTRAP.md").read_text(encoding="utf-8")
+        for required in (
+            "config/instance.csv",
+            "instance_repository",
+            "github_owner",
+            "knowledge_repository",
+            "maintenance_for_ai/indice_mantenimiento.csv",
+            "## Acceptance conditions for a user instance",
+        ):
+            self.assertIn(required, bootstrap)
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("## Portable-instance onboarding (draft entrypoint)", router)
+        self.assertIn("BOOTSTRAP.md", router)
+        self.assertIn("read-only setup guide", router)
+        self.assertIn("not installed yet", router)
+        registered = {row[0] for row in csv_rows(AI / "comandos.csv")[1:]}
+        self.assertNotIn("#NOAH", registered)
+
+        user_commands = {"#ME", "#BIO"}
+        maintenance_commands = {"#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK"}
+        bulk_commands = {"#DEP", "#SEC", "#CLEAN", "#RUNS", "#TRIAGE", "#CI"}
+        if registered & (user_commands | maintenance_commands | bulk_commands):
+            self.assertTrue((ROOT / "config/instance.csv").is_file(),
+                            "Do not activate owner workflows before instance configuration exists")
+            self.assertTrue((AI / "info_user/00_core.md").is_file())
+            self.assertTrue((AI / "info_user/indice_info_user.csv").is_file())
+            self.assertTrue((AI / "info_user/repositorios_github.csv").is_file())
+            self.assertTrue((AI / "info_user/repositorios_github_lookup.csv").is_file())
+        if registered & maintenance_commands:
+            self.assertTrue((ROOT / "maintenance_for_ai/00_core.md").is_file())
+            self.assertTrue((ROOT / "maintenance_for_ai/indice_mantenimiento.csv").is_file())
+            self.assertTrue((ROOT / "maintenance_for_ai/validation/validate.py").is_file(),
+                            "KBCHK and maintenance commands require the portable validator")
+
+        schemas = {
+            "info_for_ai/info_user/_data/fuentes.csv": "source_id,source_name,source_type,priority,confidence,review_status,visibility,location,valid_from,valid_to,observed_at,scope,notes",
+            "info_for_ai/info_user/_data/hechos.csv": "fact_id,category,assertion_type,confidence,subject,predicate,value,review_status,visibility,valid_from,valid_to,observed_at,source_id,notes",
+            "info_for_ai/info_user/_data/capacidades.csv": "capability_id,capability,capability_domain,capability_group,claim_type,confidence,review_status,visibility,evidence,source_id,valid_from,valid_to,observed_at,notes",
+            "info_for_ai/info_user/_data/relaciones.csv": "relation_id,assertion_type,confidence,review_status,subject,predicate,object,visibility,valid_from,valid_to,observed_at,source_id,notes",
+            "info_for_ai/info_user/repositorios_github.csv": "nombre,url,descripcion_resumen,tipo,visibilidad,estado_desarrollo,archivado,es_fork,dependabot_dias_versiones,ultima_verificacion,notas",
+            "info_for_ai/info_user/repositorios_github_lookup.csv": "nombre,line",
+        }
+        # An installed private fork may hold authorized user records. Upstream
+        # PR validation must reject published personal rows, including CSVs
+        # added after this fixed list of canonical schemas.
+        is_public_upstream = os.environ.get("GITHUB_REPOSITORY", "").lower() == "dokos-tayos/knotbase"
+        profile_root = AI / "info_user"
+        if (profile_root / "00_core.md").is_file():
+            self.assertTrue((profile_root / "indice_info_user.csv").is_file())
+            for required in schemas:
+                self.assertTrue((ROOT / required).is_file(),
+                                "Published info_user is missing required schema: " + required)
+        for relative, header in schemas.items():
+            path = ROOT / relative
+            if not path.exists():
+                continue
+            rows = csv_rows(path)
+            self.assertEqual(rows[0], header.split(","), relative)
+        if is_public_upstream and profile_root.exists():
+            for path in profile_root.rglob("*.csv"):
+                rows = csv_rows(path)
+                self.assertEqual(len(rows), 1,
+                                 "Public upstream must ship header-only profile CSVs: " + str(path))
+                self.assertTrue(rows[0] and any(field.strip() for field in rows[0]),
+                                "Public CSV must have a nonempty header: " + str(path))
+
+        config_path = ROOT / "config/instance.csv"
+        if config_path.exists():
+            configuration = csv_rows(config_path)
+            self.assertEqual(configuration[0], ["key", "value"])
+            self.assertTrue(all(len(record) == 2 and record[0].strip()
+                                for record in configuration[1:]))
+            values = dict(configuration[1:])
+            self.assertEqual(len(values), len(configuration) - 1,
+                             "Instance configuration keys must be unique")
+            for key in ("instance_repository", "github_owner",
+                        "knowledge_repository", "knowledge_storage", "onboarding_state"):
+                self.assertIn(key, values)
+            for key in values:
+                self.assertIsNone(re.search(r"token|password|secret|api[_-]?key", key, re.I),
+                                  "Never store credentials in the instance manifest")
+            for key in ("instance_repository", "knowledge_repository"):
+                if values[key]:
+                    self.assertRegex(values[key], r"^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$")
+            if values["onboarding_state"] == "configured":
+                self.assertTrue(values["instance_repository"] and values["github_owner"])
+            if is_public_upstream:
+                self.assertFalse(values["instance_repository"],
+                                 "Do not bootstrap a public upstream to a user's private instance")
+                self.assertFalse(values["github_owner"])
+                self.assertFalse(values["knowledge_repository"])
 
 
 if __name__ == "__main__":

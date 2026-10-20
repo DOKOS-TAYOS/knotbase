@@ -14,6 +14,12 @@ This is a **public, scoped adaptation** of the DIK global routing contract. It i
 8. Do not run repository-wide search, recursive inventory or broad private-data discovery to compensate for missing public indices. If an expected public index or dependency is missing, report the exact blocker. Public files are not evidence of personal achievements or contact details.
 9. In continuing a prior workflow, preserve the same objective, artifact, user constraints and approved evidence. An isolated `OK` only advances when the **active selected module** expressly permits it. No earlier or unrelated task is revived merely by `OK`.
 
+## Portable-instance onboarding (draft entrypoint)
+
+When the user explicitly asks to install, initialize, or configure **their own Knotbase instance**, load the repository-root `BOOTSTRAP.md` as a **read-only setup guide** before selecting ordinary semantic domains. Keep the current command registry authoritative: this natural-language onboarding route is not a compact command, maintenance mode, or an authorization to mutate another repository.
+
+The portable runtime is **not installed yet**: `config/instance.csv`, the empty `info_user` domain and the portable maintenance procedures are missing from this public pilot. Explain those missing prerequisites rather than recording configuration, claiming a successful bootstrap, selecting a GitHub owner, or invoking any of the unregistered twelve commands. Do not send user data to the public upstream or infer any identity or target repository from the canonical private DIK. Ordinary registered commands continue under the routing rules above until the missing dependencies and corresponding tests are genuinely integrated.
+
 ## Enabled pilot commands and behavior
 
 The registry currently supports fifty-two public commands: `#HELP`, `#PROMPT`, `#DEEP`, `#LIT`, `#SOTA`, `#READ`, `#PAPER`, `#ARG`, `#PROOF`, `#OPP`, `#EXPL`, `#NOTES`, `#VIDEO`, `#CLASS`, `#TFG`, `#TFM`, `#BLOG`, `#HTML`, `#CV`, `#CVEDIT`, `#MAIL`, `#LINKEDIN`, `#CONTACT`, `#DELIVER`, `#REC`, `#IDENT`, `#ASSESS`, `#REV`, `#COM`, `#DIFF`, `#RESP`, `#RESUB`, `#INIT`, `#REPRO`, `#REFAC`, `#DOC`, `#READY`, `#BUG`, `#OPT`, `#DEAD`, `#TEST`, `#FIX`, `#CYCLE`, `#REFACT`, `#JOURNAL`, `#PAPERFIT`, `#PR`, `#ISSUE`, `#SYNC`, `#RELEASE`, `#BITACORA` and `#SHIP`. Its exact rows are authoritative, not this summary.
@@ -52,6 +58,6 @@ Default to Spanish for user-facing responses unless the audience, task or user r
 
 ## Scope boundary
 
-This pilot intentionally **does not register** `#DEP`, `#SEC`, `#SHIP`, personal-data synchronization, maintenance commands, excluded private-recipient workflows or other unlisted DIK commands. Their original contracts, scopes and permissions must not be inferred from their names. Unregistered commands remain unavailable even where their source modules or supporting domains are present.
+This pilot intentionally **does not register** `#PAPSYNC`, `#CVSYNC`, `#REPOSYNC`, `#KBCHK`, `#DEP`, `#SEC`, `#CLEAN`, `#RUNS`, `#CI`, `#TRIAGE`, `#BIO`, `#ME` or the private-recipient-specific `#NOAH`. These thirteen commands remain unavailable until their prerequisites and public routing contracts are individually published; no semantics, authorization or repository scope may be inferred from their names. `#SHIP` **is registered** and remains subject to its canonical code-readiness and GitHub publication gates.
 
 The public source files are instructions for a capable ChatGPT client; Knotbase is **not** a standalone executable or independently validated full DIK runtime. Activation depends on loading this repository's `AGENTS.md` in the actual consumer environment. Test command parsing, index resolution, phase gates, privacy and artifact generation in that environment before claiming functional parity.
