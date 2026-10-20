@@ -8,4 +8,4 @@ Zona horaria canónica: `Europe/Madrid`.
 
 | Mes | Días con cambios | Cambios | Resumen |
 |---|---:|---:|---|
-| _Sin entradas_ | 0 | 0 | Sin cambios registrados. |
+| [2026-10](2026-10/) | 1 | 1 | Portabilidad de mantenimiento y registro de 64 comandos. |
