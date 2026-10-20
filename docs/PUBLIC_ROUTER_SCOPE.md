@@ -97,6 +97,6 @@ The manifest remains **139 source records**. No personal inventory, restricted e
 
 ## Read-only onboarding entrypoint (not an installed instance)
 
-The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The entrypoint is read-only and fail-closed while `config/instance.csv`, generic `info_user` templates and portable maintenance contracts remain unpublished. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
+The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The entrypoint is read-only and fail-closed. An unset `config/instance.csv` and header-only generic `info_user` domain are published, but portable maintenance contracts and the remaining twelve commands are not installed. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
 
 A public upstream checkout and a private installed fork have different privacy obligations: the public upstream must not ship personal-data rows or instance assignments, but a configured private fork must be allowed to store validated user evidence. Structural checks protect schema parity and public blank-data packaging without requiring the private fork's evidence tables to remain empty. No consumer-runtime acceptance is inferred.

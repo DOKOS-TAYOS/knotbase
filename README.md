@@ -24,9 +24,9 @@ The standard CV workflow uses an evidence-led **two-phase strategy with explicit
 
 Source publications must preserve original DIK behavior and algorithms except for documented privacy and owner-authorized deviations. Do not add private or restricted data, personal contact details, proprietary templates, or unlicensed third-party media.
 
-## User-instance onboarding (read-only preview)
+## User-instance onboarding (unconfigured scaffold)
 
-A user who wants to adopt Knotbase can consult [the bootstrap contract](BOOTSTRAP.md). The public router recognizes natural-language onboarding requests and opens that guide, but this is **not an installed or executable setup flow**: the instance configuration, empty user-knowledge templates, portable maintenance validator and remaining twelve owner workflows have not been published. No personal records or configured GitHub owners are bundled. Until those dependencies are installed and independently verified, the fifty-two registered commands retain their existing public scope and omitted commands remain unavailable.
+A user who wants to adopt Knotbase can consult [the bootstrap contract](BOOTSTRAP.md). The public router recognizes natural-language onboarding requests and opens that guide, but this is **not an installed or executable setup flow**: empty instance configuration and user-knowledge schemas are published, but the portable maintenance validator, twelve owner workflows and executable user setup are not installed. No personal records or configured GitHub owners are bundled. Until those dependencies are installed and independently verified, the fifty-two registered commands retain their existing public scope and omitted commands remain unavailable.
 
 ## Migration handoff
 
