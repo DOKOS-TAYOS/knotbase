@@ -239,7 +239,7 @@ class PublicRouterTests(unittest.TestCase):
         ):
             self.assertIn(required, bootstrap)
         router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        self.assertIn("## Portable-instance onboarding (draft entrypoint)", router)
+        self.assertIn("## Portable-instance onboarding and owner gates", router)
         self.assertIn("BOOTSTRAP.md", router)
         self.assertIn("On the public upstream this is read-only", router)
         self.assertIn("unconfigured, header-only scaffold", router)
