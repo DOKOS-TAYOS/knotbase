@@ -93,7 +93,7 @@ class PublicRouterTests(unittest.TestCase):
         domains = csv_rows(AI / "indice_dominios.csv")
         self.assertEqual(len(domains[0]), 8)
         mapping = {row[0]: row for row in domains[1:]}
-        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github"})
+        self.assertEqual(set(mapping), {"professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github", "info_user"})
         for domain, row in mapping.items():
             self.assertEqual(len(row), 8)
             core = AI / row[3]
@@ -113,10 +113,26 @@ class PublicRouterTests(unittest.TestCase):
             for module in modules:
                 route = AI / module
                 self.assertTrue(route.is_file(), str(route))
-        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github"):
+        for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github", "info_user"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
             for row in index[1:]:
-                self.assertTrue((AI / row[1]).is_file(), row[1])
+                self.assertTrue((AI / row[1]).is_dir() if row[3] == "container" else (AI / row[1]).is_file(), row[1])
+
+    def test_generic_user_scaffold_is_unconfigured(self) -> None:
+        config = dict(csv_rows(ROOT / "config/instance.csv")[1:])
+        self.assertEqual(config["onboarding_state"], "unconfigured")
+        for field in ("instance_repository", "github_owner", "knowledge_repository", "knowledge_storage"):
+            self.assertEqual(config[field], "")
+        index = csv_rows(AI / "info_user/indice_info_user.csv")
+        self.assertEqual(len(index[0]), 10)
+        self.assertGreater(len(index), 20)
+        for entry in index[1:]:
+            self.assertEqual(len(entry), 10)
+            path = AI / entry[1]
+            self.assertTrue(path.is_dir() if entry[3] == "container" else path.is_file(), entry[1])
+        for name in ("papers.csv", "articulos.csv", "citas_papers.csv", "citas_por_paper.csv",
+                     "repositorios_github.csv", "repositorios_github_lookup.csv", "cursos.csv", "videos.csv"):
+            self.assertEqual(len(csv_rows(AI / "info_user" / name)), 1)
 
     def test_continuation_and_approval_gates(self) -> None:
         iterative = AI / "iterative_continuation.md"
@@ -265,6 +281,8 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(rows[0], header.split(","), relative)
         if is_public_upstream and profile_root.exists():
             for path in profile_root.rglob("*.csv"):
+                if path.name == "indice_info_user.csv":
+                    continue  # routing metadata, not a personal-data record
                 rows = csv_rows(path)
                 self.assertEqual(len(rows), 1,
                                  "Public upstream must ship header-only profile CSVs: " + str(path))
