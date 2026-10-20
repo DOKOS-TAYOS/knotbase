@@ -2,7 +2,7 @@
 
 This file describes the **consumer's own installation**. The upstream public Knotbase repository is a template, never a destination for a user's personal records or routine maintenance changes.
 
-**Implementation status:** The public checkout now includes `config/instance.csv` with unset values and header-only `info_user` templates. These are a static scaffold, not an installed or verified personal instance. Portable `maintenance_for_ai` procedures and executable owner-specific onboarding are not installed. Do not interpret this document's presence as successful bootstrap or as authorization to activate omitted commands.
+**Implementation status:** The public checkout now includes `config/instance.csv` with unset values and header-only `info_user` templates. These are a static scaffold, not an installed or verified personal instance. Indexed portable `maintenance_for_ai` procedures and an offline target-tree validator are included. Owner-specific onboarding still requires a real private instance, verified remote permissions, explicit authorization and independent consumer tests. Do not interpret this document's presence as successful bootstrap or as authorization to activate omitted commands.
 
 ## Bootstrap trigger
 
@@ -36,14 +36,14 @@ At the start of a newly adopted Knotbase instance, inspect `config/instance.csv`
 
 **Required schema-preserving substitutions before activation:**
 
-- Replace the original owner's publication catalog path with an explicitly indexed user catalog, preserving its CSV columns and publication-update semantics. Until that mapping is installed, `#PAPSYNC` must not run.
-- Keep the original user-knowledge canonical layers and their source IDs, statuses, dates and visibility fields; publish only empty headers and blank derived views. Until their index and owner-specific storage are installed, `#ME`, `#BIO`, `#CVSYNC` and profile-maintenance commands must fail closed instead of fabricating records.
+- Replace the original owner's publication catalog path with an explicitly indexed user catalog, preserving its CSV columns and publication-update semantics. Until an actual configured user and writable private catalog are verified, `#PAPSYNC` must not mutate any repository.
+- Keep the original user-knowledge canonical layers and their source IDs, statuses, dates and visibility fields; publish only empty headers and blank derived views. Without verified owner-specific evidence and private storage, `#ME`, `#BIO`, `#CVSYNC` and profile-maintenance commands must fail closed instead of fabricating records.
 - Keep `repositorios_github.csv` and its line-number lookup together. Bootstrap must verify allowed owners, repository identity, archived/frozen status and inventory completeness before `#DEP`, `#SEC`, `#CLEAN`, `#RUNS`, `#TRIAGE` or a bulk synchronization. Even when a repository is explicitly supplied, retain the original workflow's eligibility and protection checks.
 - Translate maintenance's hard-coded repository name into the configured *user instance* only after a verified selection. A copied procedure referring to original-owner publication files, a fixed GitHub owner, or a project instruction mirror must not be considered portable until those references have been reviewed and adapted individually.
-- Port the canonical maintenance validator, dependency index and logbook procedures with equivalent checks against the configured instance. `#KBCHK` cannot claim full validity from Knotbase's existing subset-only structural suite; it requires validation of the exact installed target tree.
+- Port the canonical maintenance validator, dependency index and logbook procedures with equivalent checks against the configured instance. `#KBCHK` must run the installed canonical offline validator against the exact target tree, plus remote and consumer-runtime checks when claiming those capabilities; it cannot claim full functionality from structural checks alone.
 - Preserve the original distinction between user assertions and independently verified claims. Public templates contain no user facts, and private records should not be committed to upstream or placed in examples.
 
-**Activation order:** publish and test configuration plus blank schemas; then index and test the user-knowledge domain; then adapt and validate maintenance procedures; then add the remaining 12 original commands, preserving their source-specific scopes and approval gates. `#NOAH` stays excluded. A public command is not operational merely because its row appears in a lookup.
+**Activation status:** Blank schemas, indexed user-knowledge domain, portable maintenance procedures, canonical offline validator and 12 owner-scoped command registrations are present. `#NOAH` stays excluded. The public upstream is unconfigured; commands requiring an owner's credentials, inventory, records or permissions must fail closed until those prerequisites are verified. Command registration alone does not establish end-to-end operational readiness.
 
 ## Acceptance conditions for a user instance
 
