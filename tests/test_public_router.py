@@ -154,7 +154,7 @@ class PublicRouterTests(unittest.TestCase):
     def test_source_ledger(self) -> None:
         rows = csv_rows(ROOT / "manifests/source_parity.csv")
         self.assertEqual(rows[0], ["path", "source_git_blob_sha", "status"])
-        self.assertEqual(len(rows), 140)  # header + 139 sources
+        self.assertEqual(len(rows), 154)  # header + 153 source-mapped files
         paths = [row[0] for row in rows[1:]]
         self.assertEqual(len(paths), len(set(paths)))
         lookup = {row[0]: row[1:] for row in rows[1:]}
@@ -166,9 +166,10 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(len(row), 3)
             self.assertEqual(len(row[1]), 40)
         self.assertEqual(
-            sum(row[2] == "verbatim" for row in rows[1:]), 105
+            sum(row[2] == "verbatim" for row in rows[1:]), 110
         )
         self.assertEqual(sum(row[2] == "privacy-adapted" for row in rows[1:]), 21)
+        self.assertEqual(sum(row[2] == "portable-owner-adapted" for row in rows[1:]), 9)
 
     def test_html_index_is_complete_without_personal_letter_flow(self) -> None:
         rows = csv_rows(AI / "htmls/indice_htmls.csv")
