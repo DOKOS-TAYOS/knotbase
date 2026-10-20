@@ -116,7 +116,7 @@ class PublicRouterTests(unittest.TestCase):
         for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github", "info_user"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
             for row in index[1:]:
-                self.assertTrue((AI / row[1]).is_dir() if row[3] == "container" else (AI / row[1]).is_file(), row[1])
+                self.assertTrue((AI / row[1]).is_dir() if row[1].endswith("/") else (AI / row[1]).is_file(), row[1])
 
     def test_generic_user_scaffold_is_unconfigured(self) -> None:
         config = dict(csv_rows(ROOT / "config/instance.csv")[1:])
@@ -129,7 +129,7 @@ class PublicRouterTests(unittest.TestCase):
         for entry in index[1:]:
             self.assertEqual(len(entry), 10)
             path = AI / entry[1]
-            self.assertTrue(path.is_dir() if entry[3] == "container" else path.is_file(), entry[1])
+            self.assertTrue(path.is_dir() if entry[1].endswith("/") else path.is_file(), entry[1])
         for name in ("papers.csv", "articulos.csv", "citas_papers.csv", "citas_por_paper.csv",
                      "repositorios_github.csv", "repositorios_github_lookup.csv", "cursos.csv", "videos.csv"):
             self.assertEqual(len(csv_rows(AI / "info_user" / name)), 1)
@@ -235,7 +235,7 @@ class PublicRouterTests(unittest.TestCase):
         self.assertIn("## Portable-instance onboarding (draft entrypoint)", router)
         self.assertIn("BOOTSTRAP.md", router)
         self.assertIn("read-only setup guide", router)
-        self.assertIn("not installed yet", router)
+        self.assertIn("unconfigured, header-only scaffold", router)
         registered = {row[0] for row in csv_rows(AI / "comandos.csv")[1:]}
         self.assertNotIn("#NOAH", registered)
 
