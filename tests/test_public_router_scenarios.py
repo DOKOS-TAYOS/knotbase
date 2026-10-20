@@ -67,12 +67,26 @@ def resolve_command(message: str) -> Decision:
         raise RoutingError("Registry and lookup inconsistent")
     argument = parts[1].strip() if len(parts) == 2 else ""
     required_args = [item.strip() for item in row["arguments"].split(";") if item.strip() and not item.strip().endswith("?")]
-    if row["mode"] == "route" and required_args:
+    if row["mode"] in ("route", "maintenance") and required_args:
         supplied = argument.split(";", len(required_args) - 1)
         if len(supplied) < len(required_args) or any(not part.strip() for part in supplied):
             raise RoutingError("Missing required arguments: " + row["usage"])
     if row["mode"] == "help":
         return Decision(name, modifier, argument, None, None, "help")
+    if row["mode"] == "maintenance":
+        if row["domains"]:
+            raise RoutingError("Maintenance may not declare routed domains")
+        core = ROOT / "maintenance_for_ai/00_core.md"
+        maintenance_index = ROOT / "maintenance_for_ai/indice_mantenimiento.csv"
+        if not core.is_file() or not maintenance_index.is_file():
+            raise RoutingError("Maintenance infrastructure missing")
+        valid = {item["ruta"] for item in read_csv(maintenance_index)}
+        modules = [module.strip() for module in row["modules"].split(";") if module.strip()]
+        for module in modules:
+            if (module.removeprefix("maintenance_for_ai/") not in valid
+                    or not (ROOT / module).is_file()):
+                raise RoutingError("Missing maintenance route target: " + module)
+        return Decision(name, modifier, argument, None, "; ".join(modules), "maintenance")
     if row["mode"] != "route":
         raise RoutingError("Unsupported mode")
     domains = {entry["dominio"]: entry for entry in read_csv(AI / "indice_dominios.csv")}
@@ -306,9 +320,32 @@ class PublicRouterScenarioTests(unittest.TestCase):
                 resolve_command(message)
 
     def test_unknown_commands_are_not_guessed(self) -> None:
-        for message in ("#DEP", "#UNREGISTERED Do something", "#SEC Whatever"):
+        for message in ("#NOAH", "#UNREGISTERED Do something"):
             with self.subTest(message=message), self.assertRaisesRegex(RoutingError, "Unregistered"):
                 resolve_command(message)
+
+    def test_owner_commands_route_without_granting_authorization(self) -> None:
+        entries = {
+            "#DEP": ("route", "github"),
+            "#SEC Whatever": ("route", "github"),
+            "#TRIAGE": ("route", "github"),
+            "#BIO A public conference": ("route", "info_user"),
+            "#ME My verified publications": ("route", "info_user"),
+            "#PAPSYNC": ("maintenance", None),
+            "#CVSYNC Synthetic evidence": ("maintenance", None),
+            "#REPOSYNC": ("maintenance", None),
+            "#KBCHK": ("maintenance", None),
+        }
+        for prompt, expected in entries.items():
+            with self.subTest(prompt=prompt):
+                decision = resolve_command(prompt)
+                self.assertEqual((decision.mode, decision.domain), expected)
+        with self.assertRaisesRegex(RoutingError, "Missing required arguments"):
+            resolve_command("#CVSYNC")
+        configuration = read_csv(ROOT / "config/instance.csv")
+        self.assertFalse(dict((row["key"], row["value"]) for row in configuration)["instance_repository"])
+        router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("Never write owner-specific configuration", router)
 
     def test_prompt_target_and_required_separator(self) -> None:
         self.assertEqual(resolve_command("#PROMPT Chat; Explain an array").module, "prompting/02_chat_prompt_generation.md")

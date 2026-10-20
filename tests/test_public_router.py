@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AI = ROOT / "info_for_ai"
-EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#IDENT", "#ASSESS", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB", "#INIT", "#REPRO", "#REFAC", "#DOC", "#READY", "#BUG", "#OPT", "#DEAD", "#TEST", "#FIX", "#CYCLE", "#REFACT", "#JOURNAL", "#PAPERFIT", "#PR", "#ISSUE", "#SYNC", "#RELEASE", "#BITACORA", "#SHIP")
+EXPECTED_COMMANDS = ("#HELP", "#PROMPT", "#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK", "#DEP", "#SEC", "#SHIP", "#CLEAN", "#RUNS", "#PR", "#CI", "#RELEASE", "#ISSUE", "#SYNC", "#TRIAGE", "#BITACORA", "#DEEP", "#LIT", "#SOTA", "#READ", "#PAPER", "#ARG", "#PROOF", "#OPP", "#REV", "#COM", "#DIFF", "#RESP", "#RESUB", "#JOURNAL", "#PAPERFIT", "#INIT", "#IDENT", "#ASSESS", "#BUG", "#OPT", "#DEAD", "#TEST", "#REPRO", "#FIX", "#CYCLE", "#REFAC", "#REFACT", "#DOC", "#READY", "#EXPL", "#NOTES", "#VIDEO", "#CLASS", "#TFG", "#TFM", "#BLOG", "#HTML", "#CV", "#CVEDIT", "#MAIL", "#LINKEDIN", "#CONTACT", "#DELIVER", "#REC", "#BIO", "#ME")
 EXPECTED_SOURCE = {
     "AGENTS.md": ("611a06672cf2fb99889268741c3f3eecb4e53696", "public-routing-adapted"),
     "info_for_ai/indice_dominios.csv": ("c5a3b7cb29e83719dd8303e1f4f93dde04e7692f", "public-routing-adapted"),
@@ -54,9 +54,12 @@ class PublicRouterTests(unittest.TestCase):
         self.assertEqual(lookup[1:], [[command, str(i + 2)] for i, command in enumerate(EXPECTED_COMMANDS)])
         for row in registry[1:]:
             self.assertEqual(len(row), 11)
-            self.assertIn(row[2], ("help", "route"))
+            self.assertIn(row[2], ("help", "route", "maintenance"))
             if row[2] == "route":
                 self.assertTrue(row[7])
+            elif row[2] == "maintenance":
+                self.assertFalse(row[7])
+                self.assertTrue(row[8].startswith("maintenance_for_ai/"))
             else:
                 self.assertEqual(row[0], "#HELP")
 
@@ -71,23 +74,13 @@ class PublicRouterTests(unittest.TestCase):
 
     def test_unregistered_command_summary_matches_registry(self) -> None:
         router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        excluded = next(
-            (line for line in router.splitlines()
-             if line.startswith("This pilot intentionally **does not register**")),
-            None,
-        )
-        self.assertIsNotNone(excluded)
-        import re
-        excluded_commands = set(re.findall(r"`(#[A-Z0-9_]+)`", excluded.split("These thirteen commands", 1)[0]))
-        registry_commands = set(EXPECTED_COMMANDS)
-        self.assertTrue(excluded_commands.isdisjoint(registry_commands),
-                        "A published command cannot be described as excluded")
-        self.assertEqual(excluded_commands, {
-            "#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK",
-            "#DEP", "#SEC", "#CLEAN", "#RUNS", "#CI", "#TRIAGE",
-            "#BIO", "#ME", "#NOAH",
-        })
-        self.assertIn("`#SHIP` **is registered**", excluded)
+        registered = set(EXPECTED_COMMANDS)
+        self.assertEqual(len(registered), 64)
+        self.assertNotIn("#NOAH", registered)
+        self.assertIn("Only the original private-recipient-specific `#NOAH` is not registered", router)
+        for cmd in ("#PAPSYNC", "#CVSYNC", "#REPOSYNC", "#KBCHK", "#DEP", "#SEC",
+                    "#CLEAN", "#RUNS", "#CI", "#TRIAGE", "#BIO", "#ME"):
+            self.assertIn(cmd, registered)
 
     def test_published_domain_routes(self) -> None:
         domains = csv_rows(AI / "indice_dominios.csv")
@@ -101,17 +94,27 @@ class PublicRouterTests(unittest.TestCase):
             if row[3]:
                 self.assertTrue(core.is_file(), str(core))
             self.assertTrue(index.is_file(), str(index))
+        maintenance_paths = {
+            row[1] for row in csv_rows(ROOT / "maintenance_for_ai/indice_mantenimiento.csv")[1:]
+        }
         for row in csv_rows(AI / "comandos.csv")[2:]:
             declared_domains = [item.strip() for item in row[7].split(";") if item.strip()]
-            self.assertTrue(declared_domains)
-            for domain in declared_domains:
-                self.assertIn(domain, mapping)
+            if row[2] == "maintenance":
+                self.assertFalse(declared_domains)
+            else:
+                self.assertTrue(declared_domains)
+                for domain in declared_domains:
+                    self.assertIn(domain, mapping)
             modules = [module.strip() for module in row[8].split(";") if module.strip()]
             if row[0] == "#PROMPT":
                 self.assertFalse(modules)
                 modules = ["prompting/01_codex_prompt_generation.md", "prompting/02_chat_prompt_generation.md"]
             for module in modules:
-                route = AI / module
+                if row[2] == "maintenance":
+                    self.assertIn(module.removeprefix("maintenance_for_ai/"), maintenance_paths)
+                    route = ROOT / module
+                else:
+                    route = AI / module
                 self.assertTrue(route.is_file(), str(route))
         for domain in ("professional_documents", "blog_writing", "research", "htmls", "prompting", "education", "interactions", "code", "papers", "github", "info_user"):
             index = csv_rows(AI / domain / f"indice_{domain}.csv")
@@ -120,9 +123,12 @@ class PublicRouterTests(unittest.TestCase):
 
     def test_generic_user_scaffold_is_unconfigured(self) -> None:
         config = dict(csv_rows(ROOT / "config/instance.csv")[1:])
-        self.assertEqual(config["onboarding_state"], "unconfigured")
-        for field in ("instance_repository", "github_owner", "knowledge_repository", "knowledge_storage"):
-            self.assertEqual(config[field], "")
+        if os.environ.get("GITHUB_REPOSITORY", "").lower() == "dokos-tayos/knotbase":
+            self.assertEqual(config["onboarding_state"], "unconfigured")
+            for field in ("instance_repository", "github_owner", "knowledge_repository", "knowledge_storage"):
+                self.assertEqual(config[field], "")
+        else:
+            self.assertIn(config["onboarding_state"], ("unconfigured", "configured", "partial"))
         index = csv_rows(AI / "info_user/indice_info_user.csv")
         self.assertEqual(len(index[0]), 10)
         self.assertGreater(len(index), 20)
@@ -132,7 +138,8 @@ class PublicRouterTests(unittest.TestCase):
             self.assertTrue(path.is_dir() if entry[1].endswith("/") else path.is_file(), entry[1])
         for name in ("papers.csv", "articulos.csv", "citas_papers.csv", "citas_por_paper.csv",
                      "repositorios_github.csv", "repositorios_github_lookup.csv", "cursos.csv", "videos.csv"):
-            self.assertEqual(len(csv_rows(AI / "info_user" / name)), 1)
+            if os.environ.get("GITHUB_REPOSITORY", "").lower() == "dokos-tayos/knotbase":
+                self.assertEqual(len(csv_rows(AI / "info_user" / name)), 1)
 
     def test_continuation_and_approval_gates(self) -> None:
         iterative = AI / "iterative_continuation.md"
@@ -147,7 +154,7 @@ class PublicRouterTests(unittest.TestCase):
     def test_source_ledger(self) -> None:
         rows = csv_rows(ROOT / "manifests/source_parity.csv")
         self.assertEqual(rows[0], ["path", "source_git_blob_sha", "status"])
-        self.assertEqual(len(rows), 140)  # header + 139 sources
+        self.assertEqual(len(rows), 154)  # header + 153 source-mapped files
         paths = [row[0] for row in rows[1:]]
         self.assertEqual(len(paths), len(set(paths)))
         lookup = {row[0]: row[1:] for row in rows[1:]}
@@ -159,9 +166,10 @@ class PublicRouterTests(unittest.TestCase):
             self.assertEqual(len(row), 3)
             self.assertEqual(len(row[1]), 40)
         self.assertEqual(
-            sum(row[2] == "verbatim" for row in rows[1:]), 105
+            sum(row[2] == "verbatim" for row in rows[1:]), 110
         )
         self.assertEqual(sum(row[2] == "privacy-adapted" for row in rows[1:]), 21)
+        self.assertEqual(sum(row[2] == "portable-owner-adapted" for row in rows[1:]), 9)
 
     def test_html_index_is_complete_without_personal_letter_flow(self) -> None:
         rows = csv_rows(AI / "htmls/indice_htmls.csv")
@@ -232,9 +240,9 @@ class PublicRouterTests(unittest.TestCase):
         ):
             self.assertIn(required, bootstrap)
         router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        self.assertIn("## Portable-instance onboarding (draft entrypoint)", router)
+        self.assertIn("## Portable-instance onboarding and owner gates", router)
         self.assertIn("BOOTSTRAP.md", router)
-        self.assertIn("read-only setup guide", router)
+        self.assertIn("On the public upstream this is read-only", router)
         self.assertIn("unconfigured, header-only scaffold", router)
         registered = {row[0] for row in csv_rows(AI / "comandos.csv")[1:]}
         self.assertNotIn("#NOAH", registered)

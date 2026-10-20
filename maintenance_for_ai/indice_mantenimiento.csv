@@ -1,0 +1,9 @@
+nombre_documento,ruta,descripcion_breve,tipo,estado,idioma_instrucciones
+Actualizar papers,01_actualizar_papers.md,Actualizar el catálogo bibliográfico con descubrimiento y contraste de Scholar arXiv DOI editoriales y ResearchGate,instruction,active,es
+Actualizar CV,02_actualizar_cv.md,Comparar uno o varios CV nuevos con la capa trazable y actualizar solo información nueva o modificada,instruction,active,es
+Actualizar repositorios GitHub,03_actualizar_repositorios_github.md,Sincronizar el inventario estructurado de repositorios propios y sus metadatos verificables,instruction,active,es
+Actualizar o revisar instrucciones,04_actualizar_instrucciones.md,Modificar instrucciones existentes o auditar de forma localizada su routing corrección eficiencia ambigüedad o coherencia,instruction,active,es
+Añadir instrucciones,05_anadir_instrucciones.md,Incorporar nuevas instrucciones sin sobreingeniería agrupando responsabilidades y reutilizando módulos existentes,instruction,active,es
+Actualizar tests y workflows,06_actualizar_tests_y_workflows.md,Modificar tests evals o workflows solo cuando cambien contratos comandos runtimes permisos o comprobaciones,instruction,active,es
+Revisión integral,07_revision_integral.md,Revisar todo el repositorio ejecutar validaciones localizar incoherencias y corregir solo problemas evidenciados,instruction,active,es
+Actualizar InfoUser general,08_actualizar_info_user.md,Incorporar o corregir información profesional o personal no cubierta por papers CV o repositorios propagando solo dependencias declaradas,instruction,active,es

@@ -12,7 +12,7 @@ This note records the **scoped public routing adaptation** enabled by the Knotba
 | `info_for_ai/comandos_lookup.csv` | `890701beb36f8a4ed80437341f16a080f1cd26aa` | `85d61ef2646dc0491062ba4083ec14294d668b94` | `public-routing-adapted` |
 | `info_for_ai/iterative_continuation.md` | `89f7ff26efd2ad8db17b64e1a12c43e3274e819b` | `89f7ff26efd2ad8db17b64e1a12c43e3274e819b` | `verbatim` |
 
-The public registry contains fifty-two exact DIK semantic command rows, and `comandos_lookup.csv` maps them to lines 2 through 53. The DIK source blob remains recorded in the manifest. Unregistered commands are unavailable and cannot be inferred or activated.
+The public registry contains 64 commands, including 52 source-identical public rows and twelve owner-scoped adaptations; `comandos_lookup.csv` maps them to lines 2 through 65. The DIK source blob remains recorded in the manifest. Unregistered commands are unavailable and cannot be inferred or activated.
 
 The public domain index contains `professional_documents`, `blog_writing`, `research`, `htmls`, `prompting`, `education`, `interactions`, `code`, `papers`, and `github`. The first two descriptions are neutralized for public use; the research domain row is copied from the source index and maps to its already published unchanged research core and modules. Index paths are relative to `info_for_ai/` exactly once.
 
@@ -21,7 +21,7 @@ The public domain index contains `professional_documents`, `blog_writing`, `rese
 - `#CV` invokes an evidence-led first phase and requires explicit approval before composing the final CV. The standard public CV generates HTML, PDF and optional editable DOCX without private personal templates.
 - `#CVEDIT` distinguishes local adjustments from changes requiring a new target strategy and explicit approval.
 - `#BLOG` uses the original seven-phase editorial workflow and the **verbatim** shared iterative continuation rules for an isolated `OK`. The public edition does not enforce the original author's personal voice.
-- `#HELP` exposes only the fifty-two installed commands. Eight research commands, general `#HTML` and `#PROMPT` now have indexed public routes and retain their canonical argument and authorization contracts.
+- `#HELP` exposes the sixty-four registered commands. Eight research commands, general `#HTML` and `#PROMPT` now have indexed public routes and retain their canonical argument and authorization contracts.
 - Research modules support evidence gathering and technical verification under eight explicitly registered research commands. `#SOTA` loads both listed modules; `#PAPER` retains its staged approval contract.
 - Do not load unpublished personal records, fixed CV layouts, private article inventories or unlicensed assets. Missing evidence or a missing publication dependency must be reported, never invented.
 - User-facing changes to professional facts, publication and remote actions require the same authorization gates as the source modules.
@@ -91,12 +91,16 @@ The original `#ISSUE` owner module controls its issue-inspection phase and expli
 
 The canonical `#SHIP` row is published unchanged at lookup line 53. The supplied-repository scope, optional branch, remote-write effect, and protections are identical to DIK. Its initial code readiness module hands off to the original GitHub integration module; no publication is permitted before the required readiness and verification gates. All referenced modules were already in the published source manifest.
 
-The canonical DIK registry contains 65 commands. The public subset now contains **52**, leaving **13 unregistered**. The remaining original workflows rely on unpublished personal records or maintenance infrastructure, private repository-inventory and archived/frozen status checks for broad operational work, or a private recipient-specific letter template. Do not activate them by inventing missing inventory or weakening the canonical contract. This is a portability exclusion, not a claim that the full DIK command set is public.
+The canonical DIK registry contains 65 commands. The current portable subset contains **64**, excluding only `#NOAH`. The remaining original workflows rely on unpublished personal records or maintenance infrastructure, private repository-inventory and archived/frozen status checks for broad operational work, or a private recipient-specific letter template. Do not activate them by inventing missing inventory or weakening the canonical contract. This is a portability exclusion, not a claim that the full DIK command set is public.
 
 The manifest remains **139 source records**. No personal inventory, restricted evidence or proprietary media has been newly published. Structural CI verifies command and routing integrity, but independent end-to-end ChatGPT consumer tests for real routing, approval gates, asset assembly, and remote publication remain separate acceptance requirements.
 
 ## Read-only onboarding entrypoint (not an installed instance)
 
-The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The entrypoint is read-only and fail-closed. An unset `config/instance.csv` and header-only generic `info_user` domain are published, but portable maintenance contracts and the remaining twelve commands are not installed. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
+The public root `AGENTS.md` now explicitly recognizes **natural-language requests to initialize a user's own Knotbase** and points to `BOOTSTRAP.md`. The public upstream entrypoint is read-only and fail-closed. An unset `config/instance.csv`, header-only `info_user` domain, maintenance contracts and the twelve owner-scoped command rows are published, but a verified private user instance is not installed. No new compact commands have been registered. The existing 52 commands retain their current behavior, and `#NOAH` remains excluded.
 
 A public upstream checkout and a private installed fork have different privacy obligations: the public upstream must not ship personal-data rows or instance assignments, but a configured private fork must be allowed to store validated user evidence. Structural checks protect schema parity and public blank-data packaging without requiring the private fork's evidence tables to remain empty. No consumer-runtime acceptance is inferred.
+
+## Portable owner-scoped registration
+
+The source registry has 65 commands. Knotbase now indexes 64, excluding the private-recipient-specific `#NOAH`. The original 52 public command rows are preserved; twelve owner-dependent rows adapt original private owner and publication targets to explicit instance configuration. No personal records or configured GitHub owners are distributed. A public command registration is not a consumer runtime test or authorization to mutate upstream; empty profile and repository inventory must fail closed. Maintenance checks now use `maintenance_for_ai/validation/validate.py` on the exact configured target tree.
