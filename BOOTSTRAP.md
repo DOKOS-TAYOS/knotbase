@@ -2,7 +2,7 @@
 
 This file describes the **consumer's own installation**. The upstream public Knotbase repository is a template, never a destination for a user's personal records or routine maintenance changes.
 
-**Implementation status:** This document is currently a proposed onboarding contract on a work branch. The referenced `config/instance.csv`, blank `info_user` templates, portable `maintenance_for_ai` procedures, and public router integration are not yet installed. Do not interpret this document's presence as successful bootstrap or as authorization to activate omitted commands.
+**Implementation status:** This document is currently a proposed onboarding contract on a work branch. The public router offers a read-only entrypoint to this guide, but `config/instance.csv`, blank `info_user` templates, portable `maintenance_for_ai` procedures, and executable owner-specific onboarding are not installed. Do not interpret this document's presence as successful bootstrap or as authorization to activate omitted commands.
 
 ## Bootstrap trigger
 
