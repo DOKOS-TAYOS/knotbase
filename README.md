@@ -64,7 +64,7 @@ Never commit credentials, tokens, or private personal information to the public 
 | [Authorized CV deviations](docs/AUTHORIZED_CV_DEVIATIONS.md) | Scope of the public CV workflow adaptations |
 | [Migration continuity](docs/MIGRATION_CONTINUITY.md) | Verified migration checkpoints and remaining work |
 | [Source parity manifest](manifests/source_parity.csv) | Published source records and their adaptation status |
-| [GitHub About settings](docs/GITHUB_ABOUT.md) | Proposed repository description and discoverability topics |
+| [GitHub About settings](docs/GITHUB_ABOUT.md) | Applied description and topics; homepage deferred until the guide is on `main` |
 
 ## Public pilot status
 
