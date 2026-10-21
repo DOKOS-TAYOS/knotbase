@@ -117,7 +117,7 @@ Official documentation: [Projects in ChatGPT](https://help.openai.com/en/article
 
 In a **new chat in that Project**, send:
 
-> Quiero configurar mi instancia de Knotbase. Lee `AGENTS.md` y `BOOTSTRAP.md` de **mi repositorio configurado** y sigue su proceso de inicialización. Mi repositorio es `YOUR_GITHUB_OWNER/my-knotbase`. Voy a proporcionarte la información que conozco sobre mí; pídeme los datos que falten, uno por uno, y no inventes nada. Confirma el destino privado y los permisos antes de guardar información.
+> Quiero configurar mi instancia de Knotbase. Lee `AGENTS.md` y `BOOTSTRAP.md` de **mi repositorio configurado**. Mi repositorio es `YOUR_GITHUB_OWNER/my-knotbase`. Para aportar mis datos quiero poder elegir entre adjuntar mi CV u otros documentos, compartir capturas de LinkedIn, enviarte enlaces a perfiles, escribir una descripción libre o que me preguntes paso a paso. Puedo combinar esas opciones y dejar datos para más adelante. No inventes nada, muéstrame lo que has extraído antes de guardarlo y confirma el destino privado y los permisos.
 
 Replace the example repository name. The assistant should first verify its ability to **read the actual repository** and determine whether first-time setup is still needed. If GitHub access fails, fix the connection or project instructions before asking it to edit anything.
 
@@ -135,22 +135,36 @@ The assistant must verify real targets and permissions. An empty value is a ques
 
 ## 7. Supply your personal information and evidence
 
-Provide **what you already have**, and let the assistant ask for missing information when a workflow genuinely needs it. It is reasonable to do this across several chats or sessions; do not require a complete biography on day one.
+**Choose the way that is easiest for you.** You do **not** need to prepare a formal CV, fill in every field or sign up for any specific professional network. Knotbase's [bootstrap contract](../BOOTSTRAP.md#flexible-profile-and-evidence-onboarding) accepts different starting points and combinations of them, with appropriate support from the current ChatGPT client.
 
-Useful optional inputs include:
+### Pick one or combine several
 
-- Identity and preferred public name, professional role and short profile.
-- CVs and records of education, employment, projects and skills.
-- Publication identifiers (DOIs, ORCID, scholarly profiles), papers and portfolio links.
-- GitHub account, repositories, which ones are active, archived or frozen, and the intended scope of maintenance.
-- Writing/language preferences, citation standards and preferred deliverables.
-- Documents containing traceable evidence for claims that you want the system to reuse.
+| Your preferred starting point | What to share | Example request |
+| --- | --- | --- |
+| **Upload a CV or documents** | PDF, DOCX or readable text; optionally certificates, a portfolio or publications list | *"Adjunto mi CV. Extrae mi trayectoria y pregúntame solo lo que necesites aclarar."* |
+| **Upload screenshots** | Captures of your LinkedIn About, Experience, Education or Skills sections; GitHub, ORCID, Google Scholar or other relevant pages | *"Estas capturas son de mi LinkedIn. Reconstruye mi perfil sin inventar lo que no se vea."* |
+| **Share profile links** | LinkedIn, GitHub, ORCID, portfolio, institutional biography, paper pages, DOI records or personal website | *"Aquí están mis perfiles. Usa únicamente los enlaces accesibles e indícame los que no puedas leer."* |
+| **Write freely** | A short description of what you have done, what you know, projects, courses, roles and current interests | *"Te cuento mi experiencia sin formato; organízala y dime qué detalles faltan."* |
+| **Have a conversation** | No files needed: answer one question at a time, in your own words | *"No tengo ningún CV preparado. Hazme preguntas de una en una."* |
+| **Upload structured exports** | CSV/JSON or other supported exports from a professional site, publication catalogue or repository list | *"Te paso una exportación. Identifica las fuentes y no presupongas que está actualizada."* |
+| **Mix everything** | For example a CV, three LinkedIn screenshots, two GitHub projects and a correction in chat | *"Combina estos materiales, detecta discrepancias y prepara un borrador para revisar."* |
 
-Example follow-up:
+The user can also dictate their experience or supply an audio transcription **if the active client supports it**. A method that is unavailable in a particular ChatGPT interface is **not** a requirement; use pasted text, supported attachments or guided questions instead.
 
-> Te adjunto mi CV y estas publicaciones. Extrae solamente hechos respaldados por las fuentes, identifica contradicciones o información incompleta y pregúntame antes de incorporar datos a la base privada.
+### A realistic first session
 
-**Data safety:** Supply only information you are comfortable sharing with your ChatGPT account. Decide what is **public**, **restricted** or **private** before publishing anything. Do not paste passwords, API keys, GitHub tokens or other secrets into chat or Git. Do not let the assistant copy all accessible emails, drives or repositories merely because a connection exists.
+1. **Provide only what you already have.** One screenshot or a short paragraph is enough to begin. You may upload multiple documents/images at once if supported, or supply them across several messages. You may defer the whole personal-profile stage and use generic workflows.
+2. **Let ChatGPT extract a provisional profile.** It should organize supported experience, education, individual contributions, projects, skills, publications and preferences, *without conflating what a team did with what you personally did*.
+3. **Review the result.** For each material claim it should retain an identifiable source, show uncertainties and spot conflicts (for example mismatched job dates or an outdated CV). An image only proves what is visible in it; a supplied statement remains a user assertion unless independently corroborated.
+4. **Choose what to keep.** You can correct facts, omit sensitive details and identify material as public, restricted or private. If a LinkedIn page requires sign-in or another link is inaccessible, provide a screenshot, export or copied text; the assistant must not claim it read the inaccessible URL.
+5. **Authorize storing selected records.** The assistant must verify the correct **private** repository and write permissions first. It should use the installed canonical profile schema and confirm the actual remote write. Uploading a document does not automatically authorize storing the raw file or publishing your personal data.
+6. **Return later if needed.** Your profile can be built incrementally. Cross-chat continuity comes from records actually saved to your chosen knowledge store, not from an assumption that every previous upload remains accessible.
+
+### Optional details you may add later
+
+If they matter to your planned tasks, provide professional identifiers, educational history, company or research roles, dates, projects, software contributions, publications, teaching, public speaking, skills and desired professional direction. The assistant should only request these details when useful, and should allow *skip*, *unknown*, or *prefer not to share*.
+
+**Data safety:** Only share what you choose to share with ChatGPT. You may redact screenshots and documents before uploading them. Do not include passwords, GitHub tokens, API keys, private messages or irrelevant information about other people. A public fork is not an appropriate destination for private records. See the [privacy guidance](#2-requirements-and-privacy-decisions) and [bootstrap contract](../BOOTSTRAP.md).
 
 ## 8. Authorize configuration and verify the installation
 
